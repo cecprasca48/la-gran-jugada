@@ -14,7 +14,7 @@
         }
         .cell {
             aspect-ratio: 1;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -24,126 +24,188 @@
         .cell-light { background-color: #166534; }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen font-sans flex flex-col items-center justify-between p-3">
-    <header class="text-center my-2">
-        <h1 class="text-2xl font-black text-emerald-400 tracking-wide">LA GRAN JUGADA</h1>
-        <p class="text-xs text-slate-400 italic">Un Gran Desafío Bíblico en Cancha</p>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans flex flex-col items-center justify-between p-2 md:p-3">
+    <header class="text-center my-1">
+        <h1 class="text-xl md:text-2xl font-black text-emerald-400 tracking-wide">LA GRAN JUGADA</h1>
+        <p class="text-[11px] text-slate-400 italic">Un Gran Desafío Bíblico en Cancha</p>
     </header>
 
     <!-- Pantalla de Configuración -->
-    <div id="setup-screen" class="w-full max-w-xl bg-slate-800 p-6 rounded-2xl shadow-xl border border-slate-700 my-auto">
-        <h2 class="text-xl font-bold text-white mb-4">Configuración del Partido</h2>
+    <div id="setup-screen" class="w-full max-w-lg bg-slate-900 p-6 rounded-2xl shadow-xl border border-slate-800 my-auto">
+        <h2 class="text-lg font-bold text-white mb-4">Configuración del Partido</h2>
         <div class="space-y-4">
             <div>
-                <label class="block text-sm font-medium text-slate-300 mb-1">Nombre Equipo 1 (Atacante Inicial / Ej. Judá):</label>
-                <input type="text" id="team1-name" value="Judá" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white">
+                <label class="block text-xs font-medium text-slate-300 mb-1">Equipo 1 (Lateral Izquierdo - Fichas Esmeralda):</label>
+                <input type="text" id="team1-name" value="Judá" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white">
             </div>
             <div>
-                <label class="block text-sm font-medium text-slate-300 mb-1">Nombre Equipo 2 (Defensor Inicial / Ej. Israel):</label>
-                <input type="text" id="team2-name" value="Israel" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white">
+                <label class="block text-xs font-medium text-slate-300 mb-1">Equipo 2 (Lateral Derecho - Fichas Azul):</label>
+                <input type="text" id="team2-name" value="Israel" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white">
             </div>
             <div>
-                <label class="block text-sm font-medium text-slate-300 mb-1">Goles para ganar:</label>
-                <input type="number" id="target-goals" value="3" min="1" max="10" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white">
+                <label class="block text-xs font-medium text-slate-300 mb-1">Goles para ganar:</label>
+                <input type="number" id="target-goals" value="3" min="1" max="10" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white">
             </div>
             <button onclick="startGame()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl transition shadow-lg mt-2">
-                ¡Iniciar La Gran Jugada!
+                ¡Iniciar Partido!
             </button>
         </div>
     </div>
 
-    <!-- Pantalla Principal de Juego (Tablero Centralizado) -->
-    <div id="game-screen" class="w-full max-w-6xl hidden flex flex-col items-center my-auto">
+    <!-- Pantalla Principal de Juego -->
+    <div id="game-screen" class="w-full max-w-[1440px] hidden flex flex-col items-center my-auto">
         
-        <!-- Marcador Superior con Score en Destaque (Goles y Estadísticas Integradas) -->
-        <div class="w-full grid grid-cols-3 items-center bg-slate-800 px-6 py-3 rounded-xl mb-4 border border-slate-700 shadow-md">
+        <!-- Marcador Superior con Score de Respuestas en Destaque -->
+        <div class="w-full max-w-5xl grid grid-cols-3 items-center bg-slate-900 px-4 py-2.5 rounded-xl mb-3 border border-slate-800 shadow-lg">
             <!-- Equipo 1 -->
-            <div class="text-left flex items-center space-x-3">
+            <div class="flex items-center justify-between pr-2 md:pr-6 border-r border-slate-800">
                 <div>
-                    <span id="disp-team1" class="font-bold text-emerald-400 text-base md:text-lg block">Judá</span>
-                    <span class="text-[10px] text-slate-400">Aciertos: <strong id="t1-correct" class="text-emerald-400">0</strong> | Errores: <strong id="t1-errors" class="text-rose-400">0</strong></span>
+                    <span id="disp-team1" class="font-black text-emerald-400 text-sm md:text-lg block">Judá</span>
+                    <span class="text-[10px] text-slate-400">22 Jugadores en cancha</span>
                 </div>
-                <span id="score-team1" class="text-2xl md:text-3xl font-black bg-slate-900 px-3 py-1 rounded-lg border border-emerald-500/30">0</span>
+                <div class="flex items-center space-x-2 md:space-x-3">
+                    <div class="bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-800 text-center">
+                        <span class="text-[9px] uppercase text-slate-400 block">Respuestas</span>
+                        <span class="text-xs font-bold"><span id="t1-correct" class="text-emerald-400">0</span>✓ / <span id="t1-errors" class="text-rose-400">0</span>✗</span>
+                    </div>
+                    <span id="score-team1" class="text-2xl md:text-3xl font-black bg-emerald-950/60 text-emerald-300 px-3 py-1 rounded-lg border border-emerald-500/40">0</span>
+                </div>
             </div>
             
             <!-- Centro: Turno Activo -->
-            <div class="text-center">
-                <span class="text-[10px] uppercase tracking-widest text-slate-400 block">Posesión / Turno</span>
-                <span id="disp-possession" class="font-bold text-amber-400 text-xs md:text-sm bg-slate-900 px-3 py-1 rounded-full border border-amber-500/30">Judá Atacando</span>
+            <div class="text-center px-2">
+                <span class="text-[9px] uppercase tracking-widest text-slate-400 block mb-0.5">Posesión Actual</span>
+                <span id="disp-possession" class="font-bold text-amber-400 text-xs md:text-sm bg-slate-950 px-3 py-1 rounded-full border border-amber-500/40 inline-block">Judá Atacando</span>
             </div>
 
             <!-- Equipo 2 -->
-            <div class="text-right flex items-center justify-end space-x-3">
-                <span id="score-team2" class="text-2xl md:text-3xl font-black bg-slate-900 px-3 py-1 rounded-lg border border-blue-500/30">0</span>
-                <div>
-                    <span id="disp-team2" class="font-bold text-blue-400 text-base md:text-lg block">Israel</span>
-                    <span class="text-[10px] text-slate-400">Aciertos: <strong id="t2-correct" class="text-emerald-400">0</strong> | Errores: <strong id="t2-errors" class="text-rose-400">0</strong></span>
+            <div class="flex items-center justify-between pl-2 md:pl-6 border-l border-slate-800">
+                <div class="flex items-center space-x-2 md:space-x-3">
+                    <span id="score-team2" class="text-2xl md:text-3xl font-black bg-blue-950/60 text-blue-300 px-3 py-1 rounded-lg border border-blue-500/40">0</span>
+                    <div class="bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-800 text-center">
+                        <span class="text-[9px] uppercase text-slate-400 block">Respuestas</span>
+                        <span class="text-xs font-bold"><span id="t2-correct" class="text-emerald-400">0</span>✓ / <span id="t2-errors" class="text-rose-400">0</span>✗</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <span id="disp-team2" class="font-black text-blue-400 text-sm md:text-lg block">Israel</span>
+                    <span class="text-[10px] text-slate-400">22 Jugadores en cancha</span>
                 </div>
             </div>
         </div>
 
-        <!-- Layout Centralizado: Tablero centrado y Tarjetas dinámicas al costado/abajo -->
-        <div class="w-full flex flex-col items-center gap-4">
+        <!-- ESTRUCTURA 3 COLUMNAS EN PC (Lateral Izquierdo | Tablero Central | Lateral Derecho) -->
+        <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-3 items-stretch">
             
-            <!-- Tablero Gráfico de 17x27 Centrado con Líneas Blancas -->
-            <div class="relative w-full max-w-4xl bg-emerald-700 border-4 border-white rounded-lg shadow-2xl overflow-hidden">
-                <svg class="absolute inset-0 w-full h-full pointer-events-none z-10" viewBox="0 0 270 170" preserveAspectRatio="none">
-                    <line x1="135" y1="0" x2="135" y2="170" stroke="white" stroke-width="2" />
-                    <circle cx="135" cy="85" r="25" stroke="white" stroke-width="2" fill="none" />
-                    <circle cx="135" cy="85" r="2" fill="white" />
-                    <rect x="0" y="42.5" width="35" height="85" stroke="white" stroke-width="2" fill="none" />
-                    <rect x="0" y="65" width="12" height="40" stroke="white" stroke-width="2" fill="none" />
-                    <rect x="-6" y="72.5" width="6" height="25" stroke="white" stroke-width="2" fill="none" />
-                    <circle cx="22" cy="85" r="1.5" fill="white" />
-                    <rect x="235" y="42.5" width="35" height="85" stroke="white" stroke-width="2" fill="none" />
-                    <rect x="258" y="65" width="12" height="40" stroke="white" stroke-width="2" fill="none" />
-                    <rect x="270" y="72.5" width="6" height="25" stroke="white" stroke-width="2" fill="none" />
-                    <circle cx="248" cy="85" r="1.5" fill="white" />
-                    <path d="M 0,10 A 10,10 0 0,0 10,0" stroke="white" stroke-width="1.5" fill="none" />
-                    <path d="M 0,160 A 10,10 0 0,1 10,170" stroke="white" stroke-width="1.5" fill="none" />
-                    <path d="M 270,10 A 10,10 0 0,1 260,0" stroke="white" stroke-width="1.5" fill="none" />
-                    <path d="M 270,160 A 10,10 0 0,0 260,170" stroke="white" stroke-width="1.5" fill="none" />
-                </svg>
-                <div id="pitch-grid" class="pitch-grid w-full"></div>
-            </div>
+            <!-- PANEL LATERAL IZQUIERDO (EQUIPO 1) -->
+            <div id="panel-t1" class="lg:col-span-3 bg-slate-900 p-3 rounded-xl border-2 border-emerald-500/40 flex flex-col justify-between gap-2 order-2 lg:order-1">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
+                    <span id="panel-t1-name" class="font-black text-emerald-400 text-sm">EQUIPO 1</span>
+                    <span id="panel-t1-role" class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">ATACANTE</span>
+                </div>
 
-            <!-- Panel de Control y Dinámica de Preguntas Alternadas -->
-            <div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-3">
-                <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 flex flex-col justify-between">
+                <!-- Bloque 1: Pregunta (Arriba) -->
+                <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 flex-1 flex flex-col justify-between">
                     <div>
-                        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Acción de Juego</h3>
-                        <p id="game-status-text" class="text-slate-200 text-xs mb-3">El equipo atacante debe tomar la tarjeta para formular el reto.</p>
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-[10px] font-bold uppercase text-slate-400">1. Pregunta de Jugada</span>
+                            <span id="t1-code-badge" class="text-[10px] font-mono bg-slate-800 px-1.5 py-0.5 rounded text-amber-300 hidden">A2-LE</span>
+                        </div>
+                        <p id="t1-question-text" class="text-xs text-slate-200 font-medium leading-relaxed">Esperando inicio de jugada...</p>
                     </div>
-                    <button id="draw-card-btn" onclick="drawCard()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 rounded-xl transition shadow-lg text-sm">
-                        Sacar Tarjeta de Pregunta
+                    <button id="t1-draw-btn" onclick="drawCard(1)" class="w-full mt-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 rounded-lg text-xs transition shadow">
+                        Lanzar Pregunta
                     </button>
                 </div>
 
-                <!-- Tarjeta Interactiva con Bloques Alternados (Atacante ve pregunta / Defensor ve opciones) -->
-                <div id="card-panel" class="md:col-span-2 bg-slate-800 p-4 rounded-xl border border-slate-700 flex flex-col justify-between hidden">
-                    <div>
-                        <div class="flex justify-between items-center mb-2">
-                            <span id="card-role-title" class="text-xs font-black bg-amber-500/20 text-amber-300 px-2.5 py-0.5 rounded border border-amber-500/40">Rol: Atacante (Formulando Pregunta)</span>
-                            <div class="flex items-center space-x-1.5">
-                                <span class="text-xs text-amber-400 font-bold">Tiempo:</span>
-                                <span id="timer-display" class="text-xs font-black bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full border border-amber-500/40">20s</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Bloque del Atacante (Pregunta completa con respuesta oculta para que la lea) -->
-                        <div id="attacker-block" class="mb-3">
-                            <p class="text-xs text-slate-400 mb-1">Lee la siguiente pregunta al equipo defensor:</p>
-                            <p id="card-question" class="text-sm font-semibold text-white bg-slate-900 p-2.5 rounded-lg border border-slate-700">Pregunta aquí...</p>
-                            <p class="text-[10px] text-emerald-400 mt-1 italic">Respuesta esperada (Solo para referencia del atacante): <span id="secret-answer" class="font-bold underline"></span></p>
-                        </div>
-
-                        <!-- Bloque del Defensor (Opciones de respuesta interactiva) -->
-                        <div id="defender-block" class="hidden">
-                            <p class="text-xs text-blue-300 font-bold mb-1">¡Equipo Defensor! Seleccionen su respuesta antes que expire el tiempo:</p>
-                            <div id="options-container" class="grid grid-cols-1 gap-1.5"></div>
-                        </div>
+                <!-- Bloque 2: Respuesta (Abajo) -->
+                <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 flex-1">
+                    <div class="flex justify-between items-center mb-1.5">
+                        <span class="text-[10px] font-bold uppercase text-slate-400">2. Opciones de Respuesta</span>
+                        <span id="t1-timer" class="text-[10px] font-black text-amber-400 hidden">20s</span>
                     </div>
-                    <div id="card-result" class="text-xs font-bold text-center py-2 rounded-lg bg-slate-900 hidden"></div>
+                    <div id="t1-options" class="grid grid-cols-1 gap-1.5">
+                        <p class="text-[11px] text-slate-500 italic">Disponible cuando este equipo defienda.</p>
+                    </div>
+                </div>
+
+                <!-- Bloque 3: Movimiento y Dirección del Balón -->
+                <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+                    <span class="text-[10px] font-bold uppercase text-slate-400 block mb-1">3. Movimiento y Dirección</span>
+                    <div id="t1-move-info" class="text-[11px] text-slate-300 font-medium">
+                        Sin jugada activa.
+                    </div>
+                </div>
+            </div>
+
+            <!-- TABLERO CENTRAL (17x27 con 22 Fichas y Líneas Blancas) -->
+            <div class="lg:col-span-6 flex flex-col items-center justify-center order-1 lg:order-2">
+                <div class="relative w-full bg-emerald-700 border-4 border-white rounded-lg shadow-2xl overflow-hidden">
+                    <svg class="absolute inset-0 w-full h-full pointer-events-none z-10" viewBox="0 0 270 170" preserveAspectRatio="none">
+                        <line x1="135" y1="0" x2="135" y2="170" stroke="white" stroke-width="2" />
+                        <circle cx="135" cy="85" r="25" stroke="white" stroke-width="2" fill="none" />
+                        <circle cx="135" cy="85" r="2" fill="white" />
+                        <!-- Área Izquierda -->
+                        <rect x="0" y="42.5" width="35" height="85" stroke="white" stroke-width="2" fill="none" />
+                        <rect x="0" y="65" width="12" height="40" stroke="white" stroke-width="2" fill="none" />
+                        <rect x="-6" y="72.5" width="6" height="25" stroke="white" stroke-width="2" fill="none" />
+                        <circle cx="22" cy="85" r="1.5" fill="white" />
+                        <!-- Área Derecha -->
+                        <rect x="235" y="42.5" width="35" height="85" stroke="white" stroke-width="2" fill="none" />
+                        <rect x="258" y="65" width="12" height="40" stroke="white" stroke-width="2" fill="none" />
+                        <rect x="270" y="72.5" width="6" height="25" stroke="white" stroke-width="2" fill="none" />
+                        <circle cx="248" cy="85" r="1.5" fill="white" />
+                        <!-- Esquinas -->
+                        <path d="M 0,10 A 10,10 0 0,0 10,0" stroke="white" stroke-width="1.5" fill="none" />
+                        <path d="M 0,160 A 10,10 0 0,1 10,170" stroke="white" stroke-width="1.5" fill="none" />
+                        <path d="M 270,10 A 10,10 0 0,1 260,0" stroke="white" stroke-width="1.5" fill="none" />
+                        <path d="M 270,160 A 10,10 0 0,0 260,170" stroke="white" stroke-width="1.5" fill="none" />
+                    </svg>
+                    <div id="pitch-grid" class="pitch-grid w-full"></div>
+                </div>
+                <div id="global-feed" class="w-full mt-2 bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5 text-center text-xs text-amber-300 font-medium">
+                    Partido listo. El equipo atacante debe lanzar la primera pregunta.
+                </div>
+            </div>
+
+            <!-- PANEL LATERAL DERECHO (EQUIPO 2) -->
+            <div id="panel-t2" class="lg:col-span-3 bg-slate-900 p-3 rounded-xl border border-slate-800 flex flex-col justify-between gap-2 order-3">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
+                    <span id="panel-t2-name" class="font-black text-blue-400 text-sm">EQUIPO 2</span>
+                    <span id="panel-t2-role" class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-400">DEFENSOR</span>
+                </div>
+
+                <!-- Bloque 1: Pregunta (Arriba) -->
+                <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-[10px] font-bold uppercase text-slate-400">1. Pregunta de Jugada</span>
+                            <span id="t2-code-badge" class="text-[10px] font-mono bg-slate-800 px-1.5 py-0.5 rounded text-amber-300 hidden">A2-LE</span>
+                        </div>
+                        <p id="t2-question-text" class="text-xs text-slate-200 font-medium leading-relaxed">En espera de turno ofensivo...</p>
+                    </div>
+                    <button id="t2-draw-btn" onclick="drawCard(2)" class="w-full mt-2 bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-xs transition shadow hidden">
+                        Lanzar Pregunta
+                    </button>
+                </div>
+
+                <!-- Bloque 2: Respuesta (Abajo) -->
+                <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 flex-1">
+                    <div class="flex justify-between items-center mb-1.5">
+                        <span class="text-[10px] font-bold uppercase text-slate-400">2. Opciones de Respuesta</span>
+                        <span id="t2-timer" class="text-[10px] font-black text-amber-400 hidden">20s</span>
+                    </div>
+                    <div id="t2-options" class="grid grid-cols-1 gap-1.5">
+                        <p class="text-[11px] text-slate-500 italic">Esperando pregunta del atacante...</p>
+                    </div>
+                </div>
+
+                <!-- Bloque 3: Movimiento y Dirección del Balón -->
+                <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+                    <span class="text-[10px] font-bold uppercase text-slate-400 block mb-1">3. Movimiento y Dirección</span>
+                    <div id="t2-move-info" class="text-[11px] text-slate-300 font-medium">
+                        Sin jugada activa.
+                    </div>
                 </div>
             </div>
 
@@ -159,28 +221,30 @@
             t1Correct: 0, t1Errors: 0,
             t2Correct: 0, t2Errors: 0,
             target: 3,
-            attacker: 1, 
-            ballX: 13, 
-            ballY: 8,  
+            attacker: 1, // 1 = Equipo 1 ataca, 2 = Equipo 2 ataca
+            ballX: 13,
+            ballY: 8,
+            players: [],
             timer: 20,
             interval: null,
             currentCard: null
         };
 
-        const possibleDirections = [
-            { code: "A", name: "Avanzar (Frente)", dx: 1, dy: 0 },
-            { code: "ADD", name: "Avanzar Diagonal Derecha", dx: 1, dy: -1 },
-            { code: "ADE", name: "Avanzar Diagonal Izquierda", dx: 1, dy: 1 },
-            { code: "LD", name: "Lateral Derecho", dx: 0, dy: -1 },
-            { code: "LE", name: "Lateral Izquierdo", dx: 0, dy: 1 },
-            { code: "R", name: "Retroceder", dx: -1, dy: 0 },
-            { code: "RDD", name: "Retroceder Diagonal Derecha", dx: -1, dy: -1 },
-            { code: "RDE", name: "Retroceder Diagonal Izquierda", dx: -1, dy: 1 }
+        // 8 Direcciones oficiales del tablero
+        const directions = [
+            { code: "A", label: "Avanzar (Frente)", dx: 1, dy: 0 },
+            { code: "ADD", label: "Avanzar Diagonal Derecha", dx: 1, dy: -1 },
+            { code: "ADE", label: "Avanzar Diagonal Izquierda", dx: 1, dy: 1 },
+            { code: "LD", label: "Lateral Derecha", dx: 0, dy: -1 },
+            { code: "LE", label: "Lateral Izquierda", dx: 0, dy: 1 },
+            { code: "R", label: "Retroceder", dx: -1, dy: 0 },
+            { code: "RDD", label: "Retroceder Diagonal Derecha", dx: -1, dy: -1 },
+            { code: "RDE", label: "Retroceder Diagonal Izquierda", dx: -1, dy: 1 }
         ];
 
         const sampleCards = [
-            { ref: "A1", q: "Palavra chave no livro de Gênesis.", correct: "No princípio", options: ["No princípio", "Criação divina", "No princípio crió Deus", "A terra era sem forma"], refBib: "Gn 1:1" },
-            { ref: "A1", q: "Bisavó de Noé. Não conheceu a morte.", correct: "Enoque", options: ["Matusalém", "Enoque", "Jared", "Lameque"], refBib: "Gn 5:21-29" },
+            { ref: "A1", q: "Palavra chave no livro de Gênesis.", correct: "No princípio", options: ["No princípio", "Criação divina", "No princípio criou Deus", "A terra era sem forma"], refBib: "Gn 1:1" },
+            { ref: "A1", q: "Bisavô de Noé. Não conheceu a morte.", correct: "Enoque", options: ["Matusalém", "Enoque", "Jared", "Lameque"], refBib: "Gn 5:21-29" },
             { ref: "A1", q: "Primeira promessa messiânica.", correct: "Gênesis 3:15", options: ["Gênesis 3:15", "Isaías 7:14", "Gênesis 12:3", "Salmo 22:1"], refBib: "Gn 3:15" },
             { ref: "A2", q: "Lugar onde Samuel orou por Israel e o julgou.", correct: "Mizpá", options: ["Betel", "Mizpá", "Ramá", "Silo"], refBib: "1 Sm 7:5,6" },
             { ref: "A2", q: "Começou a reinar em Jerusalém desde os 7 anos.", correct: "Joás", options: ["Josias", "Joás", "Uzias", "Salomão"], refBib: "2 Rs 11:21" },
@@ -188,6 +252,42 @@
             { ref: "B1", q: "É conhecido como o Pai da Fé.", correct: "Abraão", options: ["Isaque", "Abraão", "Moisés", "Davi"], refBib: "Rm 4:16" },
             { ref: "B2", q: "Qual o Salmo mais curto?", correct: "Salmo 117", options: ["Salmo 117", "Salmo 133", "Salmo 23", "Salmo 150"], refBib: "Sl 117" }
         ];
+
+        // Inicializar las 22 fichas respetando paridad de casillas (oscuras vs claras)
+        function initPlayers() {
+            gameState.players = [
+                // Equipo 1 (Izquierda - 11 fichas en casillas oscuras: (x+y)%2 === 0)
+                { id: 1, team: 1, role: "POR", x: 1, y: 9 },
+                { id: 2, team: 1, role: "DEF", x: 5, y: 3 },
+                { id: 3, team: 1, role: "DEF", x: 5, y: 7 },
+                { id: 4, team: 1, role: "DEF", x: 5, y: 11 },
+                { id: 5, team: 1, role: "DEF", x: 5, y: 15 },
+                { id: 6, team: 1, role: "MED", x: 9, y: 3 },
+                { id: 7, team: 1, role: "MED", x: 9, y: 7 },
+                { id: 8, team: 1, role: "MED", x: 9, y: 11 },
+                { id: 9, team: 1, role: "MED", x: 9, y: 15 },
+                { id: 10, team: 1, role: "DEL", x: 13, y: 7 }, // Delantero inicial con balón
+                { id: 11, team: 1, role: "DEL", x: 12, y: 10 },
+
+                // Equipo 2 (Derecha - 11 fichas en casillas claras: (x+y)%2 === 1)
+                { id: 12, team: 2, role: "POR", x: 25, y: 8 },
+                { id: 13, team: 2, role: "DEF", x: 21, y: 2 },
+                { id: 14, team: 2, role: "DEF", x: 21, y: 6 },
+                { id: 15, team: 2, role: "DEF", x: 21, y: 10 },
+                { id: 16, team: 2, role: "DEF", x: 21, y: 14 },
+                { id: 17, team: 2, role: "MED", x: 17, y: 2 },
+                { id: 18, team: 2, role: "MED", x: 17, y: 6 },
+                { id: 19, team: 2, role: "MED", x: 17, y: 10 },
+                { id: 20, team: 2, role: "MED", x: 17, y: 14 },
+                { id: 21, team: 2, role: "DEL", x: 14, y: 7 },
+                { id: 22, team: 2, role: "DEL", x: 14, y: 11 }
+            ];
+            // Ubicar balón en el delantero central del equipo 1
+            gameState.ballX = 13;
+            gameState.ballY = 8;
+            gameState.players[9].x = 13;
+            gameState.players[9].y = 8;
+        }
 
         function startGame() {
             const t1 = document.getElementById('team1-name').value.trim();
@@ -200,13 +300,17 @@
 
             document.getElementById('disp-team1').innerText = gameState.team1;
             document.getElementById('disp-team2').innerText = gameState.team2;
+            document.getElementById('panel-t1-name').innerText = gameState.team1.toUpperCase();
+            document.getElementById('panel-t2-name').innerText = gameState.team2.toUpperCase();
+
+            initPlayers();
             updateStatsUI();
+            syncPanelsRole();
 
             document.getElementById('setup-screen').classList.add('hidden');
             document.getElementById('game-screen').classList.remove('hidden');
 
             renderPitch();
-            updatePossessionLabel();
         }
 
         function updateStatsUI() {
@@ -218,6 +322,42 @@
             document.getElementById('t2-errors').innerText = gameState.t2Errors;
         }
 
+        function syncPanelsRole() {
+            const p1 = document.getElementById('panel-t1');
+            const p2 = document.getElementById('panel-t2');
+            const r1 = document.getElementById('panel-t1-role');
+            const r2 = document.getElementById('panel-t2-role');
+            const btn1 = document.getElementById('t1-draw-btn');
+            const btn2 = document.getElementById('t2-draw-btn');
+            const poss = document.getElementById('disp-possession');
+
+            if (gameState.attacker === 1) {
+                p1.className = "lg:col-span-3 bg-slate-900 p-3 rounded-xl border-2 border-emerald-500 flex flex-col justify-between gap-2 order-2 lg:order-1 shadow-lg shadow-emerald-950/30";
+                p2.className = "lg:col-span-3 bg-slate-900 p-3 rounded-xl border border-slate-800 flex flex-col justify-between gap-2 order-3";
+                r1.innerText = "ATACANTE (TURNO)";
+                r1.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300";
+                r2.innerText = "DEFENSOR";
+                r2.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-400";
+                btn1.classList.remove('hidden');
+                btn1.disabled = false;
+                btn2.classList.add('hidden');
+                poss.innerText = `${gameState.team1} Atacando ➔`;
+                poss.className = "font-bold text-emerald-400 text-xs md:text-sm bg-slate-950 px-3 py-1 rounded-full border border-emerald-500/40 inline-block";
+            } else {
+                p2.className = "lg:col-span-3 bg-slate-900 p-3 rounded-xl border-2 border-blue-500 flex flex-col justify-between gap-2 order-3 shadow-lg shadow-blue-950/30";
+                p1.className = "lg:col-span-3 bg-slate-900 p-3 rounded-xl border border-slate-800 flex flex-col justify-between gap-2 order-2 lg:order-1";
+                r2.innerText = "ATACANTE (TURNO)";
+                r2.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-blue-500/20 text-blue-300";
+                r1.innerText = "DEFENSOR";
+                r1.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-400";
+                btn2.classList.remove('hidden');
+                btn2.disabled = false;
+                btn1.classList.add('hidden');
+                poss.innerText = `⬅️ ${gameState.team2} Atacando`;
+                poss.className = "font-bold text-blue-400 text-xs md:text-sm bg-slate-950 px-3 py-1 rounded-full border border-blue-500/40 inline-block";
+            }
+        }
+
         function renderPitch() {
             const grid = document.getElementById('pitch-grid');
             grid.innerHTML = '';
@@ -227,147 +367,176 @@
                     const isDark = (r + c) % 2 === 0;
                     cell.className = `cell ${isDark ? 'cell-dark' : 'cell-light'}`;
                     
+                    // Verificar si hay ficha en esta casilla
+                    const player = gameState.players.find(p => p.x === c && p.y === r);
+                    if (player) {
+                        const token = document.createElement('div');
+                        const bgColor = player.team === 1 ? 'bg-emerald-400 text-slate-950' : 'bg-blue-400 text-slate-950';
+                        token.className = `w-3.5 h-3.5 md:w-4 md:h-4 ${bgColor} rounded-full border border-white z-10 flex items-center justify-center text-[7px] font-black shadow`;
+                        token.innerText = player.role === 'POR' ? 'P' : '';
+                        cell.appendChild(token);
+                    }
+
+                    // Verificar si el balón está en esta casilla
                     if (c === gameState.ballX && r === gameState.ballY) {
                         const ball = document.createElement('div');
-                        ball.className = 'w-4 h-4 bg-white rounded-full shadow-md border-2 border-slate-900 z-20 flex items-center justify-center text-[8px] font-black text-slate-900';
+                        ball.className = 'w-4 h-4 md:w-5 md:h-5 bg-white rounded-full shadow-lg border-2 border-slate-950 z-20 flex items-center justify-center text-[9px] font-black text-slate-950 absolute';
                         ball.innerText = '⚽';
                         cell.appendChild(ball);
-                    } else if (c === 2 && r === 8) {
-                        const p1 = document.createElement('div');
-                        p1.className = 'w-3 h-3 bg-emerald-400 rounded-full border border-white z-10';
-                        cell.appendChild(p1);
-                    } else if (c === 24 && r === 8) {
-                        const p2 = document.createElement('div');
-                        p2.className = 'w-3 h-3 bg-blue-400 rounded-full border border-white z-10';
-                        cell.appendChild(p2);
                     }
                     grid.appendChild(cell);
                 }
             }
         }
 
-        function updatePossessionLabel() {
-            const lbl = document.getElementById('disp-possession');
-            if (gameState.attacker === 1) {
-                lbl.innerText = `${gameState.team1} Atacando ➔`;
-                lbl.className = "font-bold text-emerald-400 text-xs md:text-sm bg-slate-900 px-3 py-1 rounded-full border border-emerald-500/30";
-            } else {
-                lbl.innerText = `⬅️ ${gameState.team2} Atacando`;
-                lbl.className = "font-bold text-blue-400 text-xs md:text-sm bg-slate-900 px-3 py-1 rounded-full border border-blue-500/30";
-            }
+        // Encontrar ficha más cercana de un equipo a unas coordenadas (x, y)
+        function findNearestPlayer(teamId, targetX, targetY) {
+            let nearest = null;
+            let minDist = Infinity;
+            gameState.players.filter(p => p.team === teamId).forEach(p => {
+                const dist = Math.hypot(p.x - targetX, p.y - targetY);
+                if (dist < minDist) {
+                    minDist = dist;
+                    nearest = p;
+                }
+            });
+            return nearest;
         }
 
-        function drawCard() {
-            document.getElementById('draw-card-btn').disabled = true;
-            const cardPanel = document.getElementById('card-panel');
-            cardPanel.classList.remove('hidden');
-            document.getElementById('card-result').classList.add('hidden');
+        function drawCard(teamId) {
+            if (teamId !== gameState.attacker) return;
 
-            const attackerName = gameState.attacker === 1 ? gameState.team1 : gameState.team2;
-            const defenderName = gameState.attacker === 1 ? gameState.team2 : gameState.team1;
+            const btn = document.getElementById(`t${teamId}-draw-btn`);
+            btn.disabled = true;
 
-            document.getElementById('card-role-title').innerText = `Turno de ${attackerName} (Atacante Lee Pregunta)`;
-            document.getElementById('attacker-block').classList.remove('hidden');
-            document.getElementById('defender-block').classList.add('hidden');
-
+            const defId = teamId === 1 ? 2 : 1;
             const card = sampleCards[Math.floor(Math.random() * sampleCards.length)];
-            const randomDir = possibleDirections[Math.floor(Math.random() * possibleDirections.length)];
-            const randomMov = Math.floor(Math.random() * 5) + 1; 
+            const dir = directions[Math.floor(Math.random() * directions.length)];
+            const hiddenSteps = Math.floor(Math.random() * 10) + 1; // 1 a 10 casillas (Oculto hasta acertar)
 
-            gameState.currentCard = {
-                ...card,
-                dirObj: randomDir,
-                mov: randomMov
-            };
+            gameState.currentCard = { ...card, dir, hiddenSteps };
 
-            document.getElementById('card-question').innerText = card.q;
-            document.getElementById('secret-answer').innerText = card.correct;
+            // Mostrar código (ej. A2-LE) y pregunta en ambos paneles, ocultando la cantidad de casillas
+            const codeText = `${card.ref}-${dir.code}`;
+            document.getElementById('t1-code-badge').innerText = codeText;
+            document.getElementById('t1-code-badge').classList.remove('hidden');
+            document.getElementById('t2-code-badge').innerText = codeText;
+            document.getElementById('t2-code-badge').classList.remove('hidden');
 
-            // Al hacer clic en la pregunta, el atacante pasa el turno al defensor para que aparezcan las opciones
-            setTimeout(() => {
-                document.getElementById('attacker-block').classList.add('hidden');
-                document.getElementById('defender-block').classList.remove('hidden');
-                document.getElementById('card-role-title').innerText = `Turno de ${defenderName} (Defensor Responde)`;
+            document.getElementById(`t${teamId}-question-text`).innerText = `${card.q} (${card.refBib})`;
+            document.getElementById(`t${defId}-question-text`).innerText = `Reto recibido: "${card.q}"`;
 
-                const optContainer = document.getElementById('options-container');
-                optContainer.innerHTML = '';
-                const shuffledOptions = [...card.options].sort(() => Math.random() - 0.5);
-                
-                shuffledOptions.forEach(opt => {
-                    const btn = document.createElement('button');
-                    btn.className = "w-full text-left bg-slate-900 hover:bg-slate-700 text-slate-200 p-2 rounded-lg border border-slate-700 transition text-xs font-medium";
-                    btn.innerText = opt;
-                    btn.onclick = () => evaluateAnswer(opt === card.correct);
-                    optContainer.appendChild(btn);
-                });
+            // Mostrar dirección anunciada (sin revelar casillas aún)
+            document.getElementById(`t${teamId}-move-info`).innerHTML = `Dirección anunciada: <strong class="text-amber-300">${dir.code} (${dir.label})</strong><br><span class="text-slate-400">Casillas: [Oculto hasta responder]</span>`;
+            document.getElementById(`t${defId}-move-info`).innerHTML = `Defendiendo jugada hacia: <strong class="text-amber-300">${dir.code}</strong>`;
 
-                // Iniciar temporizador de 20s para el defensor
-                gameState.timer = 20;
-                document.getElementById('timer-display').innerText = `${gameState.timer}s`;
-                
-                if (gameState.interval) clearInterval(gameState.interval);
-                gameState.interval = setInterval(() => {
-                    gameState.timer--;
-                    document.getElementById('timer-display').innerText = `${gameState.timer}s`;
-                    if (gameState.timer <= 0) {
-                        clearInterval(gameState.interval);
-                        evaluateAnswer(false);
-                    }
-                }, 1000);
-            }, 4000); // 4 segundos para que el atacante lea la pregunta antes de mostrar las opciones al defensor
+            // Desplegar opciones de respuesta exclusivamente en el panel del DEFENSOR
+            document.getElementById(`t${teamId}-options`).innerHTML = `<p class="text-[11px] text-emerald-400 italic">Esperando respuesta del equipo defensor...</p>`;
+            
+            const defOptionsDiv = document.getElementById(`t${defId}-options`);
+            defOptionsDiv.innerHTML = '';
+            const shuffled = [...card.options].sort(() => Math.random() - 0.5);
+            shuffled.forEach(opt => {
+                const b = document.createElement('button');
+                b.className = "w-full text-left bg-slate-900 hover:bg-slate-800 text-slate-100 p-2 rounded border border-slate-700 text-xs transition font-medium";
+                b.innerText = opt;
+                b.onclick = () => resolvePlay(opt === card.correct);
+                defOptionsDiv.appendChild(b);
+            });
+
+            document.getElementById('global-feed').innerText = `¡Pregunta lanzada (${codeText})! El defensor tiene 20 segundos para responder.`;
+
+            // Cronómetro de 20 segundos en el panel defensor
+            gameState.timer = 20;
+            const timerEl = document.getElementById(`t${defId}-timer`);
+            timerEl.classList.remove('hidden');
+            timerEl.innerText = `${gameState.timer}s`;
+
+            if (gameState.interval) clearInterval(gameState.interval);
+            gameState.interval = setInterval(() => {
+                gameState.timer--;
+                timerEl.innerText = `${gameState.timer}s`;
+                if (gameState.timer <= 0) {
+                    clearInterval(gameState.interval);
+                    resolvePlay(false);
+                }
+            }, 1000);
         }
 
-        function evaluateAnswer(isCorrect) {
+        function resolvePlay(defenderAnsweredCorrectly) {
             clearInterval(gameState.interval);
-            document.getElementById('defender-block').classList.add('hidden');
+            const attId = gameState.attacker;
+            const defId = attId === 1 ? 2 : 1;
+            document.getElementById(`t${defId}-timer`).classList.add('hidden');
+            document.getElementById(`t${defId}-options`).innerHTML = '';
 
-            const resultDiv = document.getElementById('card-result');
-            resultDiv.classList.remove('hidden');
+            const { dir, hiddenSteps, correct } = gameState.currentCard;
 
-            const defenderName = gameState.attacker === 1 ? gameState.team2 : gameState.team1;
-            const attackerName = gameState.attacker === 1 ? gameState.team1 : gameState.team2;
-            const dir = gameState.currentCard.dirObj;
-            const mov = gameState.currentCard.mov;
-
-            if (gameState.attacker === 1) {
-                if (isCorrect) gameState.t2Correct++; else gameState.t1Errors++;
+            // Actualizar contadores de aciertos/errores del defensor
+            if (defenderAnsweredCorrectly) {
+                if (defId === 1) gameState.t1Correct++; else gameState.t2Correct++;
             } else {
-                if (isCorrect) gameState.t1Correct++; else gameState.t2Errors++;
+                if (defId === 1) gameState.t1Errors++; else gameState.t2Errors++;
             }
             updateStatsUI();
 
-            if (isCorrect) {
-                resultDiv.className = "text-xs font-bold text-center py-2 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40";
-                resultDiv.innerText = `¡Correcto! ${defenderName} interceptó. ¡Robo de posesión! Movimiento: ${dir.code} (${mov} cas).`;
-                gameState.attacker = gameState.attacker === 1 ? 2 : 1;
-            } else {
-                resultDiv.className = "text-xs font-bold text-center py-2 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/40";
-                resultDiv.innerText = `Incorrecto / Tiempo agotado. ${attackerName} avanza (${dir.code}: ${mov} casillas).`;
-                
-                let multiplier = (gameState.attacker === 1) ? 1 : -1;
-                gameState.ballX = Math.max(0, Math.min(26, gameState.ballX + (dir.dx * mov * multiplier)));
-                gameState.ballY = Math.max(0, Math.min(16, gameState.ballY + (dir.dy * mov)));
+            if (!defenderAnsweredCorrectly) {
+                // CASO A: EL DEFENSOR FALLA -> EL ATACANTE AVANZA EL BALÓN LAS CASILLAS REVELADAS (1-10) EN LA DIRECCIÓN INDICADA
+                const attName = attId === 1 ? gameState.team1 : gameState.team2;
+                const multiplier = attId === 1 ? 1 : -1;
 
-                if (gameState.attacker === 1 && gameState.ballX >= 26) {
-                    gameState.score1++;
-                    updateStatsUI();
-                    alert(`¡GOOOOL de ${gameState.team1}! ⚽🎉`);
-                    gameState.ballX = 13; gameState.ballY = 8;
-                } else if (gameState.attacker === 2 && gameState.ballX <= 0) {
-                    gameState.score2++;
-                    updateStatsUI();
-                    alert(`¡GOOOOL de ${gameState.team2}! ⚽🎉`);
-                    gameState.ballX = 13; gameState.ballY = 8;
+                const newX = Math.max(0, Math.min(26, gameState.ballX + (dir.dx * hiddenSteps * multiplier)));
+                const newY = Math.max(0, Math.min(16, gameState.ballY + (dir.dy * hiddenSteps)));
+
+                gameState.ballX = newX;
+                gameState.ballY = newY;
+
+                // La ficha más próxima del equipo atacante en esa dirección recepciona/conduce el balón
+                const receiver = findNearestPlayer(attId, newX, newY);
+                if (receiver) {
+                    receiver.x = newX;
+                    receiver.y = newY;
                 }
-                renderPitch();
+
+                const moveMsg = `¡Defensor falló! Se revelan <strong class="text-emerald-400">${hiddenSteps} casillas</strong> en dirección <strong>${dir.code}</strong>. Ficha #${receiver.id} de ${attName} recepciona el balón.`;
+                document.getElementById(`t${attId}-move-info`).innerHTML = moveMsg;
+                document.getElementById(`t${defId}-move-info`).innerHTML = `Respuesta correcta era: <strong>${correct}</strong>. ${attName} avanzó ${hiddenSteps} casillas (${dir.code}).`;
+                document.getElementById('global-feed').innerHTML = `¡Fallo defensivo! ${attName} avanza ${hiddenSteps} casillas en dirección ${dir.code}.`;
+
+                // Verificar si es GOL
+                if ((attId === 1 && gameState.ballX >= 26) || (attId === 2 && gameState.ballX <= 0)) {
+                    if (attId === 1) gameState.score1++; else gameState.score2++;
+                    updateStatsUI();
+                    renderPitch();
+                    setTimeout(() => {
+                        alert(`¡GOOOOL DE ${attName.toUpperCase()}! ⚽🎉`);
+                        initPlayers();
+                        renderPitch();
+                    }, 300);
+                }
+
+            } else {
+                // CASO B: EL DEFENSOR ACIERTA -> ROBO DE BALÓN POR LA FICHA DEFENSORA MÁS PRÓXIMA EN CUALQUIER DIRECCIÓN
+                const defName = defId === 1 ? gameState.team1 : gameState.team2;
+                const interceptor = findNearestPlayer(defId, gameState.ballX, gameState.ballY);
+                
+                if (interceptor) {
+                    // La ficha defensora más cercana intercepta y toma el balón en su posición o en la del balón
+                    gameState.ballX = interceptor.x;
+                    gameState.ballY = interceptor.y;
+                }
+
+                const stealMsg = `¡Respuesta correcta! Ficha #${interceptor.id} de <strong class="text-amber-300">${defName}</strong> (la más cercana) roba el balón y asume el ataque.`;
+                document.getElementById(`t${defId}-move-info`).innerHTML = stealMsg;
+                document.getElementById(`t${attId}-move-info`).innerHTML = `¡Balón interceptado por ${defName}! Pierdes la posesión.`;
+                document.getElementById('global-feed').innerHTML = `¡Intercepción! ${defName} respondió bien y robó el balón con su jugador más cercano.`;
+
+                // Cambiar posesión al equipo que robó el balón
+                gameState.attacker = defId;
             }
 
-            updatePossessionLabel();
-
-            setTimeout(() => {
-                document.getElementById('card-panel').classList.add('hidden');
-                document.getElementById('draw-card-btn').disabled = false;
-            }, 3500);
+            renderPitch();
+            syncPanelsRole();
         }
     </script>
 </body>
