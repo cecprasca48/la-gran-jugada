@@ -24,13 +24,14 @@
         .cell-light { background-color: #166534; }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen font-sans flex flex-col items-center p-4">
-    <header class="text-center mb-4">
-        <h1 class="text-3xl font-black text-emerald-400 tracking-wide">LA GRAN JUGADA</h1>
-        <p class="text-sm text-slate-400 italic">Un Gran Desafío Bíblico en Cancha</p>
+<body class="bg-slate-900 text-slate-100 min-h-screen font-sans flex flex-col items-center p-3">
+    <header class="text-center mb-2">
+        <h1 class="text-2xl font-black text-emerald-400 tracking-wide">LA GRAN JUGADA</h1>
+        <p class="text-xs text-slate-400 italic">Un Gran Desafío Bíblico en Cancha</p>
     </header>
 
-    <div id="setup-screen" class="w-full max-w-xl bg-slate-800 p-6 rounded-2xl shadow-xl border border-slate-700">
+    <!-- Pantalla de Configuración Inicial -->
+    <div id="setup-screen" class="w-full max-w-xl bg-slate-800 p-6 rounded-2xl shadow-xl border border-slate-700 mt-4">
         <h2 class="text-xl font-bold text-white mb-4">Configuración del Partido</h2>
         <div class="space-y-4">
             <div>
@@ -51,90 +52,99 @@
         </div>
     </div>
 
-    <div id="game-screen" class="w-full max-w-6xl hidden flex flex-col items-center">
+    <!-- Pantalla Principal de Juego (Diseño Responsivo: Lados en PC, Apilado en Móvil) -->
+    <div id="game-screen" class="w-full max-w-7xl hidden flex flex-col items-center">
         <!-- Marcador superior -->
-        <div class="w-full flex justify-between items-center bg-slate-800 px-6 py-3 rounded-xl mb-4 border border-slate-700 shadow-md">
+        <div class="w-full flex justify-between items-center bg-slate-800 px-4 py-2 rounded-xl mb-3 border border-slate-700 shadow-md">
             <div class="text-left">
-                <span id="disp-team1" class="font-bold text-emerald-400 text-lg">Judá</span>
-                <span id="score-team1" class="text-2xl font-black ml-2 bg-slate-900 px-3 py-1 rounded-lg">0</span>
+                <span id="disp-team1" class="font-bold text-emerald-400 text-sm md:text-base">Judá</span>
+                <span id="score-team1" class="text-xl font-black ml-2 bg-slate-900 px-2.5 py-0.5 rounded-lg">0</span>
             </div>
             <div class="text-center">
-                <span class="text-xs uppercase tracking-widest text-slate-400 block">Posesión Actual</span>
-                <span id="disp-possession" class="font-bold text-amber-400 text-sm bg-slate-900 px-4 py-1 rounded-full border border-amber-500/30">Judá Atacando</span>
+                <span class="text-[10px] uppercase tracking-widest text-slate-400 block">Posesión Actual</span>
+                <span id="disp-possession" class="font-bold text-amber-400 text-xs md:text-sm bg-slate-900 px-3 py-0.5 rounded-full border border-amber-500/30">Judá Atacando</span>
             </div>
             <div class="text-right">
-                <span id="score-team2" class="text-2xl font-black mr-2 bg-slate-900 px-3 py-1 rounded-lg">0</span>
-                <span id="disp-team2" class="font-bold text-blue-400 text-lg">Israel</span>
+                <span id="score-team2" class="text-xl font-black mr-2 bg-slate-900 px-2.5 py-0.5 rounded-lg">0</span>
+                <span id="disp-team2" class="font-bold text-blue-400 text-sm md:text-base">Israel</span>
             </div>
         </div>
 
-        <!-- Tablero de 17x27 con líneas reglamentarias exactas -->
-        <div class="relative w-full max-w-5xl bg-emerald-700 border-4 border-white rounded-lg shadow-2xl overflow-hidden mb-4">
-            <!-- Capa de líneas blancas SVG -->
-            <svg class="absolute inset-0 w-full h-full pointer-events-none z-10" viewBox="0 0 270 170" preserveAspectRatio="none">
-                <!-- Línea de medio campo -->
-                <line x1="135" y1="0" x2="135" y2="170" stroke="white" stroke-width="2" />
-                <!-- Círculo central -->
-                <circle cx="135" cy="85" r="25" stroke="white" stroke-width="2" fill="none" />
-                <circle cx="135" cy="85" r="2" fill="white" />
-                
-                <!-- Área Grande Izquierda -->
-                <rect x="0" y="42.5" width="35" height="85" stroke="white" stroke-width="2" fill="none" />
-                <!-- Área Chica Izquierda -->
-                <rect x="0" y="65" width="12" height="40" stroke="white" stroke-width="2" fill="none" />
-                <!-- Arco Izquierdo -->
-                <rect x="-6" y="72.5" width="6" height="25" stroke="white" stroke-width="2" fill="none" />
-                <!-- Punto Penal Izquierdo -->
-                <circle cx="22" cy="85" r="1.5" fill="white" />
-
-                <!-- Área Grande Derecha -->
-                <rect x="235" y="42.5" width="35" height="85" stroke="white" stroke-width="2" fill="none" />
-                <!-- Área Chica Derecha -->
-                <rect x="258" y="65" width="12" height="40" stroke="white" stroke-width="2" fill="none" />
-                <!-- Arco Derecho -->
-                <rect x="270" y="72.5" width="6" height="25" stroke="white" stroke-width="2" fill="none" />
-                <!-- Punto Penal Derecho -->
-                <circle cx="248" cy="85" r="1.5" fill="white" />
-
-                <!-- Esquinas (Córner - arcos en los 4 vértices) -->
-                <path d="M 0,10 A 10,10 0 0,0 10,0" stroke="white" stroke-width="1.5" fill="none" />
-                <path d="M 0,160 A 10,10 0 0,1 10,170" stroke="white" stroke-width="1.5" fill="none" />
-                <path d="M 270,10 A 10,10 0 0,1 260,0" stroke="white" stroke-width="1.5" fill="none" />
-                <path d="M 270,160 A 10,10 0 0,0 260,170" stroke="white" stroke-width="1.5" fill="none" />
-            </svg>
-
-            <!-- Cuadrícula exacta 17 filas x 27 columnas -->
-            <div id="pitch-grid" class="pitch-grid w-full"></div>
-        </div>
-
-        <!-- Panel de Control y Tarjeta -->
-        <div class="w-full max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 flex flex-col justify-between">
-                <div>
-                    <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-2">Estado Táctico</h3>
-                    <p id="game-status-text" class="text-slate-200 text-sm mb-4">El equipo atacante tiene la posesión del balón en mediocampo. Presiona el botón para sacar tarjeta.</p>
-                </div>
-                <button id="draw-card-btn" onclick="drawCard()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl transition shadow-lg">
-                    Sacar Tarjeta de Pregunta
-                </button>
-            </div>
-
-            <div id="card-panel" class="md:col-span-2 bg-slate-800 p-5 rounded-xl border border-slate-700 flex flex-col justify-between hidden">
-                <div>
-                    <div class="flex justify-between items-center mb-2">
-                        <span id="card-ref" class="text-xs font-bold bg-slate-900 px-2 py-1 rounded text-emerald-400">REF: A1</span>
-                        <div class="flex items-center space-x-2">
-                            <span class="text-xs text-amber-400 font-bold">Tiempo:</span>
-                            <span id="timer-display" class="text-sm font-black bg-amber-500/20 text-amber-300 px-2.5 py-0.5 rounded-full border border-amber-500/40">20s</span>
-                        </div>
+        <!-- Layout Adaptable: En PC las tarjetas van al costado izquierdo y el campo a la derecha para evitar scroll -->
+        <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+            
+            <!-- Panel Lateral de Control y Preguntas (Izquierda en PC, Abajo en Móvil) -->
+            <div class="lg:col-span-4 flex flex-col gap-3 order-2 lg:order-1">
+                <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Estado Táctico</h3>
+                        <p id="game-status-text" class="text-slate-200 text-xs mb-3">El equipo atacante tiene el balón. Presiona el botón para sacar tarjeta de jugada.</p>
                     </div>
-                    <p id="card-question" class="text-base font-semibold text-white mb-4">Pregunta aquí...</p>
-                    
-                    <!-- Opciones de opción múltiple -->
-                    <div id="options-container" class="grid grid-cols-1 gap-2 mb-4"></div>
+                    <button id="draw-card-btn" onclick="drawCard()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 rounded-xl transition shadow-lg text-sm">
+                        Sacar Tarjeta de Pregunta
+                    </button>
                 </div>
-                <div id="card-result" class="text-sm font-bold text-center py-2 rounded-lg bg-slate-900 hidden"></div>
+
+                <!-- Tarjeta de Preguntas Interactiva -->
+                <div id="card-panel" class="bg-slate-800 p-4 rounded-xl border border-slate-700 flex flex-col justify-between hidden">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span id="card-ref" class="text-[10px] font-bold bg-slate-900 px-2 py-0.5 rounded text-emerald-400">REF: A1</span>
+                            <div class="flex items-center space-x-1.5">
+                                <span class="text-[10px] text-amber-400 font-bold">Tiempo:</span>
+                                <span id="timer-display" class="text-xs font-black bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full border border-amber-500/40">20s</span>
+                            </div>
+                        </div>
+                        <p id="card-question" class="text-sm font-semibold text-white mb-3">Pregunta aquí...</p>
+                        
+                        <!-- Opciones de opción múltiple -->
+                        <div id="options-container" class="grid grid-cols-1 gap-1.5 mb-3"></div>
+                    </div>
+                    <div id="card-result" class="text-xs font-bold text-center py-2 rounded-lg bg-slate-900 hidden"></div>
+                </div>
             </div>
+
+            <!-- Tablero de 17x27 con líneas reglamentarias (Derecha en PC, Arriba en Móvil) -->
+            <div class="lg:col-span-8 order-1 lg:order-2">
+                <div class="relative w-full bg-emerald-700 border-4 border-white rounded-lg shadow-2xl overflow-hidden">
+                    <!-- Capa de líneas blancas SVG -->
+                    <svg class="absolute inset-0 w-full h-full pointer-events-none z-10" viewBox="0 0 270 170" preserveAspectRatio="none">
+                        <!-- Línea de medio campo -->
+                        <line x1="135" y1="0" x2="135" y2="170" stroke="white" stroke-width="2" />
+                        <!-- Círculo central -->
+                        <circle cx="135" cy="85" r="25" stroke="white" stroke-width="2" fill="none" />
+                        <circle cx="135" cy="85" r="2" fill="white" />
+                        
+                        <!-- Área Grande Izquierda -->
+                        <rect x="0" y="42.5" width="35" height="85" stroke="white" stroke-width="2" fill="none" />
+                        <!-- Área Chica Izquierda -->
+                        <rect x="0" y="65" width="12" height="40" stroke="white" stroke-width="2" fill="none" />
+                        <!-- Arco Izquierdo -->
+                        <rect x="-6" y="72.5" width="6" height="25" stroke="white" stroke-width="2" fill="none" />
+                        <!-- Punto Penal Izquierdo -->
+                        <circle cx="22" cy="85" r="1.5" fill="white" />
+
+                        <!-- Área Grande Derecha -->
+                        <rect x="235" y="42.5" width="35" height="85" stroke="white" stroke-width="2" fill="none" />
+                        <!-- Área Chica Derecha -->
+                        <rect x="258" y="65" width="12" height="40" stroke="white" stroke-width="2" fill="none" />
+                        <!-- Arco Derecho -->
+                        <rect x="270" y="72.5" width="6" height="25" stroke="white" stroke-width="2" fill="none" />
+                        <!-- Punto Penal Derecho -->
+                        <circle cx="248" cy="85" r="1.5" fill="white" />
+
+                        <!-- Esquinas (Córner) -->
+                        <path d="M 0,10 A 10,10 0 0,0 10,0" stroke="white" stroke-width="1.5" fill="none" />
+                        <path d="M 0,160 A 10,10 0 0,1 10,170" stroke="white" stroke-width="1.5" fill="none" />
+                        <path d="M 270,10 A 10,10 0 0,1 260,0" stroke="white" stroke-width="1.5" fill="none" />
+                        <path d="M 270,160 A 10,10 0 0,0 260,170" stroke="white" stroke-width="1.5" fill="none" />
+                    </svg>
+
+                    <!-- Cuadrícula 17x27 -->
+                    <div id="pitch-grid" class="pitch-grid w-full"></div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -145,23 +155,35 @@
             score1: 0,
             score2: 0,
             target: 3,
-            attacker: 1,
-            ballX: 13,
-            ballY: 8,
+            attacker: 1, // 1 para team1, 2 para team2
+            ballX: 13, // Centro del campo (0 a 26)
+            ballY: 8,  // Centro vertical (0 a 16)
             timer: 20,
             interval: null,
             currentCard: null
         };
 
+        // Banco de 8 direcciones posibles según el reglamento original
+        const possibleDirections = [
+            { code: "A", name: "Avanzar (Frente)", dx: 1, dy: 0 },
+            { code: "ADD", name: "Avanzar Diagonal Derecha", dx: 1, dy: -1 },
+            { code: "ADE", name: "Avanzar Diagonal Izquierda", dx: 1, dy: 1 },
+            { code: "LD", name: "Movimiento Lateral Derecho", dx: 0, dy: -1 },
+            { code: "LE", name: "Movimiento Lateral Izquierdo", dx: 0, dy: 1 },
+            { code: "R", name: "Retroceder", dx: -1, dy: 0 },
+            { code: "RDD", name: "Retroceder Diagonal Derecha", dx: -1, dy: -1 },
+            { code: "RDE", name: "Retroceder Diagonal Izquierda", dx: -1, dy: 1 }
+        ];
+
         const sampleCards = [
-            { ref: "A1", q: "Palavra chave no livro de Gênesis.", correct: "No princípio", options: ["No princípio", "Criação divina", "No princípio crió Deus", "A terra era sem forma"], refBib: "Gn 1:1", dir: "A", mov: 3 },
-            { ref: "A1", q: "Bisavó de Noé. Não conheceu a morte.", correct: "Enoque", options: ["Matusalém", "Enoque", "Jared", "Lameque"], refBib: "Gn 5:21-29", dir: "ADD", mov: 4 },
-            { ref: "A1", q: "Primeira promessa messiânica.", correct: "Gênesis 3:15", options: ["Gênesis 3:15", "Isaías 7:14", "Gênesis 12:3", "Salmo 22:1"], refBib: "Gn 3:15", dir: "A", mov: 5 },
-            { ref: "A2", q: "Lugar onde Samuel orou por Israel e o julgou.", correct: "Mizpá", options: ["Betel", "Mizpá", "Ramá", "Silo"], refBib: "1 Sm 7:5,6", dir: "ADE", mov: 3 },
-            { ref: "A2", q: "Começou a reinar em Jerusalém desde os 7 anos.", correct: "Joás", options: ["Josias", "Joás", "Uzias", "Salomão"], refBib: "2 Rs 11:21", dir: "A", mov: 4 },
-            { ref: "A3", q: "Quantos anos viveu Adão?", correct: "Viveu 930 anos", options: ["Viveu 930 anos", "Viveu 969 anos", "Viveu 777 anos", "Viveu 500 anos"], refBib: "Gn 5:5", dir: "ADD", mov: 4 },
-            { ref: "B1", q: "É conhecido como o Pai da Fé.", correct: "Abraão", options: ["Isaque", "Abraão", "Moisés", "Davi"], refBib: "Rm 4:16", dir: "A", mov: 5 },
-            { ref: "B2", q: "Qual o Salmo mais curto?", correct: "Salmo 117", options: ["Salmo 117", "Salmo 133", "Salmo 23", "Salmo 150"], refBib: "Sl 117", dir: "ADE", mov: 3 }
+            { ref: "A1", q: "Palavra chave no livro de Gênesis.", correct: "No princípio", options: ["No princípio", "Criação divina", "No princípio crió Deus", "A terra era sem forma"], refBib: "Gn 1:1" },
+            { ref: "A1", q: "Bisavó de Noé. Não conheceu a morte.", correct: "Enoque", options: ["Matusalém", "Enoque", "Jared", "Lameque"], refBib: "Gn 5:21-29" },
+            { ref: "A1", q: "Primeira promessa messiânica.", correct: "Gênesis 3:15", options: ["Gênesis 3:15", "Isaías 7:14", "Gênesis 12:3", "Salmo 22:1"], refBib: "Gn 3:15" },
+            { ref: "A2", q: "Lugar onde Samuel orou por Israel e o julgou.", correct: "Mizpá", options: ["Betel", "Mizpá", "Ramá", "Silo"], refBib: "1 Sm 7:5,6" },
+            { ref: "A2", q: "Começou a reinar em Jerusalém desde os 7 anos.", correct: "Joás", options: ["Josias", "Joás", "Uzias", "Salomão"], refBib: "2 Rs 11:21" },
+            { ref: "A3", q: "Quantos anos viveu Adão?", correct: "Viveu 930 anos", options: ["Viveu 930 anos", "Viveu 969 anos", "Viveu 777 anos", "Viveu 500 anos"], refBib: "Gn 5:5" },
+            { ref: "B1", q: "É conhecido como o Pai da Fé.", correct: "Abraão", options: ["Isaque", "Abraão", "Moisés", "Davi"], refBib: "Rm 4:16" },
+            { ref: "B2", q: "Qual o Salmo mais curto?", correct: "Salmo 117", options: ["Salmo 117", "Salmo 133", "Salmo 23", "Salmo 150"], refBib: "Sl 117" }
         ];
 
         function startGame() {
@@ -196,7 +218,7 @@
                     
                     if (c === gameState.ballX && r === gameState.ballY) {
                         const ball = document.createElement('div');
-                        ball.className = 'w-4 h-4 bg-white rounded-full shadow-md border-2 border-slate-900 z-20 flex items-center justify-center text-[8px] font-black text-slate-900';
+                        ball.className = 'w-3.5 h-3.5 bg-white rounded-full shadow-md border-2 border-slate-900 z-20 flex items-center justify-center text-[7px] font-black text-slate-900';
                         ball.innerText = '⚽';
                         cell.appendChild(ball);
                     }
@@ -209,10 +231,10 @@
             const lbl = document.getElementById('disp-possession');
             if (gameState.attacker === 1) {
                 lbl.innerText = `${gameState.team1} Atacando ➔`;
-                lbl.className = "font-bold text-emerald-400 text-sm bg-slate-900 px-4 py-1 rounded-full border border-emerald-500/30";
+                lbl.className = "font-bold text-emerald-400 text-xs md:text-sm bg-slate-900 px-3 py-0.5 rounded-full border border-emerald-500/30";
             } else {
                 lbl.innerText = `⬅️ ${gameState.team2} Atacando`;
-                lbl.className = "font-bold text-blue-400 text-sm bg-slate-900 px-4 py-1 rounded-full border border-blue-500/30";
+                lbl.className = "font-bold text-blue-400 text-xs md:text-sm bg-slate-900 px-3 py-0.5 rounded-full border border-blue-500/30";
             }
         }
 
@@ -222,10 +244,18 @@
             cardPanel.classList.remove('hidden');
             document.getElementById('card-result').classList.add('hidden');
 
+            // Seleccionar pregunta aleatoria y alternar dirección y movimiento aleatorio (1 a 6 casillas)
             const card = sampleCards[Math.floor(Math.random() * sampleCards.length)];
-            gameState.currentCard = card;
+            const randomDir = possibleDirections[Math.floor(Math.random() * possibleDirections.length)];
+            const randomMov = Math.floor(Math.random() * 5) + 1; // Entre 1 y 5 casillas
 
-            document.getElementById('card-ref').innerText = `REF: ${card.ref} | ${card.refBib}`;
+            gameState.currentCard = {
+                ...card,
+                dirObj: randomDir,
+                mov: randomMov
+            };
+
+            document.getElementById('card-ref').innerText = `REF: ${card.ref} | ${card.refBib} | Dir: ${randomDir.code} (${randomMov} cas)`;
             document.getElementById('card-question').innerText = card.q;
 
             const optContainer = document.getElementById('options-container');
@@ -235,7 +265,7 @@
             
             shuffledOptions.forEach(opt => {
                 const btn = document.createElement('button');
-                btn.className = "w-full text-left bg-slate-900 hover:bg-slate-700 text-slate-200 p-2.5 rounded-lg border border-slate-700 transition text-sm font-medium";
+                btn.className = "w-full text-left bg-slate-900 hover:bg-slate-700 text-slate-200 p-2 rounded-lg border border-slate-700 transition text-xs font-medium";
                 btn.innerText = opt;
                 btn.onclick = () => evaluateAnswer(opt === card.correct);
                 optContainer.appendChild(btn);
@@ -265,33 +295,35 @@
 
             const defenderName = gameState.attacker === 1 ? gameState.team2 : gameState.team1;
             const attackerName = gameState.attacker === 1 ? gameState.team1 : gameState.team2;
+            const dir = gameState.currentCard.dirObj;
+            const mov = gameState.currentCard.mov;
 
             if (isCorrect) {
-                resultDiv.className = "text-sm font-bold text-center py-2 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40";
-                resultDiv.innerText = `¡Correcto! ${defenderName} defendió e interceptó el balón. ¡Robo de posesión!`;
+                // Defensor responde bien -> Robo de balón e intercepta moviéndose hacia adelante del atacante
+                resultDiv.className = "text-xs font-bold text-center py-2 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40";
+                resultDiv.innerText = `¡Correcto! ${defenderName} defendió e interceptó. ¡Robo de posesión!`;
                 gameState.attacker = gameState.attacker === 1 ? 2 : 1;
             } else {
-                resultDiv.className = "text-sm font-bold text-center py-2 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/40";
-                resultDiv.innerText = `Incorrecto / Tiempo agotado. ${attackerName} avanza con el balón (${gameState.currentCard.dir}, ${gameState.currentCard.mov} casillas).`;
+                // Defensor falla o expira el tiempo -> Atacante avanza según el vector aleatorio de la tarjeta
+                resultDiv.className = "text-xs font-bold text-center py-2 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/40";
+                resultDiv.innerText = `Incorrecto / Tiempo agotado. ${attackerName} avanza (${dir.code}: ${mov} casillas).`;
                 
-                if (gameState.attacker === 1) {
-                    gameState.ballX = Math.min(26, gameState.ballX + gameState.currentCard.mov);
-                    if (gameState.ballX >= 26) {
-                        gameState.score1++;
-                        document.getElementById('score-team1').innerText = gameState.score1;
-                        alert(`¡GOOOOL de ${gameState.team1}! ⚽🎉`);
-                        gameState.ballX = 13;
-                        gameState.ballY = 8;
-                    }
-                } else {
-                    gameState.ballX = Math.max(0, gameState.ballX - gameState.currentCard.mov);
-                    if (gameState.ballX <= 0) {
-                        gameState.score2++;
-                        document.getElementById('score-team2').innerText = gameState.score2;
-                        alert(`¡GOOOOL de ${gameState.team2}! ⚽🎉`);
-                        gameState.ballX = 13;
-                        gameState.ballY = 8;
-                    }
+                // Aplicar movimiento vectorial según la dirección del equipo atacante
+                let multiplier = (gameState.attacker === 1) ? 1 : -1;
+                gameState.ballX = Math.max(0, Math.min(26, gameState.ballX + (dir.dx * mov * multiplier)));
+                gameState.ballY = Math.max(0, Math.min(16, gameState.ballY + (dir.dy * mov)));
+
+                // Validar si cruza la línea de gol (X=0 para equipo 2, X=26 para equipo 1)
+                if (gameState.attacker === 1 && gameState.ballX >= 26) {
+                    gameState.score1++;
+                    document.getElementById('score-team1').innerText = gameState.score1;
+                    alert(`¡GOOOOL de ${gameState.team1}! ⚽🎉`);
+                    gameState.ballX = 13; gameState.ballY = 8;
+                } else if (gameState.attacker === 2 && gameState.ballX <= 0) {
+                    gameState.score2++;
+                    document.getElementById('score-team2').innerText = gameState.score2;
+                    alert(`¡GOOOOL de ${gameState.team2}! ⚽🎉`);
+                    gameState.ballX = 13; gameState.ballY = 8;
                 }
                 renderPitch();
             }
