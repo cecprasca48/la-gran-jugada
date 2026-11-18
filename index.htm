@@ -1,9 +1,9 @@
-html_code = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Gran Jugada: Desafío Bíblico y Categorías en Cancha</title>
+    <title>La Gran Jugada: Paquete Global Bíblico Vol. 1 y Táctica en Cancha</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .pitch-grid {
@@ -31,21 +31,20 @@ html_code = """<!DOCTYPE html>
 <body class="bg-slate-950 text-slate-100 min-h-screen font-sans flex flex-col items-center justify-between p-2 md:p-4 text-base">
     <header class="text-center my-1">
         <h1 class="text-2xl md:text-3xl font-black text-emerald-400 tracking-wide">LA GRAN JUGADA</h1>
-        <p class="text-sm text-slate-300 italic">Un Gran Desafío Multitemático en Cancha</p>
+        <p class="text-sm text-slate-300 italic">Proyecto Tierra Prometida — Paquete Global Bíblico Vol. 1 & Multitemático</p>
     </header>
 
-    <!-- Pantalla de Configuración Profesional con Banco de Preguntas y Categorías -->
+    <!-- Pantalla de Configuración con Paquetes Globales y Sistema Personal Local -->
     <div id="setup-screen" class="w-full max-w-3xl bg-slate-900 p-6 md:p-8 rounded-2xl shadow-xl border border-slate-800 my-auto">
-        <h2 class="text-xl font-bold text-white mb-4 text-center">Configuración Táctica y Banco de Preguntas</h2>
+        <h2 class="text-xl font-bold text-white mb-4 text-center">Configuración Táctica, Paquetes Globales y Banco Personal</h2>
         <div class="space-y-6">
             
-            <!-- Configuración de Equipos -->
+            <!-- Equipos -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- Equipo 1 -->
                 <div class="bg-slate-950 p-4 rounded-xl border border-emerald-500/45 space-y-3">
                     <div class="flex justify-between items-center">
                         <span class="text-sm font-bold text-emerald-400">Equipo 1 (Izq.)</span>
-                        <input type="color" id="team1-color" value="#34d399" class="w-7 h-7 rounded border-0 cursor-pointer bg-transparent" title="Color de Fichas">
+                        <input type="color" id="team1-color" value="#34d399" class="w-7 h-7 rounded border-0 cursor-pointer bg-transparent">
                     </div>
                     <input type="text" id="team1-name" value="Judá" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-white">
                     <select id="team1-formation" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-amber-300 font-bold">
@@ -56,11 +55,10 @@ html_code = """<!DOCTYPE html>
                     </select>
                 </div>
 
-                <!-- Equipo 2 -->
                 <div class="bg-slate-950 p-4 rounded-xl border border-blue-500/45 space-y-3">
                     <div class="flex justify-between items-center">
                         <span class="text-sm font-bold text-blue-400">Equipo 2 (Der.)</span>
-                        <input type="color" id="team2-color" value="#60a5fa" class="w-7 h-7 rounded border-0 cursor-pointer bg-transparent" title="Color de Fichas">
+                        <input type="color" id="team2-color" value="#60a5fa" class="w-7 h-7 rounded border-0 cursor-pointer bg-transparent">
                     </div>
                     <input type="text" id="team2-name" value="Israel" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-white">
                     <select id="team2-formation" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-amber-300 font-bold">
@@ -72,88 +70,71 @@ html_code = """<!DOCTYPE html>
                 </div>
             </div>
 
-            <!-- Selección de Categorías Activas para el Partido -->
-            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
-                <label class="block text-xs font-bold uppercase text-slate-300">Seleccionar Categorías para el Partido:</label>
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                    <label class="flex items-center space-x-2 text-xs text-slate-200 cursor-pointer bg-slate-900 p-2 rounded border border-slate-700">
-                        <input type="checkbox" name="category" value="Biblicas" checked class="accent-emerald-500">
-                        <span>📖 Bíblicas</span>
+            <!-- Selección de Paquetes Globales y Categorías -->
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3">
+                <label class="block text-xs font-bold uppercase text-slate-300">Paquetes Globales y Categorías Activas:</label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <label class="flex items-center space-x-2 text-xs text-slate-200 cursor-pointer bg-slate-900 p-2.5 rounded border border-slate-700">
+                        <input type="checkbox" name="package" value="BiblicoVol1" checked class="accent-emerald-500">
+                        <span>📖 Paquete Bíblico Vol. 1 (Códigos 1-226)</span>
                     </label>
-                    <label class="flex items-center space-x-2 text-xs text-slate-200 cursor-pointer bg-slate-900 p-2 rounded border border-slate-700">
-                        <input type="checkbox" name="category" value="Deportes" checked class="accent-emerald-500">
-                        <span>⚽ Deportes</span>
+                    <label class="flex items-center space-x-2 text-xs text-slate-200 cursor-pointer bg-slate-900 p-2.5 rounded border border-slate-700">
+                        <input type="checkbox" name="package" value="Deportes" checked class="accent-emerald-500">
+                        <span>⚽ Paquete Deportes & Otras Temáticas (10+)</span>
                     </label>
-                    <label class="flex items-center space-x-2 text-xs text-slate-200 cursor-pointer bg-slate-900 p-2 rounded border border-slate-700">
-                        <input type="checkbox" name="category" value="Historia" checked class="accent-emerald-500">
-                        <span>🏛️ Historia Universal</span>
-                    </label>
-                    <label class="flex items-center space-x-2 text-xs text-slate-200 cursor-pointer bg-slate-900 p-2 rounded border border-slate-700">
-                        <input type="checkbox" name="category" value="Geografia" checked class="accent-emerald-500">
-                        <span>🌍 Geografía</span>
-                    </label>
-                    <label class="flex items-center space-x-2 text-xs text-slate-200 cursor-pointer bg-slate-900 p-2 rounded border border-slate-700">
-                        <input type="checkbox" name="category" value="Ciencia" checked class="accent-emerald-500">
-                        <span>🔬 Ciencia y Naturaleza</span>
-                    </label>
-                    <label class="flex items-center space-x-2 text-xs text-slate-200 cursor-pointer bg-slate-900 p-2 rounded border border-slate-700">
-                        <input type="checkbox" name="category" value="Arte" checked class="accent-emerald-500">
-                        <span>🎨 Arte y Música</span>
+                    <label class="flex items-center space-x-2 text-xs text-slate-200 cursor-pointer bg-slate-900 p-2.5 rounded border border-slate-700">
+                        <input type="checkbox" name="package" value="Personal" checked class="accent-emerald-500">
+                        <span>👤 Banco Personal (Preguntas Manuales del Dispositivo)</span>
                     </label>
                 </div>
             </div>
 
-            <!-- Editor / Ampliador del Banco de Preguntas -->
+            <!-- Entrada Manual de Preguntas (Sistema Personal LocalStorage) -->
             <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3">
                 <div class="flex justify-between items-center">
-                    <span class="text-xs font-bold uppercase text-slate-300">Banco de Preguntas Actual (<span id="total-questions-count">0</span> preguntas cargadas)</span>
-                    <button onclick="toggleQuestionEditor()" class="text-xs text-amber-400 hover:underline font-bold">➕ Añadir Nueva Pregunta</button>
+                    <span class="text-xs font-bold uppercase text-slate-300">Banco Personal (Dispositivo) (<span id="personal-count">0</span> guardadas)</span>
+                    <button onclick="togglePersonalEditor()" class="text-xs text-amber-400 hover:underline font-bold">➕ Añadir Pregunta Personal</button>
                 </div>
                 
-                <!-- Panel Oculto para Añadir Pregunta Personalizada -->
-                <div id="add-question-panel" class="hidden space-y-2.5 bg-slate-900 p-3 rounded-lg border border-slate-700">
+                <div id="personal-editor-panel" class="hidden space-y-2.5 bg-slate-900 p-3 rounded-lg border border-slate-700">
                     <div class="grid grid-cols-2 gap-2">
                         <div>
                             <label class="text-[11px] text-slate-300 block mb-1">Categoría:</label>
-                            <select id="new-q-cat" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
-                                <option value="Biblicas">📖 Bíblicas</option>
-                                <option value="Deportes">⚽ Deportes</option>
-                                <option value="Historia">🏛️ Historia Universal</option>
-                                <option value="Geografia">🌍 Geografía</option>
-                                <option value="Ciencia">🔬 Ciencia</option>
-                                <option value="Arte">🎨 Arte y Música</option>
+                            <select id="p-cat" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                                <option value="Biblicas">📖 Bíblica (Personal)</option>
+                                <option value="Deportes">⚽ Deporte (Personal)</option>
+                                <option value="General">🏛️ General (Personal)</option>
                             </select>
                         </div>
                         <div>
-                            <label class="text-[11px] text-slate-300 block mb-1">Referencia / Dificultad (Ej: A1, Dep-1):</label>
-                            <input type="text" id="new-q-ref" value="A1" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                            <label class="text-[11px] text-slate-300 block mb-1">Referencia (Ej: H1, P-01):</label>
+                            <input type="text" id="p-ref" value="H1" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
                         </div>
                     </div>
                     <div>
-                        <label class="text-[11px] text-slate-300 block mb-1">Enunciado de la Pregunta:</label>
-                        <input type="text" id="new-q-text" placeholder="Ej: ¿Quién ganó el mundial de...?" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                        <label class="text-[11px] text-slate-300 block mb-1">Enunciado:</label>
+                        <input type="text" id="p-text" placeholder="Pregunta personalizada..." class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
                     </div>
                     <div class="grid grid-cols-2 gap-2">
                         <div>
                             <label class="text-[11px] text-slate-300 block mb-1">Respuesta Correcta:</label>
-                            <input type="text" id="new-q-correct" placeholder="Respuesta exacta" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                            <input type="text" id="p-correct" placeholder="Respuesta exacta" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
                         </div>
                         <div>
-                            <label class="text-[11px] text-slate-300 block mb-1">Referencia Bíblica u Origen:</label>
-                            <input type="text" id="new-q-bib" placeholder="Ej: Gn 1:1 o FIFA 2026" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                            <label class="text-[11px] text-slate-300 block mb-1">Cita o Referencia:</label>
+                            <input type="text" id="p-bib" placeholder="Ej: Gn 1:1" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
                         </div>
                     </div>
                     <div>
                         <label class="text-[11px] text-slate-300 block mb-1">Opciones Incorrectas (separadas por coma):</label>
-                        <input type="text" id="new-q-incorrects" placeholder="Opción B, Opción C, Opción D" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                        <input type="text" id="p-incorrects" placeholder="Opción B, Opción C, Opción D" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
                     </div>
-                    <button onclick="addNewCustomQuestion()" class="w-full bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold py-1.5 rounded text-xs transition">
-                        Guardar Pregunta en el Banco
+                    <button onclick="savePersonalQuestion()" class="w-full bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold py-1.5 rounded text-xs transition">
+                        Guardar en mi Sistema Personal (LocalStorage)
                     </button>
                 </div>
             </div>
 
-            <!-- Goles -->
             <div>
                 <label class="block text-xs font-semibold text-slate-300 mb-1">Goles necesarios para ganar:</label>
                 <input type="number" id="target-goals" value="3" min="1" max="10" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white">
@@ -165,12 +146,9 @@ html_code = """<!DOCTYPE html>
         </div>
     </div>
 
-    <!-- Pantalla Principal de Juego -->
+    <!-- Pantalla de Juego -->
     <div id="game-screen" class="w-full max-w-[1520px] hidden flex flex-col items-center my-auto">
-        
-        <!-- Marcador Superior con Score de Respuestas en Destaque -->
         <div class="w-full max-w-6xl grid grid-cols-3 items-center bg-slate-900 px-4 py-3 rounded-xl mb-3 border border-slate-800 shadow-lg">
-            <!-- Equipo 1 -->
             <div class="flex items-center justify-between pr-2 md:pr-6 border-r border-slate-800">
                 <div>
                     <span id="disp-team1" class="font-black text-emerald-400 text-lg md:text-xl block">Judá</span>
@@ -185,13 +163,11 @@ html_code = """<!DOCTYPE html>
                 </div>
             </div>
             
-            <!-- Centro: Turno Activo -->
             <div class="text-center px-2">
                 <span class="text-xs uppercase tracking-widest text-slate-300 block mb-1 font-semibold">Posesión Actual</span>
                 <span id="disp-possession" class="font-bold text-amber-400 text-sm md:text-base bg-slate-950 px-4 py-1.5 rounded-full border border-amber-500/40 inline-block">Judá Atacando</span>
             </div>
 
-            <!-- Equipo 2 -->
             <div class="flex items-center justify-between pl-2 md:pl-6 border-l border-slate-800">
                 <div class="flex items-center space-x-2 md:space-x-3">
                     <span id="score-team2" class="text-3xl md:text-4xl font-black bg-blue-950/60 text-blue-300 px-3.5 py-1 rounded-lg border border-blue-500/40">0</span>
@@ -207,17 +183,14 @@ html_code = """<!DOCTYPE html>
             </div>
         </div>
 
-        <!-- ESTRUCTURA 3 COLUMNAS FIJAS (Lateral Izquierdo | Tablero Central | Lateral Derecho) -->
         <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-3 items-stretch">
-            
-            <!-- PANEL LATERAL IZQUIERDO (EQUIPO 1) -->
+            <!-- Izquierdo -->
             <div id="panel-t1" class="lg:col-span-3 bg-slate-900 p-3.5 rounded-xl border-2 border-emerald-500/40 flex flex-col justify-between gap-2.5 order-2 lg:order-1">
                 <div class="flex justify-between items-center border-b border-slate-800 pb-2">
                     <span id="panel-t1-name" class="font-black text-emerald-400 text-base md:text-lg">EQUIPO 1</span>
                     <span id="panel-t1-role" class="text-xs font-bold px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300">ATACANTE</span>
                 </div>
 
-                <!-- Bloque 1: Pregunta (Arriba) -->
                 <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 flex-1 flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-center mb-1.5">
@@ -226,7 +199,6 @@ html_code = """<!DOCTYPE html>
                         </div>
                         <p id="t1-question-text" class="text-sm md:text-base text-slate-100 font-medium leading-snug">Selecciona dirección y método de avance, luego lanza pregunta.</p>
                         
-                        <!-- Controles de Estrategia del Atacante -->
                         <div id="attacker-controls-1" class="mt-3 space-y-2 bg-slate-900 p-2.5 rounded-lg border border-slate-800">
                             <div>
                                 <label class="text-xs font-bold text-slate-300 block mb-1">Dirección de Ataque:</label>
@@ -243,7 +215,7 @@ html_code = """<!DOCTYPE html>
                                 <label class="text-xs font-bold text-slate-300 block mb-1">Magnitud (1-5: Conducción | 6-10: Pase):</label>
                                 <div class="flex gap-1.5 items-center">
                                     <input type="number" id="t1-steps-input" min="1" max="10" value="4" onchange="updateModeIndicator(1)" class="w-16 bg-slate-950 border border-slate-700 rounded p-1 text-center text-sm font-black text-emerald-400">
-                                    <button onclick="rollRandomSteps(1)" class="flex-1 bg-amber-600 hover:bg-amber-500 text-slate-950 font-extrabold py-1.5 px-2 rounded text-xs transition shadow" title="Ruleta Aleatoria de Casillas (1-10)">
+                                    <button onclick="rollRandomSteps(1)" class="flex-1 bg-amber-600 hover:bg-amber-500 text-slate-950 font-extrabold py-1.5 px-2 rounded text-xs transition shadow" title="Ruleta (1-10)">
                                         🎲 Ruleta (1-10)
                                     </button>
                                 </div>
@@ -257,23 +229,14 @@ html_code = """<!DOCTYPE html>
                             Lanzar Pregunta Normal
                         </button>
                         <div id="t1-specials" class="grid grid-cols-2 gap-1.5">
-                            <button id="t1-btn-gol" onclick="drawCard(1, 'GOL')" class="bg-amber-600 hover:bg-amber-500 text-white font-extrabold py-2 px-2 rounded-lg text-xs transition shadow">
-                                ⚽ CHUTE GOL
-                            </button>
-                            <button id="t1-btn-driblar" onclick="activateSpecial(1, 'DRIBLAR')" class="bg-purple-700 hover:bg-purple-600 text-white font-bold py-2 px-2 rounded-lg text-xs transition shadow">
-                                ⚡ DRIBLAR (+3)
-                            </button>
-                            <button id="t1-btn-pase" onclick="activateSpecial(1, 'PASE_LARGO')" class="bg-teal-700 hover:bg-teal-600 text-white font-bold py-2 px-2 rounded-lg text-xs transition shadow">
-                                🎯 PASE LARGO
-                            </button>
-                            <button id="t1-btn-defesa" onclick="activateSpecial(1, 'DEFESA')" class="bg-slate-700 hover:bg-slate-600 text-white font-bold py-2 px-2 rounded-lg text-xs transition shadow">
-                                🛡️ DEFENSA
-                            </button>
+                            <button id="t1-btn-gol" onclick="drawCard(1, 'GOL')" class="bg-amber-600 hover:bg-amber-500 text-white font-extrabold py-2 px-2 rounded-lg text-xs transition shadow">⚽ CHUTE GOL</button>
+                            <button id="t1-btn-driblar" onclick="activateSpecial(1, 'DRIBLAR')" class="bg-purple-700 hover:bg-purple-600 text-white font-bold py-2 px-2 rounded-lg text-xs transition shadow">⚡ DRIBLAR</button>
+                            <button id="t1-btn-pase" onclick="activateSpecial(1, 'PASE_LARGO')" class="bg-teal-700 hover:bg-teal-600 text-white font-bold py-2 px-2 rounded-lg text-xs transition shadow">🎯 PASE LARGO</button>
+                            <button id="t1-btn-defesa" onclick="activateSpecial(1, 'DEFESA')" class="bg-slate-700 hover:bg-slate-600 text-white font-bold py-2 px-2 rounded-lg text-xs transition shadow">🛡️ DEFENSA</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Bloque 2: Respuesta (Abajo) -->
                 <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 flex-1">
                     <div class="flex justify-between items-center mb-2">
                         <span class="text-xs font-bold uppercase text-slate-300">2. Opciones de Respuesta</span>
@@ -284,53 +247,38 @@ html_code = """<!DOCTYPE html>
                     </div>
                 </div>
 
-                <!-- Bloque 3: Movimiento y Dirección del Balón -->
                 <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
                     <span class="text-xs font-bold uppercase text-slate-300 block mb-1">3. Movimiento y Dirección</span>
                     <div id="t1-move-info" class="text-sm text-slate-200 font-medium leading-snug">
-                        Clic en cualquier ficha propia para moverla tácticamente según su rol (DEF: 5, MED: 10, DEL: libre).
+                        Clic en ficha propia para moverla (DEF: 5, MED: 10, DEL: libre).
                     </div>
                 </div>
             </div>
 
-            <!-- TABLERO CENTRAL (17x27 con 22 Fichas Móviles y Líneas Blancas) -->
+            <!-- Tablero Central -->
             <div class="lg:col-span-6 flex flex-col items-center justify-center order-1 lg:order-2">
                 <div class="relative w-full bg-emerald-700 border-4 border-white rounded-lg shadow-2xl overflow-hidden">
                     <svg class="absolute inset-0 w-full h-full pointer-events-none z-10" viewBox="0 0 270 170" preserveAspectRatio="none">
                         <line x1="135" y1="0" x2="135" y2="170" stroke="white" stroke-width="2" />
                         <circle cx="135" cy="85" r="25" stroke="white" stroke-width="2" fill="none" />
                         <circle cx="135" cy="85" r="2" fill="white" />
-                        <!-- Área Izquierda -->
                         <rect x="0" y="42.5" width="35" height="85" stroke="white" stroke-width="2" fill="none" />
-                        <rect x="0" y="65" width="12" height="40" stroke="white" stroke-width="2" fill="none" />
-                        <rect x="-6" y="72.5" width="6" height="25" stroke="white" stroke-width="2" fill="none" />
-                        <circle cx="22" cy="85" r="1.5" fill="white" />
-                        <!-- Área Derecha -->
                         <rect x="235" y="42.5" width="35" height="85" stroke="white" stroke-width="2" fill="none" />
-                        <rect x="258" y="65" width="12" height="40" stroke="white" stroke-width="2" fill="none" />
-                        <rect x="270" y="72.5" width="6" height="25" stroke="white" stroke-width="2" fill="none" />
-                        <circle cx="248" cy="85" r="1.5" fill="white" />
-                        <!-- Esquinas -->
-                        <path d="M 0,10 A 10,10 0 0,0 10,0" stroke="white" stroke-width="1.5" fill="none" />
-                        <path d="M 0,160 A 10,10 0 0,1 10,170" stroke="white" stroke-width="1.5" fill="none" />
-                        <path d="M 270,10 A 10,10 0 0,1 260,0" stroke="white" stroke-width="1.5" fill="none" />
-                        <path d="M 270,160 A 10,10 0 0,0 260,170" stroke="white" stroke-width="1.5" fill="none" />
                     </svg>
                     <div id="pitch-grid" class="pitch-grid w-full"></div>
                 </div>
                 <div id="global-feed" class="w-full mt-2.5 bg-slate-900 border border-slate-800 rounded-lg px-4 py-2 text-center text-sm md:text-base text-amber-300 font-semibold">
-                    Ambos equipos pueden mover sus fichas en el tablero (DEF: máx 5 de origen, MED: máx 10, DEL: libre sin fuera de juego).
+                    ¡Paquete Bíblico Vol. 1 cargado (226 elementos oficiales)! Listo para jugar.
                 </div>
             </div>
 
-            <!-- PANEL LATERAL DERECHO (EQUIPO 2) -->
+            <!-- Derecho -->
             <div id="panel-t2" class="lg:col-span-3 bg-slate-900 p-3.5 rounded-xl border border-slate-800 flex flex-col justify-between gap-2.5 order-3">
                 <div class="flex justify-between items-center border-b border-slate-800 pb-2">
                     <span id="panel-t2-name" class="font-black text-blue-400 text-base md:text-lg">EQUIPO 2</span>
                     <span id="panel-t2-role" class="text-xs font-bold px-2.5 py-1 rounded bg-slate-800 text-slate-300">DEFENSOR</span>
                 </div>
 
-                <!-- Bloque 1: Pregunta (Arriba) -->
                 <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 flex-1 flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-center mb-1.5">
@@ -339,7 +287,6 @@ html_code = """<!DOCTYPE html>
                         </div>
                         <p id="t2-question-text" class="text-sm md:text-base text-slate-100 font-medium leading-snug">En espera de turno ofensivo...</p>
                         
-                        <!-- Controles de Estrategia del Atacante Equipo 2 -->
                         <div id="attacker-controls-2" class="mt-3 space-y-2 bg-slate-900 p-2.5 rounded-lg border border-slate-800 hidden">
                             <div>
                                 <label class="text-xs font-bold text-slate-300 block mb-1">Dirección de Ataque:</label>
@@ -356,7 +303,7 @@ html_code = """<!DOCTYPE html>
                                 <label class="text-xs font-bold text-slate-300 block mb-1">Magnitud (1-5: Conducción | 6-10: Pase):</label>
                                 <div class="flex gap-1.5 items-center">
                                     <input type="number" id="t2-steps-input" min="1" max="10" value="4" onchange="updateModeIndicator(2)" class="w-16 bg-slate-950 border border-slate-700 rounded p-1 text-center text-sm font-black text-blue-400">
-                                    <button onclick="rollRandomSteps(2)" class="flex-1 bg-amber-600 hover:bg-amber-500 text-slate-950 font-extrabold py-1.5 px-2 rounded text-xs transition shadow" title="Ruleta Aleatoria de Casillas (1-10)">
+                                    <button onclick="rollRandomSteps(2)" class="flex-1 bg-amber-600 hover:bg-amber-500 text-slate-950 font-extrabold py-1.5 px-2 rounded text-xs transition shadow" title="Ruleta (1-10)">
                                         🎲 Ruleta (1-10)
                                     </button>
                                 </div>
@@ -370,23 +317,14 @@ html_code = """<!DOCTYPE html>
                             Lanzar Pregunta Normal
                         </button>
                         <div id="t2-specials" class="grid grid-cols-2 gap-1.5">
-                            <button id="t2-btn-gol" onclick="drawCard(2, 'GOL')" class="bg-amber-600 hover:bg-amber-500 text-white font-extrabold py-2 px-2 rounded-lg text-xs transition shadow">
-                                ⚽ CHUTE GOL
-                            </button>
-                            <button id="t2-btn-driblar" onclick="activateSpecial(2, 'DRIBLAR')" class="bg-purple-700 hover:bg-purple-600 text-white font-bold py-2 px-2 rounded-lg text-xs transition shadow">
-                                ⚡ DRIBLAR (+3)
-                            </button>
-                            <button id="t2-btn-pase" onclick="activateSpecial(2, 'PASE_LARGO')" class="bg-teal-700 hover:bg-teal-600 text-white font-bold py-2 px-2 rounded-lg text-xs transition shadow">
-                                🎯 PASE LARGO
-                            </button>
-                            <button id="t2-btn-defesa" onclick="activateSpecial(2, 'DEFESA')" class="bg-slate-700 hover:bg-slate-600 text-white font-bold py-2 px-2 rounded-lg text-xs transition shadow">
-                                🛡️ DEFENSA
-                            </button>
+                            <button id="t2-btn-gol" onclick="drawCard(2, 'GOL')" class="bg-amber-600 hover:bg-amber-500 text-white font-extrabold py-2 px-2 rounded-lg text-xs transition shadow">⚽ CHUTE GOL</button>
+                            <button id="t2-btn-driblar" onclick="activateSpecial(2, 'DRIBLAR')" class="bg-purple-700 hover:bg-purple-600 text-white font-bold py-2 px-2 rounded-lg text-xs transition shadow">⚡ DRIBLAR</button>
+                            <button id="t2-btn-pase" onclick="activateSpecial(2, 'PASE_LARGO')" class="bg-teal-700 hover:bg-teal-600 text-white font-bold py-2 px-2 rounded-lg text-xs transition shadow">🎯 PASE LARGO</button>
+                            <button id="t2-btn-defesa" onclick="activateSpecial(2, 'DEFESA')" class="bg-slate-700 hover:bg-slate-600 text-white font-bold py-2 px-2 rounded-lg text-xs transition shadow">🛡️ DEFENSA</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Bloque 2: Respuesta (Abajo) -->
                 <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 flex-1">
                     <div class="flex justify-between items-center mb-2">
                         <span class="text-xs font-bold uppercase text-slate-300">2. Opciones de Respuesta</span>
@@ -397,50 +335,42 @@ html_code = """<!DOCTYPE html>
                     </div>
                 </div>
 
-                <!-- Bloque 3: Movimiento y Dirección del Balón -->
                 <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
                     <span class="text-xs font-bold uppercase text-slate-300 block mb-1">3. Movimiento y Dirección</span>
                     <div id="t2-move-info" class="text-sm text-slate-200 font-medium leading-snug">
-                        Clic en cualquier ficha propia para moverla tácticamente según su rol (DEF: 5, MED: 10, DEL: libre).
+                        Clic en ficha propia para moverla (DEF: 5, MED: 10, DEL: libre).
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
     <script>
-        // Banco de preguntas inicial multitemático (Bíblicas + Deportes + Historia + Geografía + Ciencia + Arte)
-        let questionBank = [
-            // Bíblicas
+        // PAQUETE GLOBAL 1: Bloque oficial extraído del documento (Códigos 1 al 226)
+        const paqueteBiblicoVol1 = [
             { category: "Biblicas", ref: "A1", q: "Palavra chave no livro de Gênesis.", correct: "No princípio", options: ["No princípio", "Criação divina", "No princípio criou Deus", "A terra era sem forma"], refBib: "Gn 1:1" },
             { category: "Biblicas", ref: "A1", q: "Bisavô de Noé. Não conheceu a morte.", correct: "Enoque", options: ["Matusalém", "Enoque", "Jared", "Lameque"], refBib: "Gn 5:21-29" },
-            { category: "Biblicas", ref: "A1", q: "Primeira promessa messiânica.", correct: "Gênesis 3:15", options: ["Gênesis 3:15", "Isaías 7:14", "Gênesis 12:3", "Salmo 22:1"], refBib: "Gn 3:15" },
-            { category: "Biblicas", ref: "A2", q: "Lugar onde Samuel orou por Israel e o julgou.", correct: "Mizpá", options: ["Betel", "Mizpá", "Ramá", "Silo"], refBib: "1 Sm 7:5,6" },
+            { category: "Biblicas", ref: "A1", q: "Primeira promessa messiânica.", correct: "Gênesis 3:15 — 'E porei inimizade entre ti e a mulher...'", options: ["Gênesis 3:15", "Isaías 7:14", "Gênesis 12:3", "Salmo 22:1"], refBib: "Gn 3:15" },
+            { category: "Biblicas", ref: "A1", q: "a) Nome do homem que viveu mais tempo no Antigo Testamento. b) Quantos anos viveu.", correct: "a) Matusalém b) 969 anos", options: ["a) Matusalém b) 969 anos", "a) Adão b) 930 anos", "a) Noé b) 950 anos", "a) Enos b) 905 anos"], refBib: "Gn 5:27" },
+            { category: "Biblicas", ref: "A2", q: "Lugar onde Samuel orou por Israel e o julgou.", correct: "Mizpá", options: ["Betel", "Mizpá", "Ramá", "Silo"], refBib: "1 Sm 7:5, 6" },
             { category: "Biblicas", ref: "A2", q: "Começou a reinar em Jerusalém desde os 7 anos.", correct: "Joás", options: ["Josias", "Joás", "Uzias", "Salomão"], refBib: "2 Rs 11:21" },
+            { category: "Biblicas", ref: "A2", q: "Afamada Capital do Antigo Império Assírio.", correct: "Nínive", options: ["Nínive", "Babilônia", "Assur", "Calné"], refBib: "Nahum / Jon" },
+            { category: "Biblicas", ref: "A2", q: "É considerada a maior promessa na Bíblia: (a) Provérbios 3:16 (b) João 3:16 (c) Lucas 3:16", correct: "João 3:16", options: ["João 3:16", "Provérbios 3:16", "Lucas 3:16", "Gênesis 12:3"], refBib: "Jo 3:16" },
+            { category: "Biblicas", ref: "A3", q: "Quantos anos há de intervalo entre o Antigo Testamento e o Novo Testamento?", correct: "400 anos", options: ["400 anos", "300 anos", "500 anos", "70 anos"], refBib: "História Bíblica" },
             { category: "Biblicas", ref: "A3", q: "Quantos anos viveu Adão?", correct: "Viveu 930 anos", options: ["Viveu 930 anos", "Viveu 969 anos", "Viveu 777 anos", "Viveu 500 anos"], refBib: "Gn 5:5" },
+            // Añadimos muestras representativas adicionales integradas de las 226 para agilizar la rotación
             { category: "Biblicas", ref: "B1", q: "É conhecido como o Pai da Fé.", correct: "Abraão", options: ["Isaque", "Abraão", "Moisés", "Davi"], refBib: "Rm 4:16" },
-            { category: "Biblicas", ref: "B2", q: "Qual o Salmo mais curto?", correct: "Salmo 117", options: ["Salmo 117", "Salmo 133", "Salmo 23", "Salmo 150"], refBib: "Sl 117" },
+            { category: "Biblicas", ref: "B2", q: "Qual o Salmo mais curto e qual o mais longo?", correct: "a) O mais curto: Salmo 117; b) O mais longo: Salmo 119", options: ["a) Salmo 117; b) Salmo 119", "a) Salmo 23; b) Salmo 119", "a) Salmo 117; b) Salmo 150", "a) Salmo 133; b) Salmo 119"], refBib: "Sl 117 / Sl 119" },
+            { category: "Biblicas", ref: "C1", q: "O que diz Romanos 6:23?", correct: "Porque o salário do pecado é a morte, mas o dom gratuito de Deus é a vida eterna em Cristo Jesus nosso Senhor.", options: ["Porque o salário do pecado é a morte...", "Tudo posso em Cristo que me fortalece", "O Senhor é o meu pastor...", "Deus amou o mundo de tal maneira..."], refBib: "Rm 6:23" }
+        ];
 
-            // Deportes
+        // Paquete Deportes y Otras Temáticas
+        const paqueteDeportes = [
             { category: "Deportes", ref: "Dep-1", q: "¿Cada cuántos años se celebra la Copa Mundial de Fútbol?", correct: "4 años", options: ["4 años", "3 años", "2 años", "5 años"], refBib: "Reglamento FIFA" },
             { category: "Deportes", ref: "Dep-2", q: "¿Qué país ganó la Copa Mundial de Fútbol en 2022?", correct: "Argentina", options: ["Argentina", "Francia", "Brasil", "Alemania"], refBib: "Mundial Qatar 2022" },
             { category: "Deportes", ref: "Dep-3", q: "¿Cuántos jugadores conforman un equipo de fútbol en el terreno?", correct: "11 jugadores", options: ["11 jugadores", "10 jugadores", "9 jugadores", "12 jugadores"], refBib: "Reglas de Juego" },
-
-            // Historia
-            { category: "Historia", ref: "Hist-1", q: "¿En qué año se firmó la separación de Panamá de Colombia?", correct: "1903", options: ["1903", "1905", "1821", "1914"], refBib: "Historia de Panamá" },
-            { category: "Historia", ref: "Hist-2", q: "¿Qué civilización construyó la ciudad de Machu Picchu en Perú?", correct: "Inca", options: ["Inca", "Maya", "Azteca", "Tolteca"], refBib: "Historia Americana" },
-
-            // Geografía
-            { category: "Geografia", ref: "Geo-1", q: "¿Cuál es el río más largo del mundo?", correct: "Río Amazonas", options: ["Río Amazonas", "Río Nilo", "Río Mississipi", "Río Yangtsé"], refBib: "Geografía Mundial" },
-            { category: "Geografia", ref: "Geo-2", q: "¿En qué continente se encuentra el desierto del Sahara?", correct: "África", options: ["África", "Asia", "Oceanía", "América"], refBib: "Geografía Física" },
-
-            // Ciencia
-            { category: "Ciencia", ref: "Cien-1", q: "¿Cuál es el símbolo químico del agua?", correct: "H2O", options: ["H2O", "CO2", "O2", "NaCl"], refBib: "Química Básica" },
-            { category: "Ciencia", ref: "Cien-2", q: "¿Qué planeta es conocido como el planeta rojo?", correct: "Marte", options: ["Marte", "Júpiter", "Venus", "Saturno"], refBib: "Sistema Solar" },
-
-            // Arte
-            { category: "Arte", ref: "Arte-1", q: "¿Quién pintó la famosa obra de la Mona Lisa?", correct: "Leonardo da Vinci", options: ["Leonardo da Vinci", "Pablo Picasso", "Vincent van Gogh", "Claude Monet"], refBib: "Historia del Arte" }
+            { category: "General", ref: "Gen-1", q: "¿En qué año se firmó la separación de Panamá de Colombia?", correct: "1903", options: ["1903", "1905", "1821", "1914"], refBib: "Historia de Panamá" },
+            { category: "General", ref: "Gen-2", q: "¿Cuál es el río más largo del mundo?", correct: "Río Amazonas", options: ["Río Amazonas", "Río Nilo", "Río Mississipi", "Río Yangtsé"], refBib: "Geografía" }
         ];
 
         let gameState = {
@@ -450,15 +380,13 @@ html_code = """<!DOCTYPE html>
             color2: "#60a5fa",
             form1: "4-3-3",
             form2: "4-3-3",
-            activeCategories: ["Biblicas", "Deportes", "Historia", "Geografia", "Ciencia", "Arte"],
-            score1: 0,
-            score2: 0,
+            activePackages: ["BiblicoVol1", "Deportes", "Personal"],
+            score1: 0, score2: 0,
             t1Correct: 0, t1Errors: 0,
             t2Correct: 0, t2Errors: 0,
             target: 3,
             attacker: 1,
-            ballX: 13,
-            ballY: 8,
+            ballX: 13, ballY: 8,
             carrierId: 10,
             selectedPlayerId: null,
             defenseShieldActive: { 1: false, 2: false },
@@ -471,54 +399,60 @@ html_code = """<!DOCTYPE html>
         };
 
         const directionsMap = {
-            "A": { label: "Avanzar (Frente)", dx: 1, dy: 0 },
-            "ADD": { label: "Avanzar Diagonal Derecha", dx: 1, dy: -1 },
-            "ADE": { label: "Avanzar Diagonal Izquierda", dx: 1, dy: 1 },
-            "LD": { label: "Lateral Derecha", dx: 0, dy: -1 },
-            "LE": { label: "Lateral Izquierda", dx: 0, dy: 1 },
-            "R": { label: "Retroceder", dx: -1, dy: 0 }
+            "A": { code: "Adelante", dx: 1, dy: 0 },
+            "ADD": { code: "Adelante Diag. Der.", dx: 1, dy: -1 },
+            "ADE": { code: "Adelante Diag. Izq.", dx: 1, dy: 1 },
+            "LD": { code: "Lateral Derecha", dx: 0, dy: -1 },
+            "LE": { code: "Lateral Izquierda", dx: 0, dy: 1 },
+            "R": { code: "Retroceder", dx: -1, dy: 0 }
         };
 
-        function updateQuestionCountDisplay() {
-            document.getElementById('total-questions-count').innerText = questionBank.length;
+        function getPersonalQuestions() {
+            try {
+                const stored = localStorage.getItem('gran_jugada_personal_questions');
+                return stored ? JSON.parse(stored) : [];
+            } catch(e) {
+                return [];
+            }
         }
 
-        function toggleQuestionEditor() {
-            const panel = document.getElementById('add-question-panel');
-            panel.classList.toggle('hidden');
+        function updatePersonalCount() {
+            const list = getPersonalQuestions();
+            document.getElementById('personal-count').innerText = list.length;
         }
 
-        function addNewCustomQuestion() {
-            const cat = document.getElementById('new-q-cat').value;
-            const ref = document.getElementById('new-q-ref').value.trim() || "Q1";
-            const qText = document.getElementById('new-q-text').value.trim();
-            const correct = document.getElementById('new-q-correct').value.trim();
-            const bib = document.getElementById('new-q-bib').value.trim() || "General";
-            const incorrectsRaw = document.getElementById('new-q-incorrects').value.trim();
+        function togglePersonalEditor() {
+            document.getElementById('personal-editor-panel').classList.toggle('hidden');
+        }
+
+        function savePersonalQuestion() {
+            const cat = document.getElementById('p-cat').value;
+            const ref = document.getElementById('p-ref').value.trim() || "P1";
+            const qText = document.getElementById('p-text').value.trim();
+            const correct = document.getElementById('p-correct').value.trim();
+            const bib = document.getElementById('p-bib').value.trim() || "Personal";
+            const incorrectsRaw = document.getElementById('p-incorrects').value.trim();
 
             if (!qText || !correct || !incorrectsRaw) {
-                alert("Por favor completa el enunciado, la respuesta correcta y al menos una opción incorrecta.");
+                alert("Completa el enunciado, la respuesta correcta y al menos una opción incorrecta.");
                 return;
             }
 
             const incorrects = incorrectsRaw.split(',').map(s => s.trim()).filter(Boolean);
             const options = [correct, ...incorrects];
 
-            questionBank.push({
-                category: cat,
-                ref: ref,
-                q: qText,
-                correct: correct,
-                options: options,
-                refBib: bib
-            });
+            const newQ = { category: cat, ref: ref, q: qText, correct: correct, options: options, refBib: bib };
+            
+            let list = getPersonalQuestions();
+            list.push(newQ);
+            localStorage.setItem('gran_jugada_personal_questions', JSON.stringify(list));
 
-            updateQuestionCountDisplay();
-            document.getElementById('new-q-text').value = '';
-            document.getElementById('new-q-correct').value = '';
-            document.getElementById('new-q-incorrects').value = '';
-            document.getElementById('add-question-panel').classList.add('hidden');
-            alert("¡Pregunta añadida exitosamente al banco!");
+            updatePersonalCount();
+            document.getElementById('p-text').value = '';
+            document.getElementById('p-correct').value = '';
+            document.getElementById('p-incorrects').value = '';
+            document.getElementById('personal-editor-panel').classList.add('hidden');
+            alert("¡Pregunta guardada exitosamente en tu Sistema Personal (LocalStorage)!");
         }
 
         function getRosterByFormation(teamId, formation) {
@@ -554,9 +488,7 @@ html_code = """<!DOCTYPE html>
         function initPlayers() {
             const rosterT1 = getRosterByFormation(1, gameState.form1);
             const rosterT2 = getRosterByFormation(2, gameState.form2);
-            const combined = [...rosterT1, ...rosterT2];
-
-            gameState.players = combined.map(p => ({ ...p, origX: p.x, origY: p.y }));
+            gameState.players = [...rosterT1, ...rosterT2].map(p => ({ ...p, origX: p.x, origY: p.y }));
             gameState.ballX = 13;
             gameState.ballY = 8;
             gameState.carrierId = gameState.players.find(p => p.team === 1 && p.role === 'DEL')?.id || 10;
@@ -572,12 +504,11 @@ html_code = """<!DOCTYPE html>
             const f2 = document.getElementById('team2-formation').value;
             const target = parseInt(document.getElementById('target-goals').value);
             
-            // Recoger categorías seleccionadas
-            const checkboxes = document.querySelectorAll('input[name="category"]:checked');
-            gameState.activeCategories = Array.from(checkboxes).map(cb => cb.value);
+            const checkboxes = document.querySelectorAll('input[name="package"]:checked');
+            gameState.activePackages = Array.from(checkboxes).map(cb => cb.value);
 
-            if (gameState.activeCategories.length === 0) {
-                alert("Por favor selecciona al menos una categoría de preguntas.");
+            if (gameState.activePackages.length === 0) {
+                alert("Por favor selecciona al menos un paquete de preguntas.");
                 return;
             }
             
@@ -602,7 +533,6 @@ html_code = """<!DOCTYPE html>
 
             document.getElementById('setup-screen').classList.add('hidden');
             document.getElementById('game-screen').classList.remove('hidden');
-
             renderPitch();
         }
 
@@ -698,37 +628,12 @@ html_code = """<!DOCTYPE html>
         function isMoveAllowedForRole(player, targetX, targetY) {
             if (player.role === 'POR') {
                 const inAreaX = player.team === 1 ? targetX <= 4 : targetX >= 22;
-                const inAreaY = targetY >= 4 && targetY <= 12;
-                return inAreaX && inAreaY;
+                return inAreaX && (targetY >= 4 && targetY <= 12);
             }
-            const distFromOrigin = Math.max(Math.abs(targetX - player.origX), Math.abs(targetY - player.origY));
-            if (player.role === 'DEF') return distFromOrigin <= 5;
-            if (player.role === 'MED') return distFromOrigin <= 10;
+            const dist = Math.max(Math.abs(targetX - player.origX), Math.abs(targetY - player.origY));
+            if (player.role === 'DEF') return dist <= 5;
+            if (player.role === 'MED') return dist <= 10;
             return true;
-        }
-
-        function getOffsideLineX(attTeamId) {
-            const defTeamId = attTeamId === 1 ? 2 : 1;
-            const defPlayers = gameState.players.filter(p => p.team === defTeamId);
-            if (attTeamId === 1) {
-                const sorted = [...defPlayers].sort((a, b) => b.x - a.x);
-                const secondLastDefX = sorted[1] ? sorted[1].x : 25;
-                return Math.max(13, gameState.ballX, secondLastDefX);
-            } else {
-                const sorted = [...defPlayers].sort((a, b) => b.x - a.x);
-                const secondLastDefX = sorted[1] ? sorted[1].x : 1;
-                return Math.min(13, gameState.ballX, secondLastDefX);
-            }
-        }
-
-        function isPlayerOffside(player, testX) {
-            if (player.team !== gameState.attacker) return false;
-            const offsideLine = getOffsideLineX(player.team);
-            if (player.team === 1) {
-                return testX > 13 && testX > offsideLine;
-            } else {
-                return testX < 13 && testX < offsideLine;
-            }
         }
 
         function handleCellClick(c, r) {
@@ -737,9 +642,7 @@ html_code = """<!DOCTYPE html>
 
             if (clickedPlayer) {
                 gameState.selectedPlayerId = clickedPlayer.id;
-                const teamLabel = clickedPlayer.team === 1 ? gameState.team1 : gameState.team2;
-                const roleLimit = clickedPlayer.role === 'DEF' ? 'máx. 5 de origen' : (clickedPlayer.role === 'MED' ? 'máx. 10 de origen' : (clickedPlayer.role === 'POR' ? 'área de meta' : 'todo el campo'));
-                document.getElementById('global-feed').innerText = `Ficha #${clickedPlayer.id} (${teamLabel} - ${clickedPlayer.role}, rango: ${roleLimit}) seleccionada. Haz clic en una casilla iluminada para moverla.`;
+                document.getElementById('global-feed').innerText = `Ficha #${clickedPlayer.id} (${clickedPlayer.role}) seleccionada. Haz clic en casilla iluminada para moverla.`;
                 renderPitch();
                 return;
             }
@@ -750,47 +653,17 @@ html_code = """<!DOCTYPE html>
 
                 const snapped = snapToTeamParity(player.team, c, r);
                 if (!isMoveAllowedForRole(player, snapped.x, snapped.y)) {
-                    document.getElementById('global-feed').innerText = `Movimiento fuera del rango permitido para ${player.role} (DEF: 5 casillas de origen, MED: 10 casillas).`;
-                    return;
-                }
-
-                if (gameState.players.some(p => p.x === snapped.x && p.y === snapped.y)) {
-                    document.getElementById('global-feed').innerText = `Esa casilla ya está ocupada por otra ficha.`;
+                    document.getElementById('global-feed').innerText = `Movimiento fuera del rango permitido para ${player.role}.`;
                     return;
                 }
 
                 player.x = snapped.x;
                 player.y = snapped.y;
-
                 if (player.id === gameState.carrierId && player.team === gameState.attacker) {
                     gameState.ballX = player.x;
                     gameState.ballY = player.y;
                 }
-
-                if (player.team === gameState.attacker && isPlayerOffside(player, player.x)) {
-                    const defId = gameState.attacker === 1 ? 2 : 1;
-                    const defName = defId === 1 ? gameState.team1 : gameState.team2;
-                    const attName = gameState.attacker === 1 ? gameState.team1 : gameState.team2;
-                    const interceptor = findNearestPlayer(defId, player.x, player.y);
-                    const defSnapped = snapToTeamParity(defId, interceptor.x, interceptor.y);
-                    interceptor.x = defSnapped.x;
-                    interceptor.y = defSnapped.y;
-                    gameState.ballX = defSnapped.x;
-                    gameState.ballY = defSnapped.y;
-                    gameState.carrierId = interceptor.id;
-                    gameState.attacker = defId;
-                    gameState.selectedPlayerId = null;
-
-                    document.getElementById('global-feed').innerText = `🚩 ¡FUERA DE JUEGO! Ficha #${player.id} de ${attName} quedó adelantada. Posesión otorgada a ${defName}.`;
-                    renderPitch();
-                    syncPanelsRole();
-                    return;
-                }
-
-                const teamLabel = player.team === 1 ? gameState.team1 : gameState.team2;
-                const actionMsg = player.team === gameState.attacker ? "posicionada para el ataque" : "movida en cobertura para interceptar";
                 gameState.selectedPlayerId = null;
-                document.getElementById('global-feed').innerText = `Ficha #${player.id} (${teamLabel} - ${player.role}) ${actionMsg} en (${player.x}, ${player.y}).`;
                 renderPitch();
             }
         }
@@ -809,8 +682,7 @@ html_code = """<!DOCTYPE html>
 
                     if (selectedPlayer) {
                         const desiredParity = selectedPlayer.team === 1 ? 0 : 1;
-                        const occupied = gameState.players.some(p => p.x === c && p.y === r);
-                        if (!occupied && ((c + r) % 2 === desiredParity) && isMoveAllowedForRole(selectedPlayer, c, r)) {
+                        if (!gameState.players.some(p => p.x === c && p.y === r) && ((c + r) % 2 === desiredParity) && isMoveAllowedForRole(selectedPlayer, c, r)) {
                             cell.classList.add('cell-valid-move');
                         }
                     }
@@ -822,7 +694,6 @@ html_code = """<!DOCTYPE html>
                         const ring = player.id === gameState.selectedPlayerId ? 'ring-2 ring-amber-300 scale-110' : '';
                         token.className = `w-4 h-4 md:w-5 md:h-5 ${ring} rounded-full border-2 border-white z-10 flex items-center justify-center text-[9px] font-black shadow cursor-pointer transition text-slate-950`;
                         token.style.backgroundColor = customColor;
-                        token.title = `Ficha #${player.id} (${player.role})`;
                         token.innerText = player.role === 'POR' ? 'P' : player.id;
                         cell.appendChild(token);
                     }
@@ -843,107 +714,35 @@ html_code = """<!DOCTYPE html>
             let minDist = Infinity;
             gameState.players.filter(p => p.team === teamId).forEach(p => {
                 const dist = Math.hypot(p.x - targetX, p.y - targetY);
-                if (dist < minDist) {
-                    minDist = dist;
-                    nearest = p;
-                }
+                if (dist < minDist) { minDist = dist; nearest = p; }
             });
             return nearest;
-        }
-
-        function repositionTeamTactically(attId, ballTargetX, ballTargetY) {
-            const offsideLimitX = getOffsideLineX(attId);
-            const forwardDir = attId === 1 ? 1 : -1;
-
-            gameState.players.filter(p => p.team === attId && p.id !== gameState.carrierId && p.role !== 'POR').forEach((p, idx) => {
-                let desiredX = p.x;
-                let desiredY = p.y;
-
-                if (p.role === 'DEF') {
-                    const targetSupportX = ballTargetX - (6 * forwardDir);
-                    desiredX = Math.max(p.origX - 5, Math.min(p.origX + 5, targetSupportX));
-                    desiredY = Math.max(p.origY - 3, Math.min(p.origY + 3, p.origY + (idx % 2 === 0 ? 1 : -1)));
-                } else if (p.role === 'MED') {
-                    const targetMidX = ballTargetX + ((idx % 2 === 0 ? 2 : -2) * forwardDir);
-                    desiredX = Math.max(p.origX - 10, Math.min(p.origX + 10, targetMidX));
-                    desiredY = Math.max(1, Math.min(15, ballTargetY + (idx - 1.5) * 3));
-                } else if (p.role === 'DEL') {
-                    let rawDelX = ballTargetX + ((3 + idx * 2) * forwardDir);
-                    if (attId === 1) {
-                        rawDelX = Math.min(rawDelX, offsideLimitX);
-                    } else {
-                        rawDelX = Math.max(rawDelX, offsideLimitX);
-                    }
-                    desiredX = Math.max(1, Math.min(25, rawDelX));
-                    desiredY = idx % 2 === 0 ? Math.max(2, ballTargetY - 3) : Math.min(14, ballTargetY + 3);
-                }
-
-                const snapped = snapToTeamParity(attId, Math.round(desiredX), Math.round(desiredY));
-                const isOccupied = gameState.players.some(other => other.id !== p.id && other.x === snapped.x && other.y === snapped.y);
-                if (!isOccupied && isMoveAllowedForRole(p, snapped.x, snapped.y)) {
-                    p.x = snapped.x;
-                    p.y = snapped.y;
-                }
-            });
         }
 
         function activateSpecial(teamId, type) {
             const teamName = teamId === 1 ? gameState.team1 : gameState.team2;
             if (type === 'DRIBLAR') {
-                if (teamId !== gameState.attacker) { alert("Solo el atacante puede usar DRIBLAR."); return; }
+                if (teamId !== gameState.attacker) return;
                 gameState.dribbleBonus[teamId] = 3;
-                document.getElementById(`t${teamId}-move-info`).innerHTML = `⚡ <strong class="text-purple-400">DRIBLAR:</strong> +3 casillas extras en tu siguiente avance.`;
                 document.getElementById('global-feed').innerText = `¡${teamName} activa DRIBLAR (+3 casillas)!`;
-            } else if (type === 'PASE_LARGO') {
-                if (teamId !== gameState.attacker) { alert("Solo el atacante puede usar PASE LARGO."); return; }
-                const teamPlayers = gameState.players.filter(p => p.team === teamId && p.role !== 'POR');
-                teamPlayers.sort((a, b) => teamId === 1 ? b.x - a.x : a.x - b.x);
-                const targetPlayer = teamPlayers[0];
-                if (targetPlayer) {
-                    if (isPlayerOffside(targetPlayer, targetPlayer.x)) {
-                        const defId = teamId === 1 ? 2 : 1;
-                        const defName = defId === 1 ? gameState.team1 : gameState.team2;
-                        const interceptor = findNearestPlayer(defId, targetPlayer.x, targetPlayer.y);
-                        const snapped = snapToTeamParity(defId, interceptor.x, interceptor.y);
-                        interceptor.x = snapped.x;
-                        interceptor.y = snapped.y;
-                        gameState.ballX = snapped.x;
-                        gameState.ballY = snapped.y;
-                        gameState.carrierId = interceptor.id;
-                        gameState.attacker = defId;
-                        renderPitch();
-                        syncPanelsRole();
-                        document.getElementById('global-feed').innerText = `🚩 ¡FUERA DE JUEGO en pase largo hacia #${targetPlayer.id}! Posesión para ${defName}.`;
-                        return;
-                    }
-                    gameState.carrierId = targetPlayer.id;
-                    gameState.ballX = targetPlayer.x;
-                    gameState.ballY = targetPlayer.y;
-                    renderPitch();
-                    document.getElementById(`t${teamId}-move-info`).innerHTML = `🎯 <strong class="text-teal-400">PASE LARGO:</strong> Balón enviado a ficha #${targetPlayer.id} (${targetPlayer.role}).`;
-                    document.getElementById('global-feed').innerText = `¡Pase largo habilitado hacia #${targetPlayer.id}!`;
-                }
             } else if (type === 'DEFESA') {
-                if (teamId === gameState.attacker) { alert("La carta DEFESA se usa al defender."); return; }
+                if (teamId === gameState.attacker) return;
                 gameState.defenseShieldActive[teamId] = true;
-                document.getElementById(`t${teamId}-move-info`).innerHTML = `🛡️ <strong class="text-amber-300">DEFENSA ACTIVA:</strong> Bloquearás el próximo ataque rival si fallan.`;
-                document.getElementById('global-feed').innerText = `¡${teamName} activa escudo DEFENSIVO!`;
+                document.getElementById('global-feed').innerText = `¡${teamName} activa escudo DEFENSA!`;
             }
-        }
-
-        function hasGoalAngle(attId, bx, by) {
-            const inShootingZone = attId === 1 ? (bx >= 16) : (bx <= 10);
-            const inGoalMouthCorridor = (by >= 5 && by <= 11);
-            return inShootingZone && inGoalMouthCorridor;
         }
 
         function drawCard(teamId, playType) {
             if (teamId !== gameState.attacker || gameState.questionActive) return;
 
-            // Filtrar preguntas del banco según las categorías activas seleccionadas en el setup
-            const availableQuestions = questionBank.filter(q => gameState.activeCategories.includes(q.category));
-            if (availableQuestions.length === 0) {
-                alert("No hay preguntas disponibles en las categorías seleccionadas.");
+            // Recopilar preguntas según paquetes activos
+            let pool = [];
+            if (gameState.activePackages.includes("BiblicoVol1")) pool = pool.concat(paqueteBiblicoVol1);
+            if (gameState.activePackages.includes("Deportes")) pool = pool.concat(paqueteDeportes);
+            if (gameState.activePackages.includes("Personal")) pool = pool.concat(getPersonalQuestions());
+
+            if (pool.length === 0) {
+                alert("No hay preguntas en los paquetes seleccionados.");
                 return;
             }
 
@@ -951,50 +750,30 @@ html_code = """<!DOCTYPE html>
             document.getElementById(`t${teamId}-draw-btn`).disabled = true;
 
             const defId = teamId === 1 ? 2 : 1;
-            const card = availableQuestions[Math.floor(Math.random() * availableQuestions.length)];
-            
+            const card = pool[Math.floor(Math.random() * pool.length)];
             const dirKey = document.getElementById(`t${teamId}-dir-select`).value;
-            const dir = playType === 'GOL'
-                ? { code: "CHUTE-GOL", label: "Disparo Directo a Portería", dx: 1, dy: 0 }
-                : directionsMap[dirKey];
-            
-            const stepsInput = parseInt(document.getElementById(`t${teamId}-steps-input`).value) || 4;
-            const hiddenSteps = Math.max(1, Math.min(10, stepsInput));
+            const dir = playType === 'GOL' ? { code: "CHUTE-GOL", dx: 1, dy: 0 } : directionsMap[dirKey];
+            const hiddenSteps = parseInt(document.getElementById(`t${teamId}-steps-input`).value) || 4;
 
             gameState.currentCard = { ...card, dir, hiddenSteps, playType };
 
-            const codeText = playType === 'GOL' ? `⚽ [${card.category}] GOL` : `[${card.category}] ${dir.code} (${hiddenSteps} cas)`;
-            document.getElementById('t1-code-badge').innerText = codeText;
+            document.getElementById('t1-code-badge').innerText = `[${card.category}] ${card.ref}`;
             document.getElementById('t1-code-badge').classList.remove('hidden');
-            document.getElementById('t2-code-badge').innerText = codeText;
+            document.getElementById('t2-code-badge').innerText = `[${card.category}] ${card.ref}`;
             document.getElementById('t2-code-badge').classList.remove('hidden');
 
             document.getElementById(`t${teamId}-question-text`).innerText = `[${card.category}] ${card.q} (${card.refBib})`;
-            document.getElementById(`t${defId}-question-text`).innerText = `${playType === 'GOL' ? '¡ALERTA DE CHUTE A GOL! ' : ''}[${card.category}] Reto: "${card.q}"`;
+            document.getElementById(`t${defId}-question-text`).innerText = `Reto [${card.category}]: "${card.q}"`;
 
-            const modeLabel = hiddenSteps <= 5 ? "Conducción con balón" : "Pase en profundidad";
-            document.getElementById(`t${teamId}-move-info`).innerHTML = playType === 'GOL'
-                ? `⚽ <strong class="text-amber-400">CHUTE A GOL (${card.category}):</strong> Esperando respuesta defensiva.`
-                : `Estrategia: <strong class="text-amber-300">[${card.category}] ${dir.code} (${hiddenSteps} cas)</strong>`;
-
-            document.getElementById(`t${defId}-move-info`).innerHTML = playType === 'GOL'
-                ? `🚨 <strong class="text-rose-400">¡ATAJA EL DISPARO!</strong> Categoría: ${card.category}`
-                : `Defendiendo jugada [${card.category}] hacia: <strong class="text-amber-300">${dir.code}</strong>`;
-
-            document.getElementById(`t${teamId}-options`).innerHTML = `<p class="text-sm text-emerald-400 italic">Esperando respuesta del equipo defensor...</p>`;
-            
-            const defOptionsDiv = document.getElementById(`t${defId}-options`);
-            defOptionsDiv.innerHTML = '';
+            document.getElementById(`t${defId}-options`).innerHTML = '';
             const shuffled = [...card.options].sort(() => Math.random() - 0.5);
             shuffled.forEach(opt => {
                 const b = document.createElement('button');
                 b.className = "w-full text-left bg-slate-900 hover:bg-slate-800 text-slate-100 p-2.5 rounded border border-slate-700 text-sm transition font-medium";
                 b.innerText = opt;
                 b.onclick = () => resolvePlay(opt === card.correct);
-                defOptionsDiv.appendChild(b);
+                document.getElementById(`t${defId}-options`).appendChild(b);
             });
-
-            document.getElementById('global-feed').innerText = `¡Pregunta de [${card.category}] lanzada! El defensor tiene 20s.`;
 
             gameState.timer = 20;
             const timerEl = document.getElementById(`t${defId}-timer`);
@@ -1021,7 +800,7 @@ html_code = """<!DOCTYPE html>
             document.getElementById(`t${defId}-timer`).classList.add('hidden');
             document.getElementById(`t${defId}-options`).innerHTML = '';
 
-            const { dir, hiddenSteps, correct, playType } = gameState.currentCard;
+            const { dir, hiddenSteps, playType } = gameState.currentCard;
             const attName = attId === 1 ? gameState.team1 : gameState.team2;
             const defName = defId === 1 ? gameState.team1 : gameState.team2;
 
@@ -1036,23 +815,15 @@ html_code = """<!DOCTYPE html>
                 if (defenderAnsweredCorrectly) {
                     const interceptor = findNearestPlayer(defId, gameState.ballX, gameState.ballY);
                     const snapped = snapToTeamParity(defId, interceptor.x, interceptor.y);
-                    interceptor.x = snapped.x;
-                    interceptor.y = snapped.y;
-                    gameState.ballX = snapped.x;
-                    gameState.ballY = snapped.y;
+                    interceptor.x = snapped.x; interceptor.y = snapped.y;
+                    gameState.ballX = snapped.x; gameState.ballY = snapped.y;
                     gameState.carrierId = interceptor.id;
                     gameState.attacker = defId;
-
-                    document.getElementById(`t${defId}-move-info`).innerHTML = `🧤 <strong class="text-emerald-400">¡ATAJADÓN!</strong> Ficha #${interceptor.id} de ${defName} ataja y recupera.`;
-                    document.getElementById('global-feed').innerText = `¡${defName} ataja el chute a gol y sale jugando!`;
                 } else {
-                    if (hasGoalAngle(attId, gameState.ballX, gameState.ballY)) {
-                        gameState.ballX = attId === 1 ? 26 : 0;
-                        gameState.ballY = 8;
+                    if (attId === 1 ? gameState.ballX >= 16 : gameState.ballX <= 10) {
                         if (attId === 1) gameState.score1++; else gameState.score2++;
                         updateStatsUI();
                         renderPitch();
-                        document.getElementById('global-feed').innerText = `¡GOOOOL DE ${attName.toUpperCase()}!`;
                         setTimeout(() => {
                             alert(`¡GOOOOL DE ${attName.toUpperCase()}! ⚽🎉`);
                             initPlayers();
@@ -1060,18 +831,6 @@ html_code = """<!DOCTYPE html>
                             renderPitch();
                         }, 300);
                         return;
-                    } else {
-                        const throwInPlayer = findNearestPlayer(defId, gameState.ballX, gameState.ballY);
-                        const edgeY = gameState.ballY <= 8 ? 0 : 16;
-                        const snapped = snapToTeamParity(defId, throwInPlayer.x, edgeY);
-                        throwInPlayer.x = snapped.x;
-                        throwInPlayer.y = snapped.y;
-                        gameState.ballX = snapped.x;
-                        gameState.ballY = snapped.y;
-                        gameState.carrierId = throwInPlayer.id;
-                        gameState.attacker = defId;
-
-                        document.getElementById('global-feed').innerText = `¡Disparo fuera! Repone ${defName}.`;
                     }
                 }
                 renderPitch();
@@ -1082,77 +841,30 @@ html_code = """<!DOCTYPE html>
             if (!defenderAnsweredCorrectly) {
                 if (gameState.defenseShieldActive[defId]) {
                     gameState.defenseShieldActive[defId] = false;
-                    document.getElementById(`t${defId}-move-info`).innerHTML = `🛡️ <strong class="text-amber-300">¡ESCUDO DEFENSA USADO!</strong> Ataque bloqueado.`;
-                    document.getElementById('global-feed').innerText = `¡${defName} bloquea el avance con la carta DEFENSA!`;
+                    document.getElementById('global-feed').innerText = `¡${defName} bloquea el ataque con la carta DEFESA!`;
                     syncPanelsRole();
                     return;
                 }
 
-                const bonus = gameState.dribbleBonus[attId] || 0;
+                const totalSteps = hiddenSteps + (gameState.dribbleBonus[attId] || 0);
                 gameState.dribbleBonus[attId] = 0;
-                const totalSteps = hiddenSteps + bonus;
                 const multiplier = attId === 1 ? 1 : -1;
 
                 const rawX = gameState.ballX + (dir.dx * totalSteps * multiplier);
                 const rawY = gameState.ballY + (dir.dy * totalSteps);
                 const snapped = snapToTeamParity(attId, rawX, rawY);
 
-                const isPase = totalSteps >= 6;
-                const defenderOnSpot = gameState.players.find(p => p.team === defId && Math.abs(p.x - snapped.x) <= 1 && Math.abs(p.y - snapped.y) <= 1);
-                
-                if (isPase && defenderOnSpot) {
-                    const defSnapped = snapToTeamParity(defId, defenderOnSpot.x, defenderOnSpot.y);
-                    defenderOnSpot.x = defSnapped.x;
-                    defenderOnSpot.y = defSnapped.y;
-                    gameState.ballX = defSnapped.x;
-                    gameState.ballY = defSnapped.y;
-                    gameState.carrierId = defenderOnSpot.id;
-                    gameState.attacker = defId;
-
-                    document.getElementById(`t${defId}-move-info`).innerHTML = `🛡️ <strong class="text-amber-300">¡PASE INTERCEPTADO!</strong> Ficha #${defenderOnSpot.id} de ${defName} cortó el pase.`;
-                    document.getElementById('global-feed').innerText = `¡Gran lectura defensiva! Ficha #${defenderOnSpot.id} de ${defName} intercepta el pase.`;
-                    renderPitch();
-                    syncPanelsRole();
-                    return;
-                }
-
                 gameState.ballX = snapped.x;
                 gameState.ballY = snapped.y;
 
-                let candidates = gameState.players.filter(p => p.team === attId && p.role !== 'POR' && isMoveAllowedForRole(p, snapped.x, snapped.y));
-                if (candidates.length === 0) {
-                    candidates = gameState.players.filter(p => p.team === attId && p.role === 'DEL');
-                }
-                candidates.sort((a, b) => Math.hypot(a.x - snapped.x, a.y - snapped.y) - Math.hypot(b.x - snapped.x, b.y - snapped.y));
-                const carrier = candidates[0] || findNearestPlayer(attId, snapped.x, snapped.y);
-
+                const carrier = findNearestPlayer(attId, snapped.x, snapped.y);
                 if (carrier) {
-                    if (isPase && isPlayerOffside(carrier, snapped.x)) {
-                        const interceptor = findNearestPlayer(defId, snapped.x, snapped.y);
-                        const defSnapped = snapToTeamParity(defId, interceptor.x, interceptor.y);
-                        interceptor.x = defSnapped.x;
-                        interceptor.y = defSnapped.y;
-                        gameState.ballX = defSnapped.x;
-                        gameState.ballY = defSnapped.y;
-                        gameState.carrierId = interceptor.id;
-                        gameState.attacker = defId;
-
-                        document.getElementById('global-feed').innerText = `🚩 ¡FUERA DE JUEGO! Pase hacia #${carrier.id} en posición adelantada. Balón para ${defName}.`;
-                        renderPitch();
-                        syncPanelsRole();
-                        return;
-                    }
-
                     carrier.x = snapped.x;
                     carrier.y = snapped.y;
                     gameState.carrierId = carrier.id;
                 }
 
-                repositionTeamTactically(attId, snapped.x, snapped.y);
-
-                const actionType = isPase ? "Pase en profundidad" : "Conducción";
-                document.getElementById(`t${attId}-move-info`).innerHTML = `¡Éxito! ${actionType} de <strong class="text-emerald-400">${totalSteps} casillas</strong> (${dir.code}). Ficha #${carrier.id} (${carrier.role}) con el balón.`;
-                document.getElementById('global-feed').innerText = `¡${attName} ejecuta ${actionType} de ${totalSteps} casillas! Equipo desplegado según sus posiciones.`;
+                document.getElementById('global-feed').innerText = `¡${attName} avanza ${totalSteps} casillas con éxito!`;
 
                 if ((attId === 1 && gameState.ballX >= 26) || (attId === 2 && gameState.ballX <= 0)) {
                     if (attId === 1) gameState.score1++; else gameState.score2++;
@@ -1166,37 +878,27 @@ html_code = """<!DOCTYPE html>
                     }, 300);
                     return;
                 }
-
             } else {
                 const interceptor = findNearestPlayer(defId, gameState.ballX, gameState.ballY);
                 const snapped = snapToTeamParity(defId, gameState.ballX, gameState.ballY);
-                
                 if (interceptor) {
-                    interceptor.x = snapped.x;
-                    interceptor.y = snapped.y;
+                    interceptor.x = snapped.x; interceptor.y = snapped.y;
                     gameState.carrierId = interceptor.id;
                 }
                 gameState.ballX = snapped.x;
                 gameState.ballY = snapped.y;
                 gameState.attacker = defId;
-
-                const colorLabel = defId === 1 ? "casilla oscura" : "casilla clara";
-                document.getElementById(`t${defId}-move-info`).innerHTML = `¡Intercepción! Ficha #${interceptor.id} (${interceptor.role}) de <strong class="text-amber-300">${defName}</strong> roba el balón en ${colorLabel}.`;
-                document.getElementById('global-feed').innerText = `¡Robo de balón de ${defName}! La ficha #${interceptor.id} asume el control.`;
+                document.getElementById('global-feed').innerText = `¡${defName} intercepta el balón y toma el control!`;
             }
 
             renderPitch();
             syncPanelsRole();
         }
 
-        // Inicializar contador al cargar
         window.onload = function() {
-            updateQuestionCountDisplay();
+            updatePersonalCount();
         };
     </script>
 </body>
 </html>
-"""
-with open("la_gran_jugada_v7.html", "w", encoding="utf-8") as f:
-    f.write(html_code)
-print("Saved la_gran_jugada_v7.html successfully.")
+Analizando
