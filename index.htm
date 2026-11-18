@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+html_code = """<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Gran Jugada: Desafío Bíblico en Cancha</title>
+    <title>La Gran Jugada: Desafío Bíblico y Categorías en Cancha</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .pitch-grid {
@@ -31,59 +31,125 @@
 <body class="bg-slate-950 text-slate-100 min-h-screen font-sans flex flex-col items-center justify-between p-2 md:p-4 text-base">
     <header class="text-center my-1">
         <h1 class="text-2xl md:text-3xl font-black text-emerald-400 tracking-wide">LA GRAN JUGADA</h1>
-        <p class="text-sm text-slate-300 italic">Un Gran Desafío Bíblico en Cancha</p>
+        <p class="text-sm text-slate-300 italic">Un Gran Desafío Multitemático en Cancha</p>
     </header>
 
-    <!-- Pantalla de Configuración Profesional (Nombres, Colores y Alineaciones Tácticas) -->
-    <div id="setup-screen" class="w-full max-w-2xl bg-slate-900 p-6 md:p-8 rounded-2xl shadow-xl border border-slate-800 my-auto">
-        <h2 class="text-xl font-bold text-white mb-4 text-center">Configuración Táctica del Partido</h2>
+    <!-- Pantalla de Configuración Profesional con Banco de Preguntas y Categorías -->
+    <div id="setup-screen" class="w-full max-w-3xl bg-slate-900 p-6 md:p-8 rounded-2xl shadow-xl border border-slate-800 my-auto">
+        <h2 class="text-xl font-bold text-white mb-4 text-center">Configuración Táctica y Banco de Preguntas</h2>
         <div class="space-y-6">
             
-            <!-- Equipo 1 -->
-            <div class="bg-slate-950 p-4 rounded-xl border border-emerald-500/40 space-y-3">
-                <div class="flex justify-between items-center">
-                    <span class="text-sm font-bold text-emerald-400">Equipo 1 (Lateral Izquierdo)</span>
-                    <div class="flex items-center space-x-2">
-                        <label class="text-xs text-slate-300">Color Fichas:</label>
-                        <input type="color" id="team1-color" value="#34d399" class="w-8 h-8 rounded border-0 cursor-pointer bg-transparent">
+            <!-- Configuración de Equipos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Equipo 1 -->
+                <div class="bg-slate-950 p-4 rounded-xl border border-emerald-500/45 space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-bold text-emerald-400">Equipo 1 (Izq.)</span>
+                        <input type="color" id="team1-color" value="#34d399" class="w-7 h-7 rounded border-0 cursor-pointer bg-transparent" title="Color de Fichas">
                     </div>
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">Nombre del Equipo:</label>
                     <input type="text" id="team1-name" value="Judá" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-white">
+                    <select id="team1-formation" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-amber-300 font-bold">
+                        <option value="4-4-2">Formación 4-4-2</option>
+                        <option value="4-3-3" selected>Formación 4-3-3</option>
+                        <option value="3-5-2">Formación 3-5-2</option>
+                        <option value="5-3-2">Formación 5-3-2</option>
+                    </select>
                 </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">Alineación Táctica Profesional:</label>
-                    <select id="team1-formation" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-xs text-amber-300 font-bold">
-                        <option value="4-4-2">4-4-2 (Clásico Balanceado: 4 DEF, 4 MED, 2 DEL)</option>
-                        <option value="4-3-3" selected>4-3-3 (Ofensivo de Ataque Total: 4 DEF, 3 MED, 3 DEL)</option>
-                        <option value="3-5-2">3-5-2 (Dominio Absoluto del Mediocampo: 3 DEF, 5 MED, 2 DEL)</option>
-                        <option value="5-3-2">5-3-2 (Muralla Defensiva Sólida: 5 DEF, 3 MED, 2 DEL)</option>
+
+                <!-- Equipo 2 -->
+                <div class="bg-slate-950 p-4 rounded-xl border border-blue-500/45 space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-bold text-blue-400">Equipo 2 (Der.)</span>
+                        <input type="color" id="team2-color" value="#60a5fa" class="w-7 h-7 rounded border-0 cursor-pointer bg-transparent" title="Color de Fichas">
+                    </div>
+                    <input type="text" id="team2-name" value="Israel" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-white">
+                    <select id="team2-formation" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-amber-300 font-bold">
+                        <option value="4-4-2">Formación 4-4-2</option>
+                        <option value="4-3-3" selected>Formación 4-3-3</option>
+                        <option value="3-5-2">Formación 3-5-2</option>
+                        <option value="5-3-2">Formación 5-3-2</option>
                     </select>
                 </div>
             </div>
 
-            <!-- Equipo 2 -->
-            <div class="bg-slate-950 p-4 rounded-xl border border-blue-500/40 space-y-3">
+            <!-- Selección de Categorías Activas para el Partido -->
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                <label class="block text-xs font-bold uppercase text-slate-300">Seleccionar Categorías para el Partido:</label>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                    <label class="flex items-center space-x-2 text-xs text-slate-200 cursor-pointer bg-slate-900 p-2 rounded border border-slate-700">
+                        <input type="checkbox" name="category" value="Biblicas" checked class="accent-emerald-500">
+                        <span>📖 Bíblicas</span>
+                    </label>
+                    <label class="flex items-center space-x-2 text-xs text-slate-200 cursor-pointer bg-slate-900 p-2 rounded border border-slate-700">
+                        <input type="checkbox" name="category" value="Deportes" checked class="accent-emerald-500">
+                        <span>⚽ Deportes</span>
+                    </label>
+                    <label class="flex items-center space-x-2 text-xs text-slate-200 cursor-pointer bg-slate-900 p-2 rounded border border-slate-700">
+                        <input type="checkbox" name="category" value="Historia" checked class="accent-emerald-500">
+                        <span>🏛️ Historia Universal</span>
+                    </label>
+                    <label class="flex items-center space-x-2 text-xs text-slate-200 cursor-pointer bg-slate-900 p-2 rounded border border-slate-700">
+                        <input type="checkbox" name="category" value="Geografia" checked class="accent-emerald-500">
+                        <span>🌍 Geografía</span>
+                    </label>
+                    <label class="flex items-center space-x-2 text-xs text-slate-200 cursor-pointer bg-slate-900 p-2 rounded border border-slate-700">
+                        <input type="checkbox" name="category" value="Ciencia" checked class="accent-emerald-500">
+                        <span>🔬 Ciencia y Naturaleza</span>
+                    </label>
+                    <label class="flex items-center space-x-2 text-xs text-slate-200 cursor-pointer bg-slate-900 p-2 rounded border border-slate-700">
+                        <input type="checkbox" name="category" value="Arte" checked class="accent-emerald-500">
+                        <span>🎨 Arte y Música</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Editor / Ampliador del Banco de Preguntas -->
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3">
                 <div class="flex justify-between items-center">
-                    <span class="text-sm font-bold text-blue-400">Equipo 2 (Lateral Derecho)</span>
-                    <div class="flex items-center space-x-2">
-                        <label class="text-xs text-slate-300">Color Fichas:</label>
-                        <input type="color" id="team2-color" value="#60a5fa" class="w-8 h-8 rounded border-0 cursor-pointer bg-transparent">
+                    <span class="text-xs font-bold uppercase text-slate-300">Banco de Preguntas Actual (<span id="total-questions-count">0</span> preguntas cargadas)</span>
+                    <button onclick="toggleQuestionEditor()" class="text-xs text-amber-400 hover:underline font-bold">➕ Añadir Nueva Pregunta</button>
+                </div>
+                
+                <!-- Panel Oculto para Añadir Pregunta Personalizada -->
+                <div id="add-question-panel" class="hidden space-y-2.5 bg-slate-900 p-3 rounded-lg border border-slate-700">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="text-[11px] text-slate-300 block mb-1">Categoría:</label>
+                            <select id="new-q-cat" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                                <option value="Biblicas">📖 Bíblicas</option>
+                                <option value="Deportes">⚽ Deportes</option>
+                                <option value="Historia">🏛️ Historia Universal</option>
+                                <option value="Geografia">🌍 Geografía</option>
+                                <option value="Ciencia">🔬 Ciencia</option>
+                                <option value="Arte">🎨 Arte y Música</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-[11px] text-slate-300 block mb-1">Referencia / Dificultad (Ej: A1, Dep-1):</label>
+                            <input type="text" id="new-q-ref" value="A1" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">Nombre del Equipo:</label>
-                    <input type="text" id="team2-name" value="Israel" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-white">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">Alineación Táctica Profesional:</label>
-                    <select id="team2-formation" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-xs text-amber-300 font-bold">
-                        <option value="4-4-2">4-4-2 (Clásico Balanceado: 4 DEF, 4 MED, 2 DEL)</option>
-                        <option value="4-3-3" selected>4-3-3 (Ofensivo de Ataque Total: 4 DEF, 3 MED, 3 DEL)</option>
-                        <option value="3-5-2">3-5-2 (Dominio Absoluto del Mediocampo: 3 DEF, 5 MED, 2 DEL)</option>
-                        <option value="5-3-2">5-3-2 (Muralla Defensiva Sólida: 5 DEF, 3 MED, 2 DEL)</option>
-                    </select>
+                    <div>
+                        <label class="text-[11px] text-slate-300 block mb-1">Enunciado de la Pregunta:</label>
+                        <input type="text" id="new-q-text" placeholder="Ej: ¿Quién ganó el mundial de...?" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="text-[11px] text-slate-300 block mb-1">Respuesta Correcta:</label>
+                            <input type="text" id="new-q-correct" placeholder="Respuesta exacta" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                        </div>
+                        <div>
+                            <label class="text-[11px] text-slate-300 block mb-1">Referencia Bíblica u Origen:</label>
+                            <input type="text" id="new-q-bib" placeholder="Ej: Gn 1:1 o FIFA 2026" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-[11px] text-slate-300 block mb-1">Opciones Incorrectas (separadas por coma):</label>
+                        <input type="text" id="new-q-incorrects" placeholder="Opción B, Opción C, Opción D" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                    </div>
+                    <button onclick="addNewCustomQuestion()" class="w-full bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold py-1.5 rounded text-xs transition">
+                        Guardar Pregunta en el Banco
+                    </button>
                 </div>
             </div>
 
@@ -344,6 +410,39 @@
     </div>
 
     <script>
+        // Banco de preguntas inicial multitemático (Bíblicas + Deportes + Historia + Geografía + Ciencia + Arte)
+        let questionBank = [
+            // Bíblicas
+            { category: "Biblicas", ref: "A1", q: "Palavra chave no livro de Gênesis.", correct: "No princípio", options: ["No princípio", "Criação divina", "No princípio criou Deus", "A terra era sem forma"], refBib: "Gn 1:1" },
+            { category: "Biblicas", ref: "A1", q: "Bisavô de Noé. Não conheceu a morte.", correct: "Enoque", options: ["Matusalém", "Enoque", "Jared", "Lameque"], refBib: "Gn 5:21-29" },
+            { category: "Biblicas", ref: "A1", q: "Primeira promessa messiânica.", correct: "Gênesis 3:15", options: ["Gênesis 3:15", "Isaías 7:14", "Gênesis 12:3", "Salmo 22:1"], refBib: "Gn 3:15" },
+            { category: "Biblicas", ref: "A2", q: "Lugar onde Samuel orou por Israel e o julgou.", correct: "Mizpá", options: ["Betel", "Mizpá", "Ramá", "Silo"], refBib: "1 Sm 7:5,6" },
+            { category: "Biblicas", ref: "A2", q: "Começou a reinar em Jerusalém desde os 7 anos.", correct: "Joás", options: ["Josias", "Joás", "Uzias", "Salomão"], refBib: "2 Rs 11:21" },
+            { category: "Biblicas", ref: "A3", q: "Quantos anos viveu Adão?", correct: "Viveu 930 anos", options: ["Viveu 930 anos", "Viveu 969 anos", "Viveu 777 anos", "Viveu 500 anos"], refBib: "Gn 5:5" },
+            { category: "Biblicas", ref: "B1", q: "É conhecido como o Pai da Fé.", correct: "Abraão", options: ["Isaque", "Abraão", "Moisés", "Davi"], refBib: "Rm 4:16" },
+            { category: "Biblicas", ref: "B2", q: "Qual o Salmo mais curto?", correct: "Salmo 117", options: ["Salmo 117", "Salmo 133", "Salmo 23", "Salmo 150"], refBib: "Sl 117" },
+
+            // Deportes
+            { category: "Deportes", ref: "Dep-1", q: "¿Cada cuántos años se celebra la Copa Mundial de Fútbol?", correct: "4 años", options: ["4 años", "3 años", "2 años", "5 años"], refBib: "Reglamento FIFA" },
+            { category: "Deportes", ref: "Dep-2", q: "¿Qué país ganó la Copa Mundial de Fútbol en 2022?", correct: "Argentina", options: ["Argentina", "Francia", "Brasil", "Alemania"], refBib: "Mundial Qatar 2022" },
+            { category: "Deportes", ref: "Dep-3", q: "¿Cuántos jugadores conforman un equipo de fútbol en el terreno?", correct: "11 jugadores", options: ["11 jugadores", "10 jugadores", "9 jugadores", "12 jugadores"], refBib: "Reglas de Juego" },
+
+            // Historia
+            { category: "Historia", ref: "Hist-1", q: "¿En qué año se firmó la separación de Panamá de Colombia?", correct: "1903", options: ["1903", "1905", "1821", "1914"], refBib: "Historia de Panamá" },
+            { category: "Historia", ref: "Hist-2", q: "¿Qué civilización construyó la ciudad de Machu Picchu en Perú?", correct: "Inca", options: ["Inca", "Maya", "Azteca", "Tolteca"], refBib: "Historia Americana" },
+
+            // Geografía
+            { category: "Geografia", ref: "Geo-1", q: "¿Cuál es el río más largo del mundo?", correct: "Río Amazonas", options: ["Río Amazonas", "Río Nilo", "Río Mississipi", "Río Yangtsé"], refBib: "Geografía Mundial" },
+            { category: "Geografia", ref: "Geo-2", q: "¿En qué continente se encuentra el desierto del Sahara?", correct: "África", options: ["África", "Asia", "Oceanía", "América"], refBib: "Geografía Física" },
+
+            // Ciencia
+            { category: "Ciencia", ref: "Cien-1", q: "¿Cuál es el símbolo químico del agua?", correct: "H2O", options: ["H2O", "CO2", "O2", "NaCl"], refBib: "Química Básica" },
+            { category: "Ciencia", ref: "Cien-2", q: "¿Qué planeta es conocido como el planeta rojo?", correct: "Marte", options: ["Marte", "Júpiter", "Venus", "Saturno"], refBib: "Sistema Solar" },
+
+            // Arte
+            { category: "Arte", ref: "Arte-1", q: "¿Quién pintó la famosa obra de la Mona Lisa?", correct: "Leonardo da Vinci", options: ["Leonardo da Vinci", "Pablo Picasso", "Vincent van Gogh", "Claude Monet"], refBib: "Historia del Arte" }
+        ];
+
         let gameState = {
             team1: "Judá",
             team2: "Israel",
@@ -351,6 +450,7 @@
             color2: "#60a5fa",
             form1: "4-3-3",
             form2: "4-3-3",
+            activeCategories: ["Biblicas", "Deportes", "Historia", "Geografia", "Ciencia", "Arte"],
             score1: 0,
             score2: 0,
             t1Correct: 0, t1Errors: 0,
@@ -379,16 +479,47 @@
             "R": { label: "Retroceder", dx: -1, dy: 0 }
         };
 
-        const sampleCards = [
-            { ref: "A1", q: "Palavra chave no livro de Gênesis.", correct: "No princípio", options: ["No princípio", "Criação divina", "No princípio criou Deus", "A terra era sem forma"], refBib: "Gn 1:1" },
-            { ref: "A1", q: "Bisavô de Noé. Não conheceu a morte.", correct: "Enoque", options: ["Matusalém", "Enoque", "Jared", "Lameque"], refBib: "Gn 5:21-29" },
-            { ref: "A1", q: "Primeira promessa messiânica.", correct: "Gênesis 3:15", options: ["Gênesis 3:15", "Isaías 7:14", "Gênesis 12:3", "Salmo 22:1"], refBib: "Gn 3:15" },
-            { ref: "A2", q: "Lugar onde Samuel orou por Israel e o julgou.", correct: "Mizpá", options: ["Betel", "Mizpá", "Ramá", "Silo"], refBib: "1 Sm 7:5,6" },
-            { ref: "A2", q: "Começou a reinar em Jerusalém desde os 7 anos.", correct: "Joás", options: ["Josias", "Joás", "Uzias", "Salomão"], refBib: "2 Rs 11:21" },
-            { ref: "A3", q: "Quantos anos viveu Adão?", correct: "Viveu 930 anos", options: ["Viveu 930 anos", "Viveu 969 anos", "Viveu 777 anos", "Viveu 500 anos"], refBib: "Gn 5:5" },
-            { ref: "B1", q: "É conhecido como o Pai da Fé.", correct: "Abraão", options: ["Isaque", "Abraão", "Moisés", "Davi"], refBib: "Rm 4:16" },
-            { ref: "B2", q: "Qual o Salmo mais curto?", correct: "Salmo 117", options: ["Salmo 117", "Salmo 133", "Salmo 23", "Salmo 150"], refBib: "Sl 117" }
-        ];
+        function updateQuestionCountDisplay() {
+            document.getElementById('total-questions-count').innerText = questionBank.length;
+        }
+
+        function toggleQuestionEditor() {
+            const panel = document.getElementById('add-question-panel');
+            panel.classList.toggle('hidden');
+        }
+
+        function addNewCustomQuestion() {
+            const cat = document.getElementById('new-q-cat').value;
+            const ref = document.getElementById('new-q-ref').value.trim() || "Q1";
+            const qText = document.getElementById('new-q-text').value.trim();
+            const correct = document.getElementById('new-q-correct').value.trim();
+            const bib = document.getElementById('new-q-bib').value.trim() || "General";
+            const incorrectsRaw = document.getElementById('new-q-incorrects').value.trim();
+
+            if (!qText || !correct || !incorrectsRaw) {
+                alert("Por favor completa el enunciado, la respuesta correcta y al menos una opción incorrecta.");
+                return;
+            }
+
+            const incorrects = incorrectsRaw.split(',').map(s => s.trim()).filter(Boolean);
+            const options = [correct, ...incorrects];
+
+            questionBank.push({
+                category: cat,
+                ref: ref,
+                q: qText,
+                correct: correct,
+                options: options,
+                refBib: bib
+            });
+
+            updateQuestionCountDisplay();
+            document.getElementById('new-q-text').value = '';
+            document.getElementById('new-q-correct').value = '';
+            document.getElementById('new-q-incorrects').value = '';
+            document.getElementById('add-question-panel').classList.add('hidden');
+            alert("¡Pregunta añadida exitosamente al banco!");
+        }
 
         function getRosterByFormation(teamId, formation) {
             const isTeam1 = teamId === 1;
@@ -440,6 +571,15 @@
             const f1 = document.getElementById('team1-formation').value;
             const f2 = document.getElementById('team2-formation').value;
             const target = parseInt(document.getElementById('target-goals').value);
+            
+            // Recoger categorías seleccionadas
+            const checkboxes = document.querySelectorAll('input[name="category"]:checked');
+            gameState.activeCategories = Array.from(checkboxes).map(cb => cb.value);
+
+            if (gameState.activeCategories.length === 0) {
+                alert("Por favor selecciona al menos una categoría de preguntas.");
+                return;
+            }
             
             if(t1) gameState.team1 = t1;
             if(t2) gameState.team2 = t2;
@@ -800,11 +940,18 @@
         function drawCard(teamId, playType) {
             if (teamId !== gameState.attacker || gameState.questionActive) return;
 
+            // Filtrar preguntas del banco según las categorías activas seleccionadas en el setup
+            const availableQuestions = questionBank.filter(q => gameState.activeCategories.includes(q.category));
+            if (availableQuestions.length === 0) {
+                alert("No hay preguntas disponibles en las categorías seleccionadas.");
+                return;
+            }
+
             gameState.questionActive = true;
             document.getElementById(`t${teamId}-draw-btn`).disabled = true;
 
             const defId = teamId === 1 ? 2 : 1;
-            const card = sampleCards[Math.floor(Math.random() * sampleCards.length)];
+            const card = availableQuestions[Math.floor(Math.random() * availableQuestions.length)];
             
             const dirKey = document.getElementById(`t${teamId}-dir-select`).value;
             const dir = playType === 'GOL'
@@ -816,23 +963,23 @@
 
             gameState.currentCard = { ...card, dir, hiddenSteps, playType };
 
-            const codeText = playType === 'GOL' ? `⚽ GOL-${card.ref}` : `${card.ref}-${dir.code} (${hiddenSteps} cas)`;
+            const codeText = playType === 'GOL' ? `⚽ [${card.category}] GOL` : `[${card.category}] ${dir.code} (${hiddenSteps} cas)`;
             document.getElementById('t1-code-badge').innerText = codeText;
             document.getElementById('t1-code-badge').classList.remove('hidden');
             document.getElementById('t2-code-badge').innerText = codeText;
             document.getElementById('t2-code-badge').classList.remove('hidden');
 
-            document.getElementById(`t${teamId}-question-text`).innerText = `${card.q} (${card.refBib})`;
-            document.getElementById(`t${defId}-question-text`).innerText = `${playType === 'GOL' ? '¡ALERTA DE CHUTE A GOL! ' : ''}Reto: "${card.q}"`;
+            document.getElementById(`t${teamId}-question-text`).innerText = `[${card.category}] ${card.q} (${card.refBib})`;
+            document.getElementById(`t${defId}-question-text`).innerText = `${playType === 'GOL' ? '¡ALERTA DE CHUTE A GOL! ' : ''}[${card.category}] Reto: "${card.q}"`;
 
             const modeLabel = hiddenSteps <= 5 ? "Conducción con balón" : "Pase en profundidad";
             document.getElementById(`t${teamId}-move-info`).innerHTML = playType === 'GOL'
-                ? `⚽ <strong class="text-amber-400">CHUTE A GOL LANZADO:</strong> Esperando respuesta defensiva.`
-                : `Estrategia: <strong class="text-amber-300">${dir.code} (${hiddenSteps} casillas - ${modeLabel})</strong>`;
+                ? `⚽ <strong class="text-amber-400">CHUTE A GOL (${card.category}):</strong> Esperando respuesta defensiva.`
+                : `Estrategia: <strong class="text-amber-300">[${card.category}] ${dir.code} (${hiddenSteps} cas)</strong>`;
 
             document.getElementById(`t${defId}-move-info`).innerHTML = playType === 'GOL'
-                ? `🚨 <strong class="text-rose-400">¡ATAJA EL DISPARO!</strong> Responde correctamente.`
-                : `Defendiendo jugada de ${modeLabel} hacia: <strong class="text-amber-300">${dir.code}</strong>`;
+                ? `🚨 <strong class="text-rose-400">¡ATAJA EL DISPARO!</strong> Categoría: ${card.category}`
+                : `Defendiendo jugada [${card.category}] hacia: <strong class="text-amber-300">${dir.code}</strong>`;
 
             document.getElementById(`t${teamId}-options`).innerHTML = `<p class="text-sm text-emerald-400 italic">Esperando respuesta del equipo defensor...</p>`;
             
@@ -847,7 +994,7 @@
                 defOptionsDiv.appendChild(b);
             });
 
-            document.getElementById('global-feed').innerText = `¡Pregunta lanzada! Estrategia: ${dir.code} (${hiddenSteps} casillas). El defensor tiene 20s.`;
+            document.getElementById('global-feed').innerText = `¡Pregunta de [${card.category}] lanzada! El defensor tiene 20s.`;
 
             gameState.timer = 20;
             const timerEl = document.getElementById(`t${defId}-timer`);
@@ -885,7 +1032,6 @@
             }
             updateStatsUI();
 
-            // 1. RESOLUCIÓN DE CHUTE A GOL
             if (playType === 'GOL') {
                 if (defenderAnsweredCorrectly) {
                     const interceptor = findNearestPlayer(defId, gameState.ballX, gameState.ballY);
@@ -933,7 +1079,6 @@
                 return;
             }
 
-            // 2. RESOLUCIÓN DE JUGADA NORMAL
             if (!defenderAnsweredCorrectly) {
                 if (gameState.defenseShieldActive[defId]) {
                     gameState.defenseShieldActive[defId] = false;
@@ -1043,6 +1188,15 @@
             renderPitch();
             syncPanelsRole();
         }
+
+        // Inicializar contador al cargar
+        window.onload = function() {
+            updateQuestionCountDisplay();
+        };
     </script>
 </body>
 </html>
+"""
+with open("la_gran_jugada_v7.html", "w", encoding="utf-8") as f:
+    f.write(html_code)
+print("Saved la_gran_jugada_v7.html successfully.")
