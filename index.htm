@@ -34,24 +34,67 @@
         <p class="text-sm text-slate-300 italic">Un Gran Desafío Bíblico en Cancha</p>
     </header>
 
-    <!-- Pantalla de Configuración -->
-    <div id="setup-screen" class="w-full max-w-xl bg-slate-900 p-7 rounded-2xl shadow-xl border border-slate-800 my-auto">
-        <h2 class="text-xl font-bold text-white mb-5">Configuración del Partido</h2>
-        <div class="space-y-4">
-            <div>
-                <label class="block text-sm font-semibold text-slate-200 mb-1.5">Equipo 1 (Lateral Izquierdo - Casillas Oscuras / Fichas Esmeralda):</label>
-                <input type="text" id="team1-name" value="Judá" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-base text-white">
+    <!-- Pantalla de Configuración Profesional (Nombres, Colores y Alineaciones Tácticas) -->
+    <div id="setup-screen" class="w-full max-w-2xl bg-slate-900 p-6 md:p-8 rounded-2xl shadow-xl border border-slate-800 my-auto">
+        <h2 class="text-xl font-bold text-white mb-4 text-center">Configuración Táctica del Partido</h2>
+        <div class="space-y-6">
+            
+            <!-- Equipo 1 -->
+            <div class="bg-slate-950 p-4 rounded-xl border border-emerald-500/40 space-y-3">
+                <div class="flex justify-between items-center">
+                    <span class="text-sm font-bold text-emerald-400">Equipo 1 (Lateral Izquierdo)</span>
+                    <div class="flex items-center space-x-2">
+                        <label class="text-xs text-slate-300">Color Fichas:</label>
+                        <input type="color" id="team1-color" value="#34d399" class="w-8 h-8 rounded border-0 cursor-pointer bg-transparent">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Nombre del Equipo:</label>
+                    <input type="text" id="team1-name" value="Judá" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-white">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Alineación Táctica Profesional:</label>
+                    <select id="team1-formation" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-xs text-amber-300 font-bold">
+                        <option value="4-4-2">4-4-2 (Clásico Balanceado: 4 DEF, 4 MED, 2 DEL)</option>
+                        <option value="4-3-3" selected>4-3-3 (Ofensivo de Ataque Total: 4 DEF, 3 MED, 3 DEL)</option>
+                        <option value="3-5-2">3-5-2 (Dominio Absoluto del Mediocampo: 3 DEF, 5 MED, 2 DEL)</option>
+                        <option value="5-3-2">5-3-2 (Muralla Defensiva Sólida: 5 DEF, 3 MED, 2 DEL)</option>
+                    </select>
+                </div>
             </div>
-            <div>
-                <label class="block text-sm font-semibold text-slate-200 mb-1.5">Equipo 2 (Lateral Derecho - Casillas Claras / Fichas Azul):</label>
-                <input type="text" id="team2-name" value="Israel" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-base text-white">
+
+            <!-- Equipo 2 -->
+            <div class="bg-slate-950 p-4 rounded-xl border border-blue-500/40 space-y-3">
+                <div class="flex justify-between items-center">
+                    <span class="text-sm font-bold text-blue-400">Equipo 2 (Lateral Derecho)</span>
+                    <div class="flex items-center space-x-2">
+                        <label class="text-xs text-slate-300">Color Fichas:</label>
+                        <input type="color" id="team2-color" value="#60a5fa" class="w-8 h-8 rounded border-0 cursor-pointer bg-transparent">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Nombre del Equipo:</label>
+                    <input type="text" id="team2-name" value="Israel" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-white">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Alineación Táctica Profesional:</label>
+                    <select id="team2-formation" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-xs text-amber-300 font-bold">
+                        <option value="4-4-2">4-4-2 (Clásico Balanceado: 4 DEF, 4 MED, 2 DEL)</option>
+                        <option value="4-3-3" selected>4-3-3 (Ofensivo de Ataque Total: 4 DEF, 3 MED, 3 DEL)</option>
+                        <option value="3-5-2">3-5-2 (Dominio Absoluto del Mediocampo: 3 DEF, 5 MED, 2 DEL)</option>
+                        <option value="5-3-2">5-3-2 (Muralla Defensiva Sólida: 5 DEF, 3 MED, 2 DEL)</option>
+                    </select>
+                </div>
             </div>
+
+            <!-- Goles -->
             <div>
-                <label class="block text-sm font-semibold text-slate-200 mb-1.5">Goles para ganar:</label>
-                <input type="number" id="target-goals" value="3" min="1" max="10" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-base text-white">
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Goles necesarios para ganar:</label>
+                <input type="number" id="target-goals" value="3" min="1" max="10" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white">
             </div>
-            <button onclick="startGame()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl transition shadow-lg mt-2 text-lg">
-                ¡Iniciar Partido!
+
+            <button onclick="startGame()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl transition shadow-lg text-base">
+                ¡Saltar al Terreno de Juego!
             </button>
         </div>
     </div>
@@ -65,7 +108,7 @@
             <div class="flex items-center justify-between pr-2 md:pr-6 border-r border-slate-800">
                 <div>
                     <span id="disp-team1" class="font-black text-emerald-400 text-lg md:text-xl block">Judá</span>
-                    <span class="text-xs text-slate-300">Casillas Oscuras • 11 Fichas</span>
+                    <span id="disp-t1-formation" class="text-xs text-slate-300 font-medium">4-3-3 • 11 Fichas</span>
                 </div>
                 <div class="flex items-center space-x-2 md:space-x-3">
                     <div class="bg-slate-950 px-3 py-1.5 rounded-lg border border-slate-800 text-center">
@@ -93,7 +136,7 @@
                 </div>
                 <div class="text-right">
                     <span id="disp-team2" class="font-black text-blue-400 text-lg md:text-xl block">Israel</span>
-                    <span class="text-xs text-slate-300">Casillas Claras • 11 Fichas</span>
+                    <span id="disp-t2-formation" class="text-xs text-slate-300 font-medium">4-3-3 • 11 Fichas</span>
                 </div>
             </div>
         </div>
@@ -117,7 +160,7 @@
                         </div>
                         <p id="t1-question-text" class="text-sm md:text-base text-slate-100 font-medium leading-snug">Selecciona dirección y método de avance, luego lanza pregunta.</p>
                         
-                        <!-- Controles de Estrategia del Atacante (Dirección y Selector de Avance/Pase 1-10) -->
+                        <!-- Controles de Estrategia del Atacante -->
                         <div id="attacker-controls-1" class="mt-3 space-y-2 bg-slate-900 p-2.5 rounded-lg border border-slate-800">
                             <div>
                                 <label class="text-xs font-bold text-slate-300 block mb-1">Dirección de Ataque:</label>
@@ -304,6 +347,10 @@
         let gameState = {
             team1: "Judá",
             team2: "Israel",
+            color1: "#34d399",
+            color2: "#60a5fa",
+            form1: "4-3-3",
+            form2: "4-3-3",
             score1: 0,
             score2: 0,
             t1Correct: 0, t1Errors: 0,
@@ -311,7 +358,7 @@
             target: 3,
             attacker: 1,
             ballX: 13,
-            ballY: 7,
+            ballY: 8,
             carrierId: 10,
             selectedPlayerId: null,
             defenseShieldActive: { 1: false, 2: false },
@@ -343,51 +390,69 @@
             { ref: "B2", q: "Qual o Salmo mais curto?", correct: "Salmo 117", options: ["Salmo 117", "Salmo 133", "Salmo 23", "Salmo 150"], refBib: "Sl 117" }
         ];
 
+        function getRosterByFormation(teamId, formation) {
+            const isTeam1 = teamId === 1;
+            let xPor = isTeam1 ? 1 : 25;
+            let roster = [{ id: isTeam1 ? 1 : 12, team: teamId, role: "POR", x: xPor, y: 8 }];
+            let idCounter = isTeam1 ? 2 : 13;
+
+            let defX = isTeam1 ? 5 : 21;
+            let medX = isTeam1 ? 9 : 17;
+            let delX = isTeam1 ? 13 : 13;
+
+            if (formation === "4-4-2") {
+                [2, 6, 10, 14].forEach(y => roster.push({ id: idCounter++, team: teamId, role: "DEF", x: defX, y }));
+                [2, 6, 10, 14].forEach(y => roster.push({ id: idCounter++, team: teamId, role: "MED", x: medX, y }));
+                [6, 10].forEach(y => roster.push({ id: idCounter++, team: teamId, role: "DEL", x: delX, y }));
+            } else if (formation === "4-3-3") {
+                [3, 7, 11, 15].forEach(y => roster.push({ id: idCounter++, team: teamId, role: "DEF", x: defX, y }));
+                [4, 8, 12].forEach(y => roster.push({ id: idCounter++, team: teamId, role: "MED", x: medX, y }));
+                [5, 8, 11].forEach(y => roster.push({ id: idCounter++, team: teamId, role: "DEL", x: delX, y }));
+            } else if (formation === "3-5-2") {
+                [4, 8, 12].forEach(y => roster.push({ id: idCounter++, team: teamId, role: "DEF", x: defX, y }));
+                [2, 5, 8, 11, 14].forEach(y => roster.push({ id: idCounter++, team: teamId, role: "MED", x: medX, y }));
+                [6, 10].forEach(y => roster.push({ id: idCounter++, team: teamId, role: "DEL", x: delX, y }));
+            } else if (formation === "5-3-2") {
+                [2, 5, 8, 11, 14].forEach(y => roster.push({ id: idCounter++, team: teamId, role: "DEF", x: defX, y }));
+                [4, 8, 12].forEach(y => roster.push({ id: idCounter++, team: teamId, role: "MED", x: medX, y }));
+                [6, 10].forEach(y => roster.push({ id: idCounter++, team: teamId, role: "DEL", x: delX, y }));
+            }
+            return roster;
+        }
+
         function initPlayers() {
-            const roster = [
-                { id: 1, team: 1, role: "POR", x: 1, y: 9 },
-                { id: 2, team: 1, role: "DEF", x: 5, y: 3 },
-                { id: 3, team: 1, role: "DEF", x: 5, y: 7 },
-                { id: 4, team: 1, role: "DEF", x: 5, y: 11 },
-                { id: 5, team: 1, role: "DEF", x: 5, y: 15 },
-                { id: 6, team: 1, role: "MED", x: 9, y: 3 },
-                { id: 7, team: 1, role: "MED", x: 9, y: 7 },
-                { id: 8, team: 1, role: "MED", x: 9, y: 11 },
-                { id: 9, team: 1, role: "MED", x: 9, y: 15 },
-                { id: 10, team: 1, role: "DEL", x: 13, y: 7 },
-                { id: 11, team: 1, role: "DEL", x: 12, y: 10 },
+            const rosterT1 = getRosterByFormation(1, gameState.form1);
+            const rosterT2 = getRosterByFormation(2, gameState.form2);
+            const combined = [...rosterT1, ...rosterT2];
 
-                { id: 12, team: 2, role: "POR", x: 25, y: 8 },
-                { id: 13, team: 2, role: "DEF", x: 21, y: 2 },
-                { id: 14, team: 2, role: "DEF", x: 21, y: 6 },
-                { id: 15, team: 2, role: "DEF", x: 21, y: 10 },
-                { id: 16, team: 2, role: "DEF", x: 21, y: 14 },
-                { id: 17, team: 2, role: "MED", x: 17, y: 2 },
-                { id: 18, team: 2, role: "MED", x: 17, y: 6 },
-                { id: 19, team: 2, role: "MED", x: 17, y: 10 },
-                { id: 20, team: 2, role: "MED", x: 17, y: 14 },
-                { id: 21, team: 2, role: "DEL", x: 14, y: 7 },
-                { id: 22, team: 2, role: "DEL", x: 14, y: 11 }
-            ];
-
-            gameState.players = roster.map(p => ({ ...p, origX: p.x, origY: p.y }));
+            gameState.players = combined.map(p => ({ ...p, origX: p.x, origY: p.y }));
             gameState.ballX = 13;
-            gameState.ballY = 7;
-            gameState.carrierId = 10;
+            gameState.ballY = 8;
+            gameState.carrierId = gameState.players.find(p => p.team === 1 && p.role === 'DEL')?.id || 10;
             gameState.selectedPlayerId = null;
         }
 
         function startGame() {
             const t1 = document.getElementById('team1-name').value.trim();
             const t2 = document.getElementById('team2-name').value.trim();
+            const c1 = document.getElementById('team1-color').value;
+            const c2 = document.getElementById('team2-color').value;
+            const f1 = document.getElementById('team1-formation').value;
+            const f2 = document.getElementById('team2-formation').value;
             const target = parseInt(document.getElementById('target-goals').value);
             
             if(t1) gameState.team1 = t1;
             if(t2) gameState.team2 = t2;
+            if(c1) gameState.color1 = c1;
+            if(c2) gameState.color2 = c2;
+            if(f1) gameState.form1 = f1;
+            if(f2) gameState.form2 = f2;
             if(target) gameState.target = target;
 
             document.getElementById('disp-team1').innerText = gameState.team1;
             document.getElementById('disp-team2').innerText = gameState.team2;
+            document.getElementById('disp-t1-formation').innerText = `${gameState.form1} • 11 Fichas`;
+            document.getElementById('disp-t2-formation').innerText = `${gameState.form2} • 11 Fichas`;
             document.getElementById('panel-t1-name').innerText = gameState.team1.toUpperCase();
             document.getElementById('panel-t2-name').innerText = gameState.team2.toUpperCase();
 
@@ -510,7 +575,7 @@
                 const secondLastDefX = sorted[1] ? sorted[1].x : 25;
                 return Math.max(13, gameState.ballX, secondLastDefX);
             } else {
-                const sorted = [...defPlayers].sort((a, b) => a.x - b.x);
+                const sorted = [...defPlayers].sort((a, b) => b.x - a.x);
                 const secondLastDefX = sorted[1] ? sorted[1].x : 1;
                 return Math.min(13, gameState.ballX, secondLastDefX);
             }
@@ -613,9 +678,10 @@
                     const player = gameState.players.find(p => p.x === c && p.y === r);
                     if (player) {
                         const token = document.createElement('div');
-                        const bgColor = player.team === 1 ? 'bg-emerald-400 text-slate-950' : 'bg-blue-400 text-slate-950';
+                        const customColor = player.team === 1 ? gameState.color1 : gameState.color2;
                         const ring = player.id === gameState.selectedPlayerId ? 'ring-2 ring-amber-300 scale-110' : '';
-                        token.className = `w-4 h-4 md:w-5 md:h-5 ${bgColor} ${ring} rounded-full border-2 border-white z-10 flex items-center justify-center text-[9px] font-black shadow cursor-pointer transition`;
+                        token.className = `w-4 h-4 md:w-5 md:h-5 ${ring} rounded-full border-2 border-white z-10 flex items-center justify-center text-[9px] font-black shadow cursor-pointer transition text-slate-950`;
+                        token.style.backgroundColor = customColor;
                         token.title = `Ficha #${player.id} (${player.role})`;
                         token.innerText = player.role === 'POR' ? 'P' : player.id;
                         cell.appendChild(token);
@@ -718,7 +784,7 @@
                     document.getElementById('global-feed').innerText = `¡Pase largo habilitado hacia #${targetPlayer.id}!`;
                 }
             } else if (type === 'DEFESA') {
-                if (teamId === gameState.attacker) { alert("La carta DEFENSA se usa al defender."); return; }
+                if (teamId === gameState.attacker) { alert("La carta DEFESA se usa al defender."); return; }
                 gameState.defenseShieldActive[teamId] = true;
                 document.getElementById(`t${teamId}-move-info`).innerHTML = `🛡️ <strong class="text-amber-300">DEFENSA ACTIVA:</strong> Bloquearás el próximo ataque rival si fallan.`;
                 document.getElementById('global-feed').innerText = `¡${teamName} activa escudo DEFENSIVO!`;
