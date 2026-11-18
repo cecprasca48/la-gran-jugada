@@ -22,11 +22,8 @@
         }
         .cell-dark { background-color: #15803d; }
         .cell-light { background-color: #166534; }
-        .cell-selected {
-            box-shadow: inset 0 0 0 2px #fbbf24;
-        }
         .cell-valid-move {
-            box-shadow: inset 0 0 0 2px rgba(251, 191, 36, 0.65);
+            box-shadow: inset 0 0 0 2px rgba(251, 191, 36, 0.75);
             cursor: pointer;
         }
     </style>
@@ -115,27 +112,52 @@
                 <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 flex-1 flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-center mb-1.5">
-                            <span class="text-xs font-bold uppercase text-slate-300">1. Pregunta de Jugada</span>
+                            <span class="text-xs font-bold uppercase text-slate-300">1. Pregunta y Selector</span>
                             <span id="t1-code-badge" class="text-xs font-mono bg-slate-800 px-2 py-0.5 rounded text-amber-300 hidden">A2-LE</span>
                         </div>
-                        <p id="t1-question-text" class="text-sm md:text-base text-slate-100 font-medium leading-snug">Esperando inicio de jugada...</p>
+                        <p id="t1-question-text" class="text-sm md:text-base text-slate-100 font-medium leading-snug">Selecciona dirección y método de avance, luego lanza pregunta.</p>
+                        
+                        <!-- Controles de Estrategia del Atacante (Dirección y Selector de Avance/Pase 1-10) -->
+                        <div id="attacker-controls-1" class="mt-3 space-y-2 bg-slate-900 p-2.5 rounded-lg border border-slate-800">
+                            <div>
+                                <label class="text-xs font-bold text-slate-300 block mb-1">Dirección de Ataque:</label>
+                                <select id="t1-dir-select" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-amber-300 font-bold">
+                                    <option value="A">Avanzar (Frente ➔)</option>
+                                    <option value="ADD">Avanzar Diag. Derecha</option>
+                                    <option value="ADE">Avanzar Diag. Izquierda</option>
+                                    <option value="LD">Lateral Derecha</option>
+                                    <option value="LE">Lateral Izquierda</option>
+                                    <option value="R">Retroceder (⬅️)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-xs font-bold text-slate-300 block mb-1">Magnitud (1-5: Conducción | 6-10: Pase):</label>
+                                <div class="flex gap-1.5 items-center">
+                                    <input type="number" id="t1-steps-input" min="1" max="10" value="4" class="w-16 bg-slate-950 border border-slate-700 rounded p-1 text-center text-sm font-black text-emerald-400">
+                                    <button onclick="rollRandomSteps(1)" class="flex-1 bg-amber-600 hover:bg-amber-500 text-slate-950 font-extrabold py-1.5 px-2 rounded text-xs transition shadow" title="Ruleta Aleatoria de Casillas (1-10)">
+                                        🎲 Ruleta (1-10)
+                                    </button>
+                                </div>
+                                <span id="t1-mode-indicator" class="text-[10px] text-teal-300 block mt-1 font-semibold">Modo actual: Conducción con balón</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mt-2.5 space-y-2">
+
+                    <div class="mt-3 space-y-2">
                         <button id="t1-draw-btn" onclick="drawCard(1, 'NORMAL')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-lg text-sm transition shadow">
                             Lanzar Pregunta Normal
                         </button>
-                        <!-- Botones de Jugadas Especiales Equipo 1 -->
                         <div id="t1-specials" class="grid grid-cols-2 gap-1.5">
-                            <button id="t1-btn-gol" onclick="drawCard(1, 'GOL')" class="bg-amber-600 hover:bg-amber-500 text-white font-extrabold py-2 px-2 rounded-lg text-xs transition shadow" title="Chute directo a gol: libera pregunta; si defensa falla y hay ángulo, ¡es GOL!">
+                            <button id="t1-btn-gol" onclick="drawCard(1, 'GOL')" class="bg-amber-600 hover:bg-amber-500 text-white font-extrabold py-2 px-2 rounded-lg text-xs transition shadow">
                                 ⚽ CHUTE GOL
                             </button>
-                            <button id="t1-btn-driblar" onclick="activateSpecial(1, 'DRIBLAR')" class="bg-purple-700 hover:bg-purple-600 text-white font-bold py-2 px-2 rounded-lg text-xs transition shadow" title="Avanza +3 casillas extras esquivando marca">
+                            <button id="t1-btn-driblar" onclick="activateSpecial(1, 'DRIBLAR')" class="bg-purple-700 hover:bg-purple-600 text-white font-bold py-2 px-2 rounded-lg text-xs transition shadow">
                                 ⚡ DRIBLAR (+3)
                             </button>
-                            <button id="t1-btn-pase" onclick="activateSpecial(1, 'PASE_LARGO')" class="bg-teal-700 hover:bg-teal-600 text-white font-bold py-2 px-2 rounded-lg text-xs transition shadow" title="Habilita pase rápido al compañero más adelantado">
+                            <button id="t1-btn-pase" onclick="activateSpecial(1, 'PASE_LARGO')" class="bg-teal-700 hover:bg-teal-600 text-white font-bold py-2 px-2 rounded-lg text-xs transition shadow">
                                 🎯 PASE LARGO
                             </button>
-                            <button id="t1-btn-defesa" onclick="activateSpecial(1, 'DEFESA')" class="bg-slate-700 hover:bg-slate-600 text-white font-bold py-2 px-2 rounded-lg text-xs transition shadow" title="Bloquea el avance rival cuando defiendes">
+                            <button id="t1-btn-defesa" onclick="activateSpecial(1, 'DEFESA')" class="bg-slate-700 hover:bg-slate-600 text-white font-bold py-2 px-2 rounded-lg text-xs transition shadow">
                                 🛡️ DEFENSA
                             </button>
                         </div>
@@ -157,7 +179,7 @@
                 <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
                     <span class="text-xs font-bold uppercase text-slate-300 block mb-1">3. Movimiento y Dirección</span>
                     <div id="t1-move-info" class="text-sm text-slate-200 font-medium leading-snug">
-                        Sin jugada activa.
+                        Haz clic en tus fichas para moverlas libremente antes de lanzar.
                     </div>
                 </div>
             </div>
@@ -188,7 +210,7 @@
                     <div id="pitch-grid" class="pitch-grid w-full"></div>
                 </div>
                 <div id="global-feed" class="w-full mt-2.5 bg-slate-900 border border-slate-800 rounded-lg px-4 py-2 text-center text-sm md:text-base text-amber-300 font-semibold">
-                    Partido listo. El equipo atacante puede mover una ficha táctica (clic en ficha) o lanzar pregunta.
+                    Partido listo. Selecciona dirección, elige valor (1-10) y lanza tu pregunta estratégica.
                 </div>
             </div>
 
@@ -203,27 +225,52 @@
                 <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 flex-1 flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-center mb-1.5">
-                            <span class="text-xs font-bold uppercase text-slate-300">1. Pregunta de Jugada</span>
+                            <span class="text-xs font-bold uppercase text-slate-300">1. Pregunta y Selector</span>
                             <span id="t2-code-badge" class="text-xs font-mono bg-slate-800 px-2 py-0.5 rounded text-amber-300 hidden">A2-LE</span>
                         </div>
                         <p id="t2-question-text" class="text-sm md:text-base text-slate-100 font-medium leading-snug">En espera de turno ofensivo...</p>
+                        
+                        <!-- Controles de Estrategia del Atacante Equipo 2 -->
+                        <div id="attacker-controls-2" class="mt-3 space-y-2 bg-slate-900 p-2.5 rounded-lg border border-slate-800 hidden">
+                            <div>
+                                <label class="text-xs font-bold text-slate-300 block mb-1">Dirección de Ataque:</label>
+                                <select id="t2-dir-select" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-amber-300 font-bold">
+                                    <option value="A">Avanzar (Frente ➔)</option>
+                                    <option value="ADD">Avanzar Diag. Derecha</option>
+                                    <option value="ADE">Avanzar Diag. Izquierda</option>
+                                    <option value="LD">Lateral Derecha</option>
+                                    <option value="LE">Lateral Izquierda</option>
+                                    <option value="R">Retroceder (⬅️)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-xs font-bold text-slate-300 block mb-1">Magnitud (1-5: Conducción | 6-10: Pase):</label>
+                                <div class="flex gap-1.5 items-center">
+                                    <input type="number" id="t2-steps-input" min="1" max="10" value="4" class="w-16 bg-slate-950 border border-slate-700 rounded p-1 text-center text-sm font-black text-blue-400">
+                                    <button onclick="rollRandomSteps(2)" class="flex-1 bg-amber-600 hover:bg-amber-500 text-slate-950 font-extrabold py-1.5 px-2 rounded text-xs transition shadow" title="Ruleta Aleatoria de Casillas (1-10)">
+                                        🎲 Ruleta (1-10)
+                                    </button>
+                                </div>
+                                <span id="t2-mode-indicator" class="text-[10px] text-teal-300 block mt-1 font-semibold">Modo actual: Conducción con balón</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mt-2.5 space-y-2">
+
+                    <div class="mt-3 space-y-2">
                         <button id="t2-draw-btn" onclick="drawCard(2, 'NORMAL')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg text-sm transition shadow hidden">
                             Lanzar Pregunta Normal
                         </button>
-                        <!-- Botones de Jugadas Especiales Equipo 2 -->
                         <div id="t2-specials" class="grid grid-cols-2 gap-1.5">
-                            <button id="t2-btn-gol" onclick="drawCard(2, 'GOL')" class="bg-amber-600 hover:bg-amber-500 text-white font-extrabold py-2 px-2 rounded-lg text-xs transition shadow" title="Chute directo a gol: libera pregunta; si defensa falla y hay ángulo, ¡es GOL!">
+                            <button id="t2-btn-gol" onclick="drawCard(2, 'GOL')" class="bg-amber-600 hover:bg-amber-500 text-white font-extrabold py-2 px-2 rounded-lg text-xs transition shadow">
                                 ⚽ CHUTE GOL
                             </button>
-                            <button id="t2-btn-driblar" onclick="activateSpecial(2, 'DRIBLAR')" class="bg-purple-700 hover:bg-purple-600 text-white font-bold py-2 px-2 rounded-lg text-xs transition shadow" title="Avanza +3 casillas extras esquivando marca">
+                            <button id="t2-btn-driblar" onclick="activateSpecial(2, 'DRIBLAR')" class="bg-purple-700 hover:bg-purple-600 text-white font-bold py-2 px-2 rounded-lg text-xs transition shadow">
                                 ⚡ DRIBLAR (+3)
                             </button>
-                            <button id="t2-btn-pase" onclick="activateSpecial(2, 'PASE_LARGO')" class="bg-teal-700 hover:bg-teal-600 text-white font-bold py-2 px-2 rounded-lg text-xs transition shadow" title="Habilita pase rápido al compañero más adelantado">
+                            <button id="t2-btn-pase" onclick="activateSpecial(2, 'PASE_LARGO')" class="bg-teal-700 hover:bg-teal-600 text-white font-bold py-2 px-2 rounded-lg text-xs transition shadow">
                                 🎯 PASE LARGO
                             </button>
-                            <button id="t2-btn-defesa" onclick="activateSpecial(2, 'DEFESA')" class="bg-slate-700 hover:bg-slate-600 text-white font-bold py-2 px-2 rounded-lg text-xs transition shadow" title="Bloquea el avance rival cuando defiendes">
+                            <button id="t2-btn-defesa" onclick="activateSpecial(2, 'DEFESA')" class="bg-slate-700 hover:bg-slate-600 text-white font-bold py-2 px-2 rounded-lg text-xs transition shadow">
                                 🛡️ DEFENSA
                             </button>
                         </div>
@@ -265,9 +312,8 @@
             attacker: 1, // 1 = Equipo 1 ataca (casillas oscuras), 2 = Equipo 2 ataca (casillas claras)
             ballX: 13,
             ballY: 8,
-            carrierId: 10, // ID de la ficha que actualmente conduce el balón
+            carrierId: 10,
             selectedPlayerId: null,
-            tacticalMoveUsed: false, // Permite mover 1 ficha libremente antes de lanzar pregunta
             defenseShieldActive: { 1: false, 2: false },
             dribbleBonus: { 1: 0, 2: 0 },
             players: [],
@@ -277,17 +323,14 @@
             questionActive: false
         };
 
-        // 8 Direcciones oficiales del tablero
-        const directions = [
-            { code: "A", label: "Avanzar (Frente)", dx: 1, dy: 0 },
-            { code: "ADD", label: "Avanzar Diagonal Derecha", dx: 1, dy: -1 },
-            { code: "ADE", label: "Avanzar Diagonal Izquierda", dx: 1, dy: 1 },
-            { code: "LD", label: "Lateral Derecha", dx: 0, dy: -1 },
-            { code: "LE", label: "Lateral Izquierda", dx: 0, dy: 1 },
-            { code: "R", label: "Retroceder", dx: -1, dy: 0 },
-            { code: "RDD", label: "Retroceder Diagonal Derecha", dx: -1, dy: -1 },
-            { code: "RDE", label: "Retroceder Diagonal Izquierda", dx: -1, dy: 1 }
-        ];
+        const directionsMap = {
+            "A": { label: "Avanzar (Frente)", dx: 1, dy: 0 },
+            "ADD": { label: "Avanzar Diagonal Derecha", dx: 1, dy: -1 },
+            "ADE": { label: "Avanzar Diagonal Izquierda", dx: 1, dy: 1 },
+            "LD": { label: "Lateral Derecha", dx: 0, dy: -1 },
+            "LE": { label: "Lateral Izquierda", dx: 0, dy: 1 },
+            "R": { label: "Retroceder", dx: -1, dy: 0 }
+        };
 
         const sampleCards = [
             { ref: "A1", q: "Palavra chave no livro de Gênesis.", correct: "No princípio", options: ["No princípio", "Criação divina", "No princípio criou Deus", "A terra era sem forma"], refBib: "Gn 1:1" },
@@ -300,7 +343,6 @@
             { ref: "B2", q: "Qual o Salmo mais curto?", correct: "Salmo 117", options: ["Salmo 117", "Salmo 133", "Salmo 23", "Salmo 150"], refBib: "Sl 117" }
         ];
 
-        // Inicializar las 22 fichas respetando paridad: Equipo 1 en oscuras ((x+y)%2===0), Equipo 2 en claras ((x+y)%2===1)
         function initPlayers() {
             gameState.players = [
                 // Equipo 1 (Izquierda - Casillas oscuras)
@@ -313,7 +355,7 @@
                 { id: 7, team: 1, role: "MED", x: 9, y: 7 },
                 { id: 8, team: 1, role: "MED", x: 9, y: 11 },
                 { id: 9, team: 1, role: "MED", x: 9, y: 15 },
-                { id: 10, team: 1, role: "DEL", x: 13, y: 7 }, // Portador inicial
+                { id: 10, team: 1, role: "DEL", x: 13, y: 7 },
                 { id: 11, team: 1, role: "DEL", x: 12, y: 10 },
 
                 // Equipo 2 (Derecha - Casillas claras)
@@ -332,7 +374,6 @@
             gameState.ballX = 13;
             gameState.ballY = 7;
             gameState.carrierId = 10;
-            gameState.tacticalMoveUsed = false;
             gameState.selectedPlayerId = null;
         }
 
@@ -376,6 +417,8 @@
             const r2 = document.getElementById('panel-t2-role');
             const btn1 = document.getElementById('t1-draw-btn');
             const btn2 = document.getElementById('t2-draw-btn');
+            const ctrl1 = document.getElementById('attacker-controls-1');
+            const ctrl2 = document.getElementById('attacker-controls-2');
             const poss = document.getElementById('disp-possession');
 
             if (gameState.attacker === 1) {
@@ -387,7 +430,9 @@
                 r2.className = "text-xs font-bold px-2.5 py-1 rounded bg-slate-800 text-slate-300";
                 btn1.classList.remove('hidden');
                 btn1.disabled = false;
+                ctrl1.classList.remove('hidden');
                 btn2.classList.add('hidden');
+                ctrl2.classList.add('hidden');
                 poss.innerText = `${gameState.team1} Atacando ➔`;
                 poss.className = "font-bold text-emerald-400 text-sm md:text-base bg-slate-950 px-4 py-1.5 rounded-full border border-emerald-500/40 inline-block";
             } else {
@@ -399,13 +444,14 @@
                 r1.className = "text-xs font-bold px-2.5 py-1 rounded bg-slate-800 text-slate-300";
                 btn2.classList.remove('hidden');
                 btn2.disabled = false;
+                ctrl2.classList.remove('hidden');
                 btn1.classList.add('hidden');
+                ctrl1.classList.add('hidden');
                 poss.innerText = `⬅️ ${gameState.team2} Atacando`;
                 poss.className = "font-bold text-blue-400 text-sm md:text-base bg-slate-950 px-4 py-1.5 rounded-full border border-blue-500/40 inline-block";
             }
         }
 
-        // Asegura que la casilla pertenezca al color del equipo (Equipo 1: oscura (x+y)%2===0, Equipo 2: clara (x+y)%2===1)
         function snapToTeamParity(teamId, x, y) {
             const desiredParity = teamId === 1 ? 0 : 1;
             let cx = Math.max(0, Math.min(26, x));
@@ -419,21 +465,38 @@
             return { x: cx, y: cy };
         }
 
-        // Movilidad manual táctica: el jugador puede mover 1 ficha libremente en su turno (hasta 3 casillas) antes de lanzar pregunta
+        // Ruleta aleatoria para definir el valor (1-10) con animación interactiva simulada
+        function rollRandomSteps(teamId) {
+            const inputEl = document.getElementById(`t${teamId}-steps-input`);
+            const indicatorEl = document.getElementById(`t${teamId}-mode-indicator`);
+            let counter = 0;
+            const rollInterval = setInterval(() => {
+                const randomVal = Math.floor(Math.random() * 10) + 1;
+                inputEl.value = randomVal;
+                counter++;
+                if (counter > 8) {
+                    clearInterval(rollInterval);
+                    const finalVal = parseInt(inputEl.value);
+                    if (finalVal <= 5) {
+                        indicatorEl.innerHTML = `Modo actual: <strong class="text-teal-300">Conducción con balón (${finalVal} casillas)</strong>`;
+                    } else {
+                        indicatorEl.innerHTML = `Modo actual: <strong class="text-amber-300">Pase Largo (${finalVal} casillas)</strong>`;
+                    }
+                }
+            }, 60);
+        }
+
         function handleCellClick(c, r) {
             if (gameState.questionActive) return;
-
             const clickedPlayer = gameState.players.find(p => p.x === c && p.y === r);
 
-            // Seleccionar una ficha propia
             if (clickedPlayer && clickedPlayer.team === gameState.attacker) {
                 gameState.selectedPlayerId = clickedPlayer.id;
-                document.getElementById('global-feed').innerText = `Ficha #${clickedPlayer.id} (${clickedPlayer.role}) seleccionada. Haz clic en una casilla cercana (hasta 3 cuadros) para desmarcarla.`;
+                document.getElementById('global-feed').innerText = `Ficha #${clickedPlayer.id} (${clickedPlayer.role}) seleccionada. Haz clic en una casilla cercana (hasta 3 cuadros) para reposicionarla.`;
                 renderPitch();
                 return;
             }
 
-            // Si hay una ficha seleccionada, moverla a una casilla libre
             if (gameState.selectedPlayerId && !clickedPlayer) {
                 const player = gameState.players.find(p => p.id === gameState.selectedPlayerId);
                 if (!player) return;
@@ -444,7 +507,6 @@
                     return;
                 }
 
-                // Ajustar a la paridad del color del equipo
                 const snapped = snapToTeamParity(player.team, c, r);
                 if (gameState.players.some(p => p.x === snapped.x && p.y === snapped.y)) {
                     document.getElementById('global-feed').innerText = `Esa casilla ya está ocupada por otro jugador.`;
@@ -454,14 +516,13 @@
                 player.x = snapped.x;
                 player.y = snapped.y;
 
-                // Si esta ficha conducía el balón, el balón viaja junto con ella
                 if (player.id === gameState.carrierId) {
                     gameState.ballX = player.x;
                     gameState.ballY = player.y;
                 }
 
                 gameState.selectedPlayerId = null;
-                document.getElementById('global-feed').innerText = `Ficha #${player.id} reposicionada tácticamente en (${player.x}, ${player.y}). Ahora puedes lanzar pregunta o jugada especial.`;
+                document.getElementById('global-feed').innerText = `Ficha #${player.id} reposicionada en (${player.x}, ${player.y}). Lista para la jugada.`;
                 renderPitch();
             }
         }
@@ -478,7 +539,6 @@
                     cell.className = `cell ${isDark ? 'cell-dark' : 'cell-light'}`;
                     cell.onclick = () => handleCellClick(c, r);
 
-                    // Resaltar casillas válidas para movilidad táctica si hay una ficha seleccionada
                     if (selectedPlayer) {
                         const dist = Math.max(Math.abs(selectedPlayer.x - c), Math.abs(selectedPlayer.y - r));
                         const desiredParity = selectedPlayer.team === 1 ? 0 : 1;
@@ -521,23 +581,15 @@
             return nearest;
         }
 
-        // Activar botones de jugadas especiales (Driblar, Pase Largo, Defensa)
         function activateSpecial(teamId, type) {
             const teamName = teamId === 1 ? gameState.team1 : gameState.team2;
             if (type === 'DRIBLAR') {
-                if (teamId !== gameState.attacker) {
-                    alert("Solo el equipo atacante puede usar DRIBLAR.");
-                    return;
-                }
+                if (teamId !== gameState.attacker) { alert("Solo el atacante puede usar DRIBLAR."); return; }
                 gameState.dribbleBonus[teamId] = 3;
-                document.getElementById(`t${teamId}-move-info`).innerHTML = `⚡ <strong class="text-purple-400">DRIBLAR ACTIVADO:</strong> Si avanzas en esta jugada, sumarás <strong>+3 casillas</strong> adicionales.`;
-                document.getElementById('global-feed').innerText = `¡${teamName} activa jugada especial DRIBLAR (+3 casillas de avance)!`;
+                document.getElementById(`t${teamId}-move-info`).innerHTML = `⚡ <strong class="text-purple-400">DRIBLAR:</strong> +3 casillas extras en tu siguiente avance.`;
+                document.getElementById('global-feed').innerText = `¡${teamName} activa DRIBLAR (+3 casillas)!`;
             } else if (type === 'PASE_LARGO') {
-                if (teamId !== gameState.attacker) {
-                    alert("Solo el equipo atacante puede ejecutar PASE LARGO.");
-                    return;
-                }
-                // Busca el compañero más adelantado hacia el arco rival y le pasa el balón
+                if (teamId !== gameState.attacker) { alert("Solo el atacante puede usar PASE LARGO."); return; }
                 const teamPlayers = gameState.players.filter(p => p.team === teamId && p.role !== 'POR');
                 teamPlayers.sort((a, b) => teamId === 1 ? b.x - a.x : a.x - b.x);
                 const targetPlayer = teamPlayers[0];
@@ -546,21 +598,17 @@
                     gameState.ballX = targetPlayer.x;
                     gameState.ballY = targetPlayer.y;
                     renderPitch();
-                    document.getElementById(`t${teamId}-move-info`).innerHTML = `🎯 <strong class="text-teal-400">PASE LARGO:</strong> Balón entregado a la ficha #${targetPlayer.id} en (${targetPlayer.x}, ${targetPlayer.y}).`;
-                    document.getElementById('global-feed').innerText = `¡Pase largo de ${teamName} hacia su delantero #${targetPlayer.id}! Ahora lanza pregunta o chute a gol.`;
+                    document.getElementById(`t${teamId}-move-info`).innerHTML = `🎯 <strong class="text-teal-400">PASE LARGO:</strong> Balón enviado a ficha #${targetPlayer.id}.`;
+                    document.getElementById('global-feed').innerText = `¡Pase largo hacia la ficha #${targetPlayer.id}!`;
                 }
             } else if (type === 'DEFESA') {
-                if (teamId === gameState.attacker) {
-                    alert("La carta DEFENSA se activa cuando estás defendiendo.");
-                    return;
-                }
+                if (teamId === gameState.attacker) { alert("La carta DEFENSA se usa al defender."); return; }
                 gameState.defenseShieldActive[teamId] = true;
-                document.getElementById(`t${teamId}-move-info`).innerHTML = `🛡️ <strong class="text-amber-300">ESCUDO DEFENSIVO ACTIVO:</strong> Si fallas la próxima pregunta, bloquearás el avance del atacante.`;
-                document.getElementById('global-feed').innerText = `¡${teamName} activa cobertura DEFENSIVA para proteger su arco!`;
+                document.getElementById(`t${teamId}-move-info`).innerHTML = `🛡️ <strong class="text-amber-300">DEFENSA ACTIVA:</strong> Bloquearás el próximo ataque rival si fallan.`;
+                document.getElementById('global-feed').innerText = `¡${teamName} activa escudo DEFENSIVO!`;
             }
         }
 
-        // Verifica si la bola tiene ángulo limpio hacia la portería rival (Filas centrales 5 a 11 y dentro del último tercio del campo)
         function hasGoalAngle(attId, bx, by) {
             const inShootingZone = attId === 1 ? (bx >= 16) : (bx <= 10);
             const inGoalMouthCorridor = (by >= 5 && by <= 11);
@@ -575,14 +623,19 @@
 
             const defId = teamId === 1 ? 2 : 1;
             const card = sampleCards[Math.floor(Math.random() * sampleCards.length)];
+            
+            // Leer dirección y magnitud seleccionadas estratégicamente por el atacante
+            const dirKey = document.getElementById(`t${teamId}-dir-select`).value;
             const dir = playType === 'GOL'
                 ? { code: "CHUTE-GOL", label: "Disparo Directo a Portería", dx: 1, dy: 0 }
-                : directions[Math.floor(Math.random() * directions.length)];
-            const hiddenSteps = Math.floor(Math.random() * 10) + 1;
+                : directionsMap[dirKey];
+            
+            const stepsInput = parseInt(document.getElementById(`t${teamId}-steps-input`).value) || 4;
+            const hiddenSteps = Math.max(1, Math.min(10, stepsInput));
 
             gameState.currentCard = { ...card, dir, hiddenSteps, playType };
 
-            const codeText = playType === 'GOL' ? `⚽ GOL-${card.ref}` : `${card.ref}-${dir.code}`;
+            const codeText = playType === 'GOL' ? `⚽ GOL-${card.ref}` : `${card.ref}-${dir.code} (${hiddenSteps} cas)`;
             document.getElementById('t1-code-badge').innerText = codeText;
             document.getElementById('t1-code-badge').classList.remove('hidden');
             document.getElementById('t2-code-badge').innerText = codeText;
@@ -591,13 +644,14 @@
             document.getElementById(`t${teamId}-question-text`).innerText = `${card.q} (${card.refBib})`;
             document.getElementById(`t${defId}-question-text`).innerText = `${playType === 'GOL' ? '¡ALERTA DE CHUTE A GOL! ' : ''}Reto: "${card.q}"`;
 
+            const modeLabel = hiddenSteps <= 5 ? "Conducción con balón" : "Pase en profundidad";
             document.getElementById(`t${teamId}-move-info`).innerHTML = playType === 'GOL'
-                ? `⚽ <strong class="text-amber-400">CHUTE A GOL LANZADO:</strong> Si la defensa no responde, se evaluará el ángulo de entrada al arco.`
-                : `Dirección: <strong class="text-amber-300">${dir.code} (${dir.label})</strong><br><span class="text-slate-400">Casillas: [Oculto hasta respuesta]</span>`;
+                ? `⚽ <strong class="text-amber-400">CHUTE A GOL LANZADO:</strong> Esperando respuesta defensiva.`
+                : `Estrategia: <strong class="text-amber-300">${dir.code} (${hiddenSteps} casillas - ${modeLabel})</strong>`;
 
             document.getElementById(`t${defId}-move-info`).innerHTML = playType === 'GOL'
-                ? `🚨 <strong class="text-rose-400">¡ATAJA EL DISPARO!</strong> Responde correctamente para salvar tu portería.`
-                : `Defendiendo jugada hacia: <strong class="text-amber-300">${dir.code}</strong>`;
+                ? `🚨 <strong class="text-rose-400">¡ATAJA EL DISPARO!</strong> Responde correctamente.`
+                : `Defendiendo jugada de ${modeLabel} hacia: <strong class="text-amber-300">${dir.code}</strong>`;
 
             document.getElementById(`t${teamId}-options`).innerHTML = `<p class="text-sm text-emerald-400 italic">Esperando respuesta del equipo defensor...</p>`;
             
@@ -612,9 +666,7 @@
                 defOptionsDiv.appendChild(b);
             });
 
-            document.getElementById('global-feed').innerText = playType === 'GOL'
-                ? `¡CHUTE A GOL (${codeText})! El defensor tiene 20s para atajar respondiendo correctamente.`
-                : `¡Pregunta lanzada (${codeText})! El defensor tiene 20 segundos para responder.`;
+            document.getElementById('global-feed').innerText = `¡Pregunta lanzada! Estrategia: ${dir.code} (${hiddenSteps} casillas). El defensor tiene 20s.`;
 
             gameState.timer = 20;
             const timerEl = document.getElementById(`t${defId}-timer`);
@@ -652,10 +704,9 @@
             }
             updateStatsUI();
 
-            // 1. RESOLUCIÓN DE CHUTE ESPECIAL A GOL
+            // 1. RESOLUCIÓN DE CHUTE A GOL
             if (playType === 'GOL') {
                 if (defenderAnsweredCorrectly) {
-                    // El arquero/defensa ataja y la ficha defensora más cercana toma posesión en casilla de su color
                     const interceptor = findNearestPlayer(defId, gameState.ballX, gameState.ballY);
                     const snapped = snapToTeamParity(defId, interceptor.x, interceptor.y);
                     interceptor.x = snapped.x;
@@ -665,19 +716,16 @@
                     gameState.carrierId = interceptor.id;
                     gameState.attacker = defId;
 
-                    document.getElementById(`t${defId}-move-info`).innerHTML = `🧤 <strong class="text-emerald-400">¡ATAJADÓN!</strong> ${defName} respondió bien y recupera el balón con ficha #${interceptor.id}.`;
-                    document.getElementById(`t${attId}-move-info`).innerHTML = `Disparo detenido por la defensa de ${defName}.`;
-                    document.getElementById('global-feed').innerText = `¡${defName} ataja el chute a gol y sale al contraataque!`;
+                    document.getElementById(`t${defId}-move-info`).innerHTML = `🧤 <strong class="text-emerald-400">¡ATAJADÓN!</strong> Ficha #${interceptor.id} de ${defName} ataja y recupera.`;
+                    document.getElementById('global-feed').innerText = `¡${defName} ataja el chute a gol y sale jugando!`;
                 } else {
-                    // Defensa falla: evaluar si la bola está en ángulo de gol o sale fuera
                     if (hasGoalAngle(attId, gameState.ballX, gameState.ballY)) {
                         gameState.ballX = attId === 1 ? 26 : 0;
                         gameState.ballY = 8;
                         if (attId === 1) gameState.score1++; else gameState.score2++;
                         updateStatsUI();
                         renderPitch();
-                        document.getElementById(`t${attId}-move-info`).innerHTML = `⚽🎉 <strong class="text-amber-300">¡GOOOOL!</strong> El disparo entró directo al arco rival.`;
-                        document.getElementById('global-feed').innerText = `¡GOOOOL DE ${attName.toUpperCase()} tras un potente chute a gol!`;
+                        document.getElementById('global-feed').innerText = `¡GOOOOL DE ${attName.toUpperCase()}!`;
                         setTimeout(() => {
                             alert(`¡GOOOOL DE ${attName.toUpperCase()}! ⚽🎉`);
                             initPlayers();
@@ -686,8 +734,6 @@
                         }, 300);
                         return;
                     } else {
-                        // Sin ángulo suficiente: el balón sale por línea de fondo o banda y el rival saca
-                        const outType = (gameState.ballY < 5 || gameState.ballY > 11) ? "línea lateral (saque de banda)" : "línea de fondo (saque de meta)";
                         const throwInPlayer = findNearestPlayer(defId, gameState.ballX, gameState.ballY);
                         const edgeY = gameState.ballY <= 8 ? 0 : 16;
                         const snapped = snapToTeamParity(defId, throwInPlayer.x, edgeY);
@@ -698,9 +744,7 @@
                         gameState.carrierId = throwInPlayer.id;
                         gameState.attacker = defId;
 
-                        document.getElementById(`t${attId}-move-info`).innerHTML = `⚠️ <strong class="text-rose-400">¡DISPARO DESVIADO!</strong> Sin ángulo suficiente, el balón salió por ${outType}.`;
-                        document.getElementById(`t${defId}-move-info`).innerHTML = `🔄 <strong class="text-emerald-400">SAQUE RIVAL:</strong> Ficha #${throwInPlayer.id} de ${defName} repone el balón.`;
-                        document.getElementById('global-feed').innerText = `¡El tiro de ${attName} se fue fuera por ${outType}! Repone ${defName}.`;
+                        document.getElementById('global-feed').innerText = `¡Disparo fuera! Repone ${defName}.`;
                     }
                 }
                 renderPitch();
@@ -710,17 +754,14 @@
 
             // 2. RESOLUCIÓN DE JUGADA NORMAL
             if (!defenderAnsweredCorrectly) {
-                // Verificar si el defensor tenía escudo DEFENSA activo
                 if (gameState.defenseShieldActive[defId]) {
                     gameState.defenseShieldActive[defId] = false;
-                    document.getElementById(`t${defId}-move-info`).innerHTML = `🛡️ <strong class="text-amber-300">¡ESCUDO DEFENSIVO USADO!</strong> Bloqueaste el avance de ${attName}.`;
-                    document.getElementById(`t${attId}-move-info`).innerHTML = `Avance bloqueado por carta DEFENSA de ${defName}.`;
-                    document.getElementById('global-feed').innerText = `¡${defName} usa su carta DEFENSA y frena el ataque de ${attName}!`;
+                    document.getElementById(`t${defId}-move-info`).innerHTML = `🛡️ <strong class="text-amber-300">¡ESCUDO DEFENSA USADO!</strong> Ataque bloqueado.`;
+                    document.getElementById('global-feed').innerText = `¡${defName} bloquea el avance con la carta DEFENSA!`;
                     syncPanelsRole();
                     return;
                 }
 
-                // El balón y la ficha que lo conduce viajan juntos por las casillas del color del atacante
                 const bonus = gameState.dribbleBonus[attId] || 0;
                 gameState.dribbleBonus[attId] = 0;
                 const totalSteps = hiddenSteps + bonus;
@@ -733,21 +774,28 @@
                 gameState.ballX = snapped.x;
                 gameState.ballY = snapped.y;
 
-                // Mover la ficha conductora junto con el balón
-                let carrier = gameState.players.find(p => p.id === gameState.carrierId && p.team === attId);
-                if (!carrier) carrier = findNearestPlayer(attId, snapped.x, snapped.y);
+                // REGLA CLAVE 1 y 2: La ficha más próxima de la bola se mueve junto con ella y las demás se reacomodan para recibir pase
+                const carrier = findNearestPlayer(attId, snapped.x, snapped.y);
                 if (carrier) {
                     carrier.x = snapped.x;
                     carrier.y = snapped.y;
                     gameState.carrierId = carrier.id;
                 }
 
-                const bonusText = bonus > 0 ? ` (+${bonus} Driblar)` : '';
-                document.getElementById(`t${attId}-move-info`).innerHTML = `¡Defensor falló! Avanzas <strong class="text-emerald-400">${totalSteps} casillas${bonusText}</strong> (${dir.code}). Ficha #${carrier.id} conduce el balón.`;
-                document.getElementById(`t${defId}-move-info`).innerHTML = `Correcta: <strong>${correct}</strong>. ${attName} avanzó ${totalSteps} casillas (${dir.code}).`;
-                document.getElementById('global-feed').innerText = `¡${attName} avanza ${totalSteps} casillas en dirección ${dir.code} junto con su ficha #${carrier.id}!`;
+                // Las demás fichas atacantes se reubican en anticipación en dirección al gol rival
+                gameState.players.filter(p => p.team === attId && p.id !== carrier.id && p.role !== 'POR').forEach((p, idx) => {
+                    const advX = Math.max(0, Math.min(26, snapped.x + (attId === 1 ? (idx + 1) : -(idx + 1))));
+                    const advY = Math.max(0, Math.min(16, snapped.y + (idx % 2 === 0 ? 1 : -1)));
+                    const teamSnapped = snapToTeamParity(attId, advX, advY);
+                    p.x = teamSnapped.x;
+                    p.y = teamSnapped.y;
+                });
 
-                // Verificar si cruzó la línea de gol
+                const isPase = totalSteps >= 6;
+                const actionType = isPase ? "Pase en profundidad" : "Conducción";
+                document.getElementById(`t${attId}-move-info`).innerHTML = `¡Éxito! ${actionType} de <strong class="text-emerald-400">${totalSteps} casillas</strong> (${dir.code}). Ficha #${carrier.id} conduce con el balón.`;
+                document.getElementById('global-feed').innerText = `¡${attName} ejecuta ${actionType} de ${totalSteps} casillas! Las fichas se reacomodan.`;
+
                 if ((attId === 1 && gameState.ballX >= 26) || (attId === 2 && gameState.ballX <= 0)) {
                     if (attId === 1) gameState.score1++; else gameState.score2++;
                     updateStatsUI();
@@ -762,7 +810,7 @@
                 }
 
             } else {
-                // DEFENSOR ACIERTA: Recupera el balón y pasa a la casilla de su tonalidad (clara/oscura) más próxima
+                // DEFENSOR ACIERTA: Intercepción y cambio de posesión
                 const interceptor = findNearestPlayer(defId, gameState.ballX, gameState.ballY);
                 const snapped = snapToTeamParity(defId, gameState.ballX, gameState.ballY);
                 
@@ -776,9 +824,8 @@
                 gameState.attacker = defId;
 
                 const colorLabel = defId === 1 ? "casilla oscura" : "casilla clara";
-                document.getElementById(`t${defId}-move-info`).innerHTML = `¡Correcto! Ficha #${interceptor.id} de <strong class="text-amber-300">${defName}</strong> recupera el balón en ${colorLabel} (${snapped.x}, ${snapped.y}).`;
-                document.getElementById(`t${attId}-move-info`).innerHTML = `¡Balón recuperado por ${defName}! Pasa a ${colorLabel}.`;
-                document.getElementById('global-feed').innerText = `¡Intercepción de ${defName}! El balón pasa a ${colorLabel} con la ficha #${interceptor.id}.`;
+                document.getElementById(`t${defId}-move-info`).innerHTML = `¡Intercepción! Ficha #${interceptor.id} de <strong class="text-amber-300">${defName}</strong> roba el balón en ${colorLabel}.`;
+                document.getElementById('global-feed').innerText = `¡Robo de balón de ${defName}! La ficha #${interceptor.id} asume el control.`;
             }
 
             renderPitch();
