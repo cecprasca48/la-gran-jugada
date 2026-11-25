@@ -3,8 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Gran Jugada: Paquete Global Bíblico Vol. 1 y Táctica en Cancha</title>
+    <title>La Gran Jugada — Motor Modular de Colecciones</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Registro Global de Paquetes Modulares -->
+    <script>
+        window.LA_GRAN_JUGADA_PACKAGES = window.LA_GRAN_JUGADA_PACKAGES || {};
+    </script>
+    <!-- Acoplamiento de Paquetes Instalados en el Repositorio (hasta 4 simultáneos) -->
+    <script src="paquete_biblico_vol1.js"></script>
     <style>
         .pitch-grid {
             display: grid;
@@ -31,12 +37,12 @@
 <body class="bg-slate-950 text-slate-100 min-h-screen font-sans flex flex-col items-center justify-between p-2 md:p-4 text-base">
     <header class="text-center my-1">
         <h1 class="text-2xl md:text-3xl font-black text-emerald-400 tracking-wide">LA GRAN JUGADA</h1>
-        <p class="text-sm text-slate-300 italic">Proyecto Tierra Prometida — Paquete Global Bíblico Vol. 1 & Multitemático</p>
+        <p class="text-sm text-slate-300 italic">Motor Modular de Colecciones — Ranuras Acoplables (1 a 4 Paquetes Simultáneos)</p>
     </header>
 
-    <!-- Pantalla de Configuración con Paquetes Globales y Sistema Personal Local -->
+    <!-- Pantalla de Configuración Modular -->
     <div id="setup-screen" class="w-full max-w-3xl bg-slate-900 p-6 md:p-8 rounded-2xl shadow-xl border border-slate-800 my-auto">
-        <h2 class="text-xl font-bold text-white mb-4 text-center">Configuración Táctica, Paquetes Globales y Banco Personal</h2>
+        <h2 class="text-xl font-bold text-white mb-4 text-center">Configuración Táctica y Acoplamiento de Paquetes</h2>
         <div class="space-y-6">
             
             <!-- Equipos -->
@@ -70,29 +76,35 @@
                 </div>
             </div>
 
-            <!-- Selección de Paquetes Globales y Categorías -->
+            <!-- Gestor de Ranuras Modulares e Instalador de 1 Clic (1 a 4 Paquetes Simultáneos) -->
             <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3">
-                <label class="block text-xs font-bold uppercase text-slate-300">Paquetes Globales y Categorías Activas:</label>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    <label class="flex items-center space-x-2 text-xs text-slate-200 cursor-pointer bg-slate-900 p-2.5 rounded border border-slate-700">
-                        <input type="checkbox" name="package" value="BiblicoVol1" checked class="accent-emerald-500">
-                        <span>📖 Paquete Bíblico Vol. 1 (Códigos 1-226)</span>
+                <div class="flex flex-wrap justify-between items-center gap-2">
+                    <label class="text-xs font-bold uppercase text-slate-300">
+                        Paquetes Acoplados (<span id="active-slots-count" class="text-amber-400">1</span> / 4 máx.):
                     </label>
-                    <label class="flex items-center space-x-2 text-xs text-slate-200 cursor-pointer bg-slate-900 p-2.5 rounded border border-slate-700">
-                        <input type="checkbox" name="package" value="Deportes" checked class="accent-emerald-500">
-                        <span>⚽ Paquete Deportes & Otras Temáticas (10+)</span>
-                    </label>
-                    <label class="flex items-center space-x-2 text-xs text-slate-200 cursor-pointer bg-slate-900 p-2.5 rounded border border-slate-700">
-                        <input type="checkbox" name="package" value="Personal" checked class="accent-emerald-500">
-                        <span>👤 Banco Personal (Preguntas Manuales del Dispositivo)</span>
-                    </label>
+                    <div class="flex flex-wrap gap-2">
+                        <button type="button" onclick="oneClickInstallOfficialPackages()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 px-3 py-1 rounded-lg text-xs font-extrabold transition shadow">
+                            ⚡ Instalar / Sincronizar Paquetes (1 Clic)
+                        </button>
+                        <label class="cursor-pointer bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/40 px-3 py-1 rounded-lg text-xs font-bold transition">
+                            📦 Subir Archivo (.js / .json)
+                            <input type="file" id="package-file-input" accept=".js,.json" multiple onchange="handlePackageFileUpload(event)" class="hidden">
+                        </label>
+                    </div>
+                </div>
+                <p class="text-[11px] text-slate-400">
+                    <strong>Instalación en 1 clic:</strong> los paquetes del repositorio se acoplan automáticamente y quedan guardados en tu navegador. Marca entre <strong>1 y 4 paquetes</strong> para jugar y rotar temas sin complicaciones.
+                </p>
+                <div id="one-click-status" class="text-[11px] text-emerald-300 font-semibold hidden"></div>
+                <div id="packages-container" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <!-- Se renderiza dinámicamente con los paquetes acoplados -->
                 </div>
             </div>
 
-            <!-- Entrada Manual de Preguntas (Sistema Personal LocalStorage) -->
+            <!-- Banco Personal Rápido (LocalStorage) -->
             <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3">
                 <div class="flex justify-between items-center">
-                    <span class="text-xs font-bold uppercase text-slate-300">Banco Personal (Dispositivo) (<span id="personal-count">0</span> guardadas)</span>
+                    <span class="text-xs font-bold uppercase text-slate-300">Banco Personal Local (<span id="personal-count">0</span> guardadas)</span>
                     <button onclick="togglePersonalEditor()" class="text-xs text-amber-400 hover:underline font-bold">➕ Añadir Pregunta Personal</button>
                 </div>
                 
@@ -130,7 +142,7 @@
                         <input type="text" id="p-incorrects" placeholder="Opción B, Opción C, Opción D" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
                     </div>
                     <button onclick="savePersonalQuestion()" class="w-full bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold py-1.5 rounded text-xs transition">
-                        Guardar en mi Sistema Personal (LocalStorage)
+                        Guardar en mi Banco Personal
                     </button>
                 </div>
             </div>
@@ -268,7 +280,7 @@
                     <div id="pitch-grid" class="pitch-grid w-full"></div>
                 </div>
                 <div id="global-feed" class="w-full mt-2.5 bg-slate-900 border border-slate-800 rounded-lg px-4 py-2 text-center text-sm md:text-base text-amber-300 font-semibold">
-                    ¡Paquete Bíblico Vol. 1 cargado (226 elementos oficiales)! Listo para jugar.
+                    Motor modular listo. Selecciona entre 1 y 4 paquetes para iniciar.
                 </div>
             </div>
 
@@ -346,31 +358,7 @@
     </div>
 
     <script>
-        // PAQUETE GLOBAL 1: Bloque oficial extraído del documento (Códigos 1 al 226)
-        const paqueteBiblicoVol1 = [
-            { category: "Biblicas", ref: "A1", q: "Palavra chave no livro de Gênesis.", correct: "No princípio", options: ["No princípio", "Criação divina", "No princípio criou Deus", "A terra era sem forma"], refBib: "Gn 1:1" },
-            { category: "Biblicas", ref: "A1", q: "Bisavô de Noé. Não conheceu a morte.", correct: "Enoque", options: ["Matusalém", "Enoque", "Jared", "Lameque"], refBib: "Gn 5:21-29" },
-            { category: "Biblicas", ref: "A1", q: "Primeira promessa messiânica.", correct: "Gênesis 3:15 — 'E porei inimizade entre ti e a mulher...'", options: ["Gênesis 3:15", "Isaías 7:14", "Gênesis 12:3", "Salmo 22:1"], refBib: "Gn 3:15" },
-            { category: "Biblicas", ref: "A1", q: "a) Nome do homem que viveu mais tempo no Antigo Testamento. b) Quantos anos viveu.", correct: "a) Matusalém b) 969 anos", options: ["a) Matusalém b) 969 anos", "a) Adão b) 930 anos", "a) Noé b) 950 anos", "a) Enos b) 905 anos"], refBib: "Gn 5:27" },
-            { category: "Biblicas", ref: "A2", q: "Lugar onde Samuel orou por Israel e o julgou.", correct: "Mizpá", options: ["Betel", "Mizpá", "Ramá", "Silo"], refBib: "1 Sm 7:5, 6" },
-            { category: "Biblicas", ref: "A2", q: "Começou a reinar em Jerusalém desde os 7 anos.", correct: "Joás", options: ["Josias", "Joás", "Uzias", "Salomão"], refBib: "2 Rs 11:21" },
-            { category: "Biblicas", ref: "A2", q: "Afamada Capital do Antigo Império Assírio.", correct: "Nínive", options: ["Nínive", "Babilônia", "Assur", "Calné"], refBib: "Nahum / Jon" },
-            { category: "Biblicas", ref: "A2", q: "É considerada a maior promessa na Bíblia: (a) Provérbios 3:16 (b) João 3:16 (c) Lucas 3:16", correct: "João 3:16", options: ["João 3:16", "Provérbios 3:16", "Lucas 3:16", "Gênesis 12:3"], refBib: "Jo 3:16" },
-            { category: "Biblicas", ref: "A3", q: "Quantos anos há de intervalo entre o Antigo Testamento e o Novo Testamento?", correct: "400 anos", options: ["400 anos", "300 anos", "500 anos", "70 anos"], refBib: "História Bíblica" },
-            { category: "Biblicas", ref: "A3", q: "Quantos anos viveu Adão?", correct: "Viveu 930 anos", options: ["Viveu 930 anos", "Viveu 969 anos", "Viveu 777 anos", "Viveu 500 anos"], refBib: "Gn 5:5" },
-            { category: "Biblicas", ref: "B1", q: "É conhecido como o Pai da Fé.", correct: "Abraão", options: ["Isaque", "Abraão", "Moisés", "Davi"], refBib: "Rm 4:16" },
-            { category: "Biblicas", ref: "B2", q: "Qual o Salmo mais curto e qual o mais longo?", correct: "a) O mais curto: Salmo 117; b) O mais longo: Salmo 119", options: ["a) Salmo 117; b) Salmo 119", "a) Salmo 23; b) Salmo 119", "a) Salmo 117; b) Salmo 150", "a) Salmo 133; b) Salmo 119"], refBib: "Sl 117 / Sl 119" },
-            { category: "Biblicas", ref: "C1", q: "O que diz Romanos 6:23?", correct: "Porque o salário do pecado é a morte, mas o dom gratuito de Deus é a vida eterna em Cristo Jesus nosso Senhor.", options: ["Porque o salário do pecado é a morte...", "Tudo posso em Cristo que me fortalece", "O Senhor é o meu pastor...", "Deus amou o mundo de tal maneira..."], refBib: "Rm 6:23" }
-        ];
-
-        // Paquete Deportes y Otras Temáticas
-        const paqueteDeportes = [
-            { category: "Deportes", ref: "Dep-1", q: "¿Cada cuántos años se celebra la Copa Mundial de Fútbol?", correct: "4 años", options: ["4 años", "3 años", "2 años", "5 años"], refBib: "Reglamento FIFA" },
-            { category: "Deportes", ref: "Dep-2", q: "¿Qué país ganó la Copa Mundial de Fútbol en 2022?", correct: "Argentina", options: ["Argentina", "Francia", "Brasil", "Alemania"], refBib: "Mundial Qatar 2022" },
-            { category: "Deportes", ref: "Dep-3", q: "¿Cuántos jugadores conforman un equipo de fútbol en el terreno?", correct: "11 jugadores", options: ["11 jugadores", "10 jugadores", "9 jugadores", "12 jugadores"], refBib: "Reglas de Juego" },
-            { category: "General", ref: "Gen-1", q: "¿En qué año se firmó la separación de Panamá de Colombia?", correct: "1903", options: ["1903", "1905", "1821", "1914"], refBib: "Historia de Panamá" },
-            { category: "General", ref: "Gen-2", q: "¿Cuál es el río más largo del mundo?", correct: "Río Amazonas", options: ["Río Amazonas", "Río Nilo", "Río Mississipi", "Río Yangtsé"], refBib: "Geografía" }
-        ];
+        const MAX_SIMULTANEOUS_PACKAGES = 4;
 
         let gameState = {
             team1: "Judá",
@@ -379,8 +367,9 @@
             color2: "#60a5fa",
             form1: "4-3-3",
             form2: "4-3-3",
-            activePackages: ["BiblicoVol1", "Deportes", "Personal"],
+            activePackages: [],
             cycleQueues: {},
+            lastCardIndexByPkg: {},
             score1: 0, score2: 0,
             t1Correct: 0, t1Errors: 0,
             t2Correct: 0, t2Errors: 0,
@@ -407,6 +396,7 @@
             "R": { code: "Retroceder", dx: -1, dy: 0 }
         };
 
+        // --- GESTOR MODULAR DE PAQUETES ---
         function getPersonalQuestions() {
             try {
                 const stored = localStorage.getItem('gran_jugada_personal_questions');
@@ -416,6 +406,101 @@
             }
         }
 
+        function getAllAvailablePackages() {
+            const registry = { ...(window.LA_GRAN_JUGADA_PACKAGES || {}) };
+            // También incluir el Banco Personal como un paquete acoplable más si tiene preguntas
+            const personalList = getPersonalQuestions();
+            if (personalList.length > 0) {
+                registry["Personal"] = {
+                    id: "Personal",
+                    name: "Banco Personal Local",
+                    category: "Personal",
+                    questions: personalList
+                };
+            }
+            return registry;
+        }
+
+        function renderAvailablePackagesUI(selectFirstIfEmpty = false) {
+            const container = document.getElementById('packages-container');
+            const registry = getAllAvailablePackages();
+            const keys = Object.keys(registry);
+            container.innerHTML = '';
+
+            if (keys.length === 0) {
+                container.innerHTML = '<p class="text-xs text-rose-400 col-span-2">No se detectaron paquetes acoplados. Carga un archivo .js o .json.</p>';
+                updateSelectedPackagesCount();
+                return;
+            }
+
+            keys.forEach((pkgKey, idx) => {
+                const pkg = registry[pkgKey];
+                const count = Array.isArray(pkg.questions) ? pkg.questions.length : 0;
+                const isDefaultChecked = idx < MAX_SIMULTANEOUS_PACKAGES;
+
+                const label = document.createElement('label');
+                label.className = "flex items-center justify-between text-xs text-slate-200 cursor-pointer bg-slate-900 p-2.5 rounded border border-slate-700 hover:border-emerald-500/60 transition";
+                label.innerHTML = `
+                    <div class="flex items-center space-x-2">
+                        <input type="checkbox" name="package" value="${pkgKey}" ${isDefaultChecked ? 'checked' : ''} onchange="enforceMaxPackages(this)" class="accent-emerald-500">
+                        <span>📦 <strong>${pkg.name || pkgKey}</strong></span>
+                    </div>
+                    <span class="text-[11px] bg-slate-800 text-amber-300 px-2 py-0.5 rounded font-mono">${count} preg.</span>
+                `;
+                container.appendChild(label);
+            });
+
+            updateSelectedPackagesCount();
+        }
+
+        function enforceMaxPackages(checkbox) {
+            const checked = document.querySelectorAll('input[name="package"]:checked');
+            if (checked.length > MAX_SIMULTANEOUS_PACKAGES) {
+                checkbox.checked = false;
+                alert(`Puedes acoplar un máximo de ${MAX_SIMULTANEOUS_PACKAGES} paquetes simultáneos. Desmarca uno para rotarlo.`);
+            }
+            updateSelectedPackagesCount();
+        }
+
+        function updateSelectedPackagesCount() {
+            const checked = document.querySelectorAll('input[name="package"]:checked');
+            document.getElementById('active-slots-count').innerText = checked.length;
+        }
+
+        function handlePackageFileUpload(event) {
+            const files = Array.from(event.target.files || []);
+            if (files.length === 0) return;
+
+            files.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const content = e.target.result;
+                    try {
+                        if (file.name.endsWith('.json')) {
+                            const parsed = JSON.parse(content);
+                            const pkgId = parsed.id || file.name.replace(/\.json$/i, '');
+                            window.LA_GRAN_JUGADA_PACKAGES[pkgId] = {
+                                id: pkgId,
+                                name: parsed.name || pkgId,
+                                category: parsed.category || "Importado",
+                                questions: Array.isArray(parsed) ? parsed : (parsed.questions || [])
+                            };
+                        } else if (file.name.endsWith('.js')) {
+                            const script = document.createElement('script');
+                            script.textContent = content;
+                            document.head.appendChild(script);
+                        }
+                        renderAvailablePackagesUI();
+                    } catch (err) {
+                        alert(`Error al acoplar el paquete "${file.name}": ${err.message}`);
+                    }
+                };
+                reader.readAsText(file, 'UTF-8');
+            });
+            event.target.value = '';
+        }
+
+        // --- BANCO PERSONAL LOCAL ---
         function updatePersonalCount() {
             const list = getPersonalQuestions();
             document.getElementById('personal-count').innerText = list.length;
@@ -440,7 +525,6 @@
 
             const incorrects = incorrectsRaw.split(',').map(s => s.trim()).filter(Boolean);
             const options = [correct, ...incorrects];
-
             const newQ = { category: cat, ref: ref, q: qText, correct: correct, options: options, refBib: bib };
             
             let list = getPersonalQuestions();
@@ -448,13 +532,15 @@
             localStorage.setItem('gran_jugada_personal_questions', JSON.stringify(list));
 
             updatePersonalCount();
+            renderAvailablePackagesUI();
             document.getElementById('p-text').value = '';
             document.getElementById('p-correct').value = '';
             document.getElementById('p-incorrects').value = '';
             document.getElementById('personal-editor-panel').classList.add('hidden');
-            alert("¡Pregunta guardada exitosamente en tu Sistema Personal (LocalStorage)!");
+            alert("¡Pregunta guardada en tu Banco Personal!");
         }
 
+        // --- TABLERO Y LÓGICA DE JUEGO ---
         function getRosterByFormation(teamId, formation) {
             const isTeam1 = teamId === 1;
             let xPor = isTeam1 ? 1 : 25;
@@ -507,8 +593,8 @@
             const checkboxes = document.querySelectorAll('input[name="package"]:checked');
             gameState.activePackages = Array.from(checkboxes).map(cb => cb.value);
 
-            if (gameState.activePackages.length === 0) {
-                alert("Por favor selecciona al menos un paquete de preguntas.");
+            if (gameState.activePackages.length < 1 || gameState.activePackages.length > MAX_SIMULTANEOUS_PACKAGES) {
+                alert(`Selecciona entre 1 y ${MAX_SIMULTANEOUS_PACKAGES} paquetes acoplados para jugar.`);
                 return;
             }
             
@@ -742,10 +828,8 @@
         }
 
         function getSourceQuestions(pkgKey) {
-            if (pkgKey === "BiblicoVol1") return paqueteBiblicoVol1;
-            if (pkgKey === "Deportes") return paqueteDeportes;
-            if (pkgKey === "Personal") return getPersonalQuestions();
-            return [];
+            const registry = getAllAvailablePackages();
+            return registry[pkgKey]?.questions || [];
         }
 
         function getNextCardFromActivePackages() {
@@ -770,12 +854,10 @@
 
             const nextIdx = queue.shift();
             gameState.cycleQueues[chosenPkg] = queue;
-            gameState.lastCardIndexByPkg = gameState.lastCardIndexByPkg || {};
             gameState.lastCardIndexByPkg[chosenPkg] = nextIdx;
 
             const card = sourceList[nextIdx];
-            const remainingInCycle = queue.length;
-            return { ...card, _pkgKey: chosenPkg, _remainingInCycle: remainingInCycle, _cycleTotal: sourceList.length };
+            return { ...card, _pkgKey: chosenPkg, _remainingInCycle: queue.length, _cycleTotal: sourceList.length };
         }
 
         function drawCard(teamId, playType) {
@@ -935,8 +1017,69 @@
             syncPanelsRole();
         }
 
+        const INSTALLED_STORAGE_KEY = 'gran_jugada_installed_packages';
+
+        function getInstalledCachePackages() {
+            try {
+                const raw = localStorage.getItem(INSTALLED_STORAGE_KEY);
+                return raw ? JSON.parse(raw) : {};
+            } catch (e) {
+                return {};
+            }
+        }
+
+        function saveInstalledCachePackages(pkgMap) {
+            try {
+                localStorage.setItem(INSTALLED_STORAGE_KEY, JSON.stringify(pkgMap));
+            } catch (e) {
+                // Si excede cuota local, no interrumpe la sesión actual
+            }
+        }
+
+        function oneClickInstallOfficialPackages() {
+            const statusEl = document.getElementById('one-click-status');
+            const liveRegistry = window.LA_GRAN_JUGADA_PACKAGES || {};
+            const cached = getInstalledCachePackages();
+
+            Object.keys(liveRegistry).forEach(key => {
+                cached[key] = liveRegistry[key];
+            });
+            saveInstalledCachePackages(cached);
+
+            // Asegura que al menos el paquete principal quede marcado si no hay ninguno marcado
+            renderAvailablePackagesUI(true);
+
+            const totalPkgs = Object.keys(getAllAvailablePackages()).length;
+            statusEl.innerText = `✅ ¡Listo! ${totalPkgs} paquete(s) instalado(s) con 1 clic y acoplados al juego.`;
+            statusEl.classList.remove('hidden');
+        }
+
+        const _origGetAllAvailablePackages = getAllAvailablePackages;
+        getAllAvailablePackages = function() {
+            const cached = getInstalledCachePackages();
+            const live = window.LA_GRAN_JUGADA_PACKAGES || {};
+            const merged = { ...cached, ...live };
+
+            const personalList = getPersonalQuestions();
+            if (personalList.length > 0) {
+                merged["Personal"] = {
+                    id: "Personal",
+                    name: "Banco Personal Local",
+                    category: "Personal",
+                    questions: personalList
+                };
+            }
+            return merged;
+        };
+
         window.onload = function() {
+            const liveRegistry = window.LA_GRAN_JUGADA_PACKAGES || {};
+            const cached = getInstalledCachePackages();
+            Object.keys(liveRegistry).forEach(k => { cached[k] = liveRegistry[k]; });
+            saveInstalledCachePackages(cached);
+
             updatePersonalCount();
+            renderAvailablePackagesUI(true);
         };
     </script>
 </body>
