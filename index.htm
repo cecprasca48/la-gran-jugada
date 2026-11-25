@@ -358,7 +358,6 @@
             { category: "Biblicas", ref: "A2", q: "É considerada a maior promessa na Bíblia: (a) Provérbios 3:16 (b) João 3:16 (c) Lucas 3:16", correct: "João 3:16", options: ["João 3:16", "Provérbios 3:16", "Lucas 3:16", "Gênesis 12:3"], refBib: "Jo 3:16" },
             { category: "Biblicas", ref: "A3", q: "Quantos anos há de intervalo entre o Antigo Testamento e o Novo Testamento?", correct: "400 anos", options: ["400 anos", "300 anos", "500 anos", "70 anos"], refBib: "História Bíblica" },
             { category: "Biblicas", ref: "A3", q: "Quantos anos viveu Adão?", correct: "Viveu 930 anos", options: ["Viveu 930 anos", "Viveu 969 anos", "Viveu 777 anos", "Viveu 500 anos"], refBib: "Gn 5:5" },
-            // Añadimos muestras representativas adicionales integradas de las 226 para agilizar la rotación
             { category: "Biblicas", ref: "B1", q: "É conhecido como o Pai da Fé.", correct: "Abraão", options: ["Isaque", "Abraão", "Moisés", "Davi"], refBib: "Rm 4:16" },
             { category: "Biblicas", ref: "B2", q: "Qual o Salmo mais curto e qual o mais longo?", correct: "a) O mais curto: Salmo 117; b) O mais longo: Salmo 119", options: ["a) Salmo 117; b) Salmo 119", "a) Salmo 23; b) Salmo 119", "a) Salmo 117; b) Salmo 150", "a) Salmo 133; b) Salmo 119"], refBib: "Sl 117 / Sl 119" },
             { category: "Biblicas", ref: "C1", q: "O que diz Romanos 6:23?", correct: "Porque o salário do pecado é a morte, mas o dom gratuito de Deus é a vida eterna em Cristo Jesus nosso Senhor.", options: ["Porque o salário do pecado é a morte...", "Tudo posso em Cristo que me fortalece", "O Senhor é o meu pastor...", "Deus amou o mundo de tal maneira..."], refBib: "Rm 6:23" }
@@ -381,7 +380,7 @@
             form1: "4-3-3",
             form2: "4-3-3",
             activePackages: ["BiblicoVol1", "Deportes", "Personal"],
-            cycleQueues: {}, // Colas barajadas por paquete para evitar repeticiones hasta agotar el ciclo
+            cycleQueues: {},
             score1: 0, score2: 0,
             t1Correct: 0, t1Errors: 0,
             t2Correct: 0, t2Errors: 0,
@@ -756,13 +755,11 @@
             const chosenPkg = availablePkgs[Math.floor(Math.random() * availablePkgs.length)];
             const sourceList = getSourceQuestions(chosenPkg);
 
-            // Inicializar o re-barajar si se agotó el ciclo del paquete o cambió el tamaño (ej. nueva pregunta personal)
             let queue = gameState.cycleQueues[chosenPkg];
             if (!Array.isArray(queue) || queue.length === 0) {
                 const indices = Array.from({ length: sourceList.length }, (_, idx) => idx);
                 queue = shuffleArray(indices);
                 if (gameState.cycleQueues[chosenPkg] && gameState.cycleQueues[chosenPkg].length === 0 && sourceList.length > 1) {
-                    // Asegurar que al reiniciar un nuevo ciclo no arranque exactamente con la misma última tarjeta si es posible
                     const lastIdx = gameState.lastCardIndexByPkg?.[chosenPkg];
                     if (queue[0] === lastIdx) {
                         [queue[0], queue[queue.length - 1]] = [queue[queue.length - 1], queue[0]];
