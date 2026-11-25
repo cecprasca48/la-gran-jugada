@@ -147,6 +147,64 @@
                 </div>
             </div>
 
+            <!-- Nivel / Tipo de Pregunta y Modalidad de Juego -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                    <label class="block text-xs font-bold uppercase text-slate-300">Nivel / Tipo de Pregunta:</label>
+                    <select id="question-tier-filter" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-xs text-amber-300 font-bold">
+                        <option value="ALL" selected>🌟 Todos los Niveles (Mixto)</option>
+                        <option value="BASICO">🥉 Básico / Fácil — Cobre</option>
+                        <option value="MEDIO">🥈 Medio / Regular — Plata</option>
+                        <option value="FUERTE">🥇 Fuerte / Difícil — Oro</option>
+                        <option value="DIAMANTE">💎 Élite / Maestro — Diamante</option>
+                    </select>
+                    <p class="text-[11px] text-slate-400">
+                        Si un paquete no especifica nivel, se adapta automáticamente sin interrumpir la partida.
+                    </p>
+                </div>
+
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                    <label class="block text-xs font-bold uppercase text-slate-300">Modalidad de Encuentro:</label>
+                    <select id="play-mode-select" onchange="toggleRemoteModePanel()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-xs text-emerald-300 font-bold">
+                        <option value="LOCAL" selected>🏠 Presencial / Misma Pantalla</option>
+                        <option value="REMOTE">🌐 A Distancia / Grupos y Desafíos</option>
+                    </select>
+                    <p class="text-[11px] text-slate-400">
+                        Ideal para jugar por videollamada o chat entre grupos en PC, tablet, TV o móvil.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Panel A Distancia / Equipos y Desafíos -->
+            <div id="remote-mode-panel" class="hidden bg-slate-950 p-4 rounded-xl border border-amber-500/40 space-y-3">
+                <div class="flex flex-wrap justify-between items-center gap-2">
+                    <span class="text-xs font-extrabold uppercase text-amber-300">🌐 Configuración de Grupos a Distancia y Desafíos</span>
+                    <span id="room-code-preview" class="text-xs font-mono bg-slate-900 text-emerald-300 px-2.5 py-1 rounded border border-slate-700">SALA: ---</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                    <div>
+                        <label class="text-[11px] text-slate-300 block mb-1">Integrantes Grupo 1:</label>
+                        <input type="number" id="team1-members" value="2" min="1" max="20" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white">
+                    </div>
+                    <div>
+                        <label class="text-[11px] text-slate-300 block mb-1">Integrantes Grupo 2:</label>
+                        <input type="number" id="team2-members" value="2" min="1" max="20" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white">
+                    </div>
+                    <div>
+                        <label class="text-[11px] text-slate-300 block mb-1">Código de Sala (opcional):</label>
+                        <input type="text" id="room-code-input" placeholder="Ej: LIGA-2026" oninput="updateRoomCodePreview()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-amber-300 font-mono uppercase">
+                    </div>
+                </div>
+                <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
+                    <span class="text-[11px] text-slate-400">
+                        Comparte el enlace de sala para que otros dispositivos carguen la misma configuración de equipos y paquetes.
+                    </span>
+                    <button type="button" onclick="copyChallengeLink()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold px-3 py-1.5 rounded-lg text-xs transition shadow">
+                        🔗 Copiar Enlace de Desafío
+                    </button>
+                </div>
+            </div>
+
             <div>
                 <label class="block text-xs font-semibold text-slate-300 mb-1">Goles necesarios para ganar:</label>
                 <input type="number" id="target-goals" value="3" min="1" max="10" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white">
@@ -180,7 +238,7 @@
                 <span id="disp-possession" class="font-bold text-amber-400 text-sm md:text-base bg-slate-950 px-4 py-1.5 rounded-full border border-amber-500/40 inline-block">Judá Atacando</span>
             </div>
 
-            <div class="flex items-center justify-between pl-2 md:pl-6 border-l border-slate-800">
+            <div class="flex items-center justify-between pl-2 md:pl-6 border-l border-slate-800 gap-2">
                 <div class="flex items-center space-x-2 md:space-x-3">
                     <span id="score-team2" class="text-3xl md:text-4xl font-black bg-blue-950/60 text-blue-300 px-3.5 py-1 rounded-lg border border-blue-500/40">0</span>
                     <div class="bg-slate-950 px-3 py-1.5 rounded-lg border border-slate-800 text-center">
@@ -188,10 +246,30 @@
                         <span class="text-sm font-bold"><span id="t2-correct" class="text-emerald-400">0</span>✓ / <span id="t2-errors" class="text-rose-400">0</span>✗</span>
                     </div>
                 </div>
-                <div class="text-right">
-                    <span id="disp-team2" class="font-black text-blue-400 text-lg md:text-xl block">Israel</span>
-                    <span id="disp-t2-formation" class="text-xs text-slate-300 font-medium">4-3-3 • 11 Fichas</span>
+                <div class="flex items-center gap-2">
+                    <div class="text-right">
+                        <span id="disp-team2" class="font-black text-blue-400 text-lg md:text-xl block">Israel</span>
+                        <span id="disp-t2-formation" class="text-xs text-slate-300 font-medium">4-3-3 • 11 Fichas</span>
+                    </div>
+                    <button type="button" onclick="openSetupScreen()" title="Volver a Configuración" aria-label="Volver a Configuración" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-amber-300 border border-slate-700 p-2.5 rounded-xl transition shadow flex items-center justify-center">
+                        ⚙️
+                    </button>
                 </div>
+            </div>
+        </div>
+        <div id="remote-challenge-bar" class="w-full max-w-6xl bg-slate-900/95 border border-amber-500/30 rounded-xl px-4 py-2 mb-3 flex flex-wrap items-center justify-between gap-2 text-xs hidden">
+            <div class="flex flex-wrap items-center gap-2">
+                <span class="bg-amber-500/20 text-amber-300 font-extrabold px-2.5 py-0.5 rounded-full">🌐 MODO A DISTANCIA / EQUIPOS</span>
+                <span id="challenge-code-label" class="font-mono text-slate-300">Sala: ---</span>
+                <span id="challenge-score-label" class="text-emerald-300 font-bold">Desafíos: 0 - 0</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+                <button type="button" onclick="triggerGroupChallenge()" class="bg-purple-700 hover:bg-purple-600 text-white font-bold px-3 py-1 rounded-lg transition">
+                    ⚔️ Lanzar Desafío entre Grupos
+                </button>
+                <button type="button" onclick="copyChallengeLink()" class="bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/40 font-bold px-3 py-1 rounded-lg transition">
+                    🔗 Copiar Enlace de Sala
+                </button>
             </div>
         </div>
 
@@ -374,6 +452,13 @@
             t1Correct: 0, t1Errors: 0,
             t2Correct: 0, t2Errors: 0,
             target: 3,
+            questionTier: "ALL",
+            playMode: "LOCAL",
+            roomCode: "",
+            team1Members: 2,
+            team2Members: 2,
+            challengeWins1: 0,
+            challengeWins2: 0,
             attacker: 1,
             ballX: 13, ballY: 8,
             carrierId: 10,
@@ -397,31 +482,69 @@
         };
 
         // --- GESTOR MODULAR DE PAQUETES ---
+        const INSTALLED_STORAGE_KEY = 'gran_jugada_installed_packages';
+
         function getPersonalQuestions() {
             try {
                 const stored = localStorage.getItem('gran_jugada_personal_questions');
                 return stored ? JSON.parse(stored) : [];
-            } catch(e) {
+            } catch (e) {
                 return [];
             }
         }
 
+        function getInstalledCachePackages() {
+            try {
+                const raw = localStorage.getItem(INSTALLED_STORAGE_KEY);
+                return raw ? JSON.parse(raw) : {};
+            } catch (e) {
+                return {};
+            }
+        }
+
+        function saveInstalledCachePackages(pkgMap) {
+            try {
+                localStorage.setItem(INSTALLED_STORAGE_KEY, JSON.stringify(pkgMap));
+            } catch (e) {
+                // Si excede cuota local, no interrumpe la sesión actual
+            }
+        }
+
         function getAllAvailablePackages() {
-            const registry = { ...(window.LA_GRAN_JUGADA_PACKAGES || {}) };
-            // También incluir el Banco Personal como un paquete acoplable más si tiene preguntas
+            const cached = getInstalledCachePackages();
+            const live = window.LA_GRAN_JUGADA_PACKAGES || {};
+            const merged = { ...cached, ...live };
+
             const personalList = getPersonalQuestions();
             if (personalList.length > 0) {
-                registry["Personal"] = {
+                merged["Personal"] = {
                     id: "Personal",
                     name: "Banco Personal Local",
                     category: "Personal",
                     questions: personalList
                 };
             }
-            return registry;
+            return merged;
         }
 
-        function renderAvailablePackagesUI(selectFirstIfEmpty = false) {
+        function oneClickInstallOfficialPackages() {
+            const statusEl = document.getElementById('one-click-status');
+            const liveRegistry = window.LA_GRAN_JUGADA_PACKAGES || {};
+            const cached = getInstalledCachePackages();
+
+            Object.keys(liveRegistry).forEach(key => {
+                cached[key] = liveRegistry[key];
+            });
+            saveInstalledCachePackages(cached);
+
+            renderAvailablePackagesUI();
+
+            const totalPkgs = Object.keys(getAllAvailablePackages()).length;
+            statusEl.innerText = `✅ ¡Listo! ${totalPkgs} paquete(s) instalado(s) con 1 clic y acoplados al juego.`;
+            statusEl.classList.remove('hidden');
+        }
+
+        function renderAvailablePackagesUI() {
             const container = document.getElementById('packages-container');
             const registry = getAllAvailablePackages();
             const keys = Object.keys(registry);
@@ -827,9 +950,32 @@
             return copy;
         }
 
+        const TIER_LABELS = {
+            "BASICO": "🥉 Básico / Cobre",
+            "MEDIO": "🥈 Medio / Plata",
+            "FUERTE": "🥇 Fuerte / Oro",
+            "DIAMANTE": "💎 Diamante"
+        };
+
+        function normalizeQuestionTier(qObj, fallbackIndex = 0) {
+            const raw = (qObj && (qObj.tier || qObj.level || qObj.dificultad)) ? String(qObj.tier || qObj.level || qObj.dificultad).toUpperCase() : "";
+            if (raw.includes("DIAM") || raw.includes("MAEST") || raw.includes("ELITE")) return "DIAMANTE";
+            if (raw.includes("FUER") || raw.includes("DIF") || raw.includes("ORO") || raw.includes("HARD")) return "FUERTE";
+            if (raw.includes("MED") || raw.includes("REG") || raw.includes("PLAT") || raw.includes("INTER")) return "MEDIO";
+            if (raw.includes("BAS") || raw.includes("FAC") || raw.includes("COBR") || raw.includes("EASY")) return "BASICO";
+            const cycle = ["BASICO", "MEDIO", "FUERTE", "DIAMANTE"];
+            return cycle[fallbackIndex % cycle.length];
+        }
+
         function getSourceQuestions(pkgKey) {
             const registry = getAllAvailablePackages();
-            return registry[pkgKey]?.questions || [];
+            const list = registry[pkgKey]?.questions || [];
+            const selectedTier = gameState.questionTier || "ALL";
+            if (selectedTier === "ALL") return list;
+
+            const filtered = list.filter((q, idx) => normalizeQuestionTier(q, idx) === selectedTier);
+            // Si el paquete no tiene preguntas marcadas específicamente en ese nivel, devolvemos el banco completo para no dejar al jugador sin preguntas
+            return filtered.length > 0 ? filtered : list;
         }
 
         function getNextCardFromActivePackages() {
@@ -879,9 +1025,11 @@
 
             gameState.currentCard = { ...card, dir, hiddenSteps, playType };
 
-            document.getElementById('t1-code-badge').innerText = `[${card.category}] ${card.ref}`;
+            const tierKey = normalizeQuestionTier(card, 0);
+            const tierTag = TIER_LABELS[tierKey] || tierKey;
+            document.getElementById('t1-code-badge').innerText = `[${card.category}] ${card.ref} • ${tierTag}`;
             document.getElementById('t1-code-badge').classList.remove('hidden');
-            document.getElementById('t2-code-badge').innerText = `[${card.category}] ${card.ref}`;
+            document.getElementById('t2-code-badge').innerText = `[${card.category}] ${card.ref} • ${tierTag}`;
             document.getElementById('t2-code-badge').classList.remove('hidden');
 
             document.getElementById(`t${teamId}-question-text`).innerText = `[${card.category}] ${card.q} (${card.refBib})`;
@@ -1017,59 +1165,147 @@
             syncPanelsRole();
         }
 
-        const INSTALLED_STORAGE_KEY = 'gran_jugada_installed_packages';
+        function openSetupScreen() {
+            if (gameState.interval) clearInterval(gameState.interval);
+            gameState.questionActive = false;
+            document.getElementById('game-screen').classList.add('hidden');
+            document.getElementById('setup-screen').classList.remove('hidden');
+            toggleRemoteModePanel();
+            updateRoomCodePreview();
+        }
 
-        function getInstalledCachePackages() {
+        function toggleRemoteModePanel() {
+            const mode = document.getElementById('play-mode-select').value;
+            const panel = document.getElementById('remote-mode-panel');
+            if (mode === 'REMOTE') {
+                panel.classList.remove('hidden');
+                updateRoomCodePreview();
+            } else {
+                panel.classList.add('hidden');
+            }
+        }
+
+        function generateRoomCode() {
+            const custom = (document.getElementById('room-code-input')?.value || '').trim().toUpperCase();
+            if (custom) return custom;
+            if (gameState.roomCode) return gameState.roomCode;
+            const code = 'JUGADA-' + Math.random().toString(36).substring(2, 6).toUpperCase();
+            gameState.roomCode = code;
+            return code;
+        }
+
+        function updateRoomCodePreview() {
+            const el = document.getElementById('room-code-preview');
+            if (el) {
+                el.innerText = 'SALA: ' + generateRoomCode();
+            }
+        }
+
+        function buildChallengeShareUrl() {
+            const payload = {
+                t1: document.getElementById('team1-name').value.trim() || 'Judá',
+                t2: document.getElementById('team2-name').value.trim() || 'Israel',
+                c1: document.getElementById('team1-color').value,
+                c2: document.getElementById('team2-color').value,
+                f1: document.getElementById('team1-formation').value,
+                f2: document.getElementById('team2-formation').value,
+                m1: parseInt(document.getElementById('team1-members')?.value) || 2,
+                m2: parseInt(document.getElementById('team2-members')?.value) || 2,
+                tier: document.getElementById('question-tier-filter').value,
+                mode: document.getElementById('play-mode-select').value,
+                goals: parseInt(document.getElementById('target-goals').value) || 3,
+                room: generateRoomCode(),
+                pkgs: Array.from(document.querySelectorAll('input[name="package"]:checked')).map(cb => cb.value)
+            };
+            const encoded = encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify(payload)))));
+            const baseUrl = window.location.href.split('#')[0];
+            return `${baseUrl}#desafio=${encoded}`;
+        }
+
+        function copyChallengeLink() {
+            const url = buildChallengeShareUrl();
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('✅ Enlace de sala / desafío copiado. Compártelo por WhatsApp o chat para jugar a distancia.');
+                }).catch(() => {
+                    prompt('Copia este enlace de sala:', url);
+                });
+            } else {
+                prompt('Copia este enlace de sala:', url);
+            }
+        }
+
+        function triggerGroupChallenge() {
+            const attName = gameState.attacker === 1 ? gameState.team1 : gameState.team2;
+            const defName = gameState.attacker === 1 ? gameState.team2 : gameState.team1;
+            const tierLabel = TIER_LABELS[gameState.questionTier] || 'Mixto';
+            const feed = document.getElementById('global-feed');
+            feed.innerText = `⚔️ ¡DESAFÍO LANZADO! ${attName} reta a ${defName} en nivel [${tierLabel}]. ¡Responde para ganar el desafío!`;
+            if (gameState.attacker === 1) {
+                gameState.challengeWins1++;
+            } else {
+                gameState.challengeWins2++;
+            }
+            const scoreLabel = document.getElementById('challenge-score-label');
+            if (scoreLabel) {
+                scoreLabel.innerText = `Desafíos: ${gameState.team1} ${gameState.challengeWins1} - ${gameState.challengeWins2} ${gameState.team2}`;
+            }
+        }
+
+        function applyChallengeFromHash() {
+            const hash = window.location.hash || '';
+            if (!hash.startsWith('#desafio=')) return;
             try {
-                const raw = localStorage.getItem(INSTALLED_STORAGE_KEY);
-                return raw ? JSON.parse(raw) : {};
+                const rawB64 = decodeURIComponent(hash.replace('#desafio=', ''));
+                const jsonStr = decodeURIComponent(escape(atob(rawB64)));
+                const data = JSON.parse(jsonStr);
+
+                if (data.t1) document.getElementById('team1-name').value = data.t1;
+                if (data.t2) document.getElementById('team2-name').value = data.t2;
+                if (data.c1) document.getElementById('team1-color').value = data.c1;
+                if (data.c2) document.getElementById('team2-color').value = data.c2;
+                if (data.f1) document.getElementById('team1-formation').value = data.f1;
+                if (data.f2) document.getElementById('team2-formation').value = data.f2;
+                if (data.m1 && document.getElementById('team1-members')) document.getElementById('team1-members').value = data.m1;
+                if (data.m2 && document.getElementById('team2-members')) document.getElementById('team2-members').value = data.m2;
+                if (data.tier) document.getElementById('question-tier-filter').value = data.tier;
+                if (data.mode) document.getElementById('play-mode-select').value = data.mode;
+                if (data.goals) document.getElementById('target-goals').value = data.goals;
+                if (data.room && document.getElementById('room-code-input')) {
+                    document.getElementById('room-code-input').value = data.room;
+                    gameState.roomCode = data.room;
+                }
+                if (Array.isArray(data.pkgs) && data.pkgs.length > 0) {
+                    const checkboxes = document.querySelectorAll('input[name="package"]');
+                    checkboxes.forEach(cb => {
+                        cb.checked = data.pkgs.includes(cb.value);
+                    });
+                    updateSelectedPackagesCount();
+                }
+                toggleRemoteModePanel();
             } catch (e) {
-                return {};
+                // Ignorar hash inválido
             }
         }
 
-        function saveInstalledCachePackages(pkgMap) {
-            try {
-                localStorage.setItem(INSTALLED_STORAGE_KEY, JSON.stringify(pkgMap));
-            } catch (e) {
-                // Si excede cuota local, no interrumpe la sesión actual
+        const _baseStartGame = startGame;
+        startGame = function() {
+            gameState.questionTier = document.getElementById('question-tier-filter').value;
+            gameState.playMode = document.getElementById('play-mode-select').value;
+            gameState.team1Members = parseInt(document.getElementById('team1-members')?.value) || 2;
+            gameState.team2Members = parseInt(document.getElementById('team2-members')?.value) || 2;
+            gameState.roomCode = generateRoomCode();
+
+            _baseStartGame();
+
+            const remoteBar = document.getElementById('remote-challenge-bar');
+            if (gameState.playMode === 'REMOTE') {
+                remoteBar.classList.remove('hidden');
+                document.getElementById('challenge-code-label').innerText = `Sala: ${gameState.roomCode} (${gameState.team1Members} vs ${gameState.team2Members} integr.)`;
+                document.getElementById('challenge-score-label').innerText = `Desafíos: ${gameState.team1} ${gameState.challengeWins1} - ${gameState.challengeWins2} ${gameState.team2}`;
+            } else {
+                remoteBar.classList.add('hidden');
             }
-        }
-
-        function oneClickInstallOfficialPackages() {
-            const statusEl = document.getElementById('one-click-status');
-            const liveRegistry = window.LA_GRAN_JUGADA_PACKAGES || {};
-            const cached = getInstalledCachePackages();
-
-            Object.keys(liveRegistry).forEach(key => {
-                cached[key] = liveRegistry[key];
-            });
-            saveInstalledCachePackages(cached);
-
-            // Asegura que al menos el paquete principal quede marcado si no hay ninguno marcado
-            renderAvailablePackagesUI(true);
-
-            const totalPkgs = Object.keys(getAllAvailablePackages()).length;
-            statusEl.innerText = `✅ ¡Listo! ${totalPkgs} paquete(s) instalado(s) con 1 clic y acoplados al juego.`;
-            statusEl.classList.remove('hidden');
-        }
-
-        const _origGetAllAvailablePackages = getAllAvailablePackages;
-        getAllAvailablePackages = function() {
-            const cached = getInstalledCachePackages();
-            const live = window.LA_GRAN_JUGADA_PACKAGES || {};
-            const merged = { ...cached, ...live };
-
-            const personalList = getPersonalQuestions();
-            if (personalList.length > 0) {
-                merged["Personal"] = {
-                    id: "Personal",
-                    name: "Banco Personal Local",
-                    category: "Personal",
-                    questions: personalList
-                };
-            }
-            return merged;
         };
 
         window.onload = function() {
@@ -1079,7 +1315,9 @@
             saveInstalledCachePackages(cached);
 
             updatePersonalCount();
-            renderAvailablePackagesUI(true);
+            renderAvailablePackagesUI();
+            applyChallengeFromHash();
+            updateRoomCodePreview();
         };
     </script>
 </body>
