@@ -795,7 +795,6 @@
 
             const defId = teamId === 1 ? 2 : 1;
             const dirKey = document.getElementById(`t${teamId}-dir-select`).value;
-            const dirKey = document.getElementById(`t${teamId}-dir-select`).value;
             const dir = playType === 'GOL' ? { code: "CHUTE-GOL", dx: 1, dy: 0 } : directionsMap[dirKey];
             const hiddenSteps = parseInt(document.getElementById(`t${teamId}-steps-input`).value) || 4;
 
