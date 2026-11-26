@@ -18,6 +18,12 @@
             grid-template-rows: repeat(17, minmax(0, 1fr));
             background-color: #166534;
         }
+        @media (max-width: 767px) {
+            .pitch-grid {
+                grid-template-columns: repeat(17, minmax(0, 1fr));
+                grid-template-rows: repeat(27, minmax(0, 1fr));
+            }
+        }
         .cell {
             aspect-ratio: 1;
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -119,8 +125,16 @@
                             </select>
                         </div>
                         <div>
-                            <label class="text-[11px] text-slate-300 block mb-1">Referencia (Ej: H1, P-01):</label>
-                            <input type="text" id="p-ref" value="H1" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                            <label class="text-[11px] text-slate-300 block mb-1">Referencia / Nivel:</label>
+                            <div class="grid grid-cols-2 gap-1.5">
+                                <input type="text" id="p-ref" value="H1" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                                <select id="p-tier" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-amber-300 font-bold">
+                                    <option value="BASICO">🥉 Básico</option>
+                                    <option value="MEDIO" selected>🥈 Medio</option>
+                                    <option value="FUERTE">🥇 Fuerte</option>
+                                    <option value="DIAMANTE">💎 Diamante</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div>
@@ -273,7 +287,63 @@
             </div>
         </div>
 
-        <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-3 items-stretch">
+        <!-- Bloque Único Dinámico para Móvil (< 768px) -->
+        <div id="mobile-unified-panel" class="md:hidden w-full bg-slate-900 p-3.5 rounded-xl border-2 border-emerald-500 flex flex-col gap-3 mb-3 transition-colors duration-200">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                <div class="flex items-center gap-2">
+                    <span id="mob-color-dot" class="w-3.5 h-3.5 rounded-full bg-emerald-400 inline-block"></span>
+                    <span id="mob-active-team-name" class="font-black text-emerald-400 text-base">EQUIPO 1</span>
+                </div>
+                <span id="mob-role-badge" class="text-xs font-bold px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300">ATACANTE</span>
+            </div>
+
+            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 space-y-2.5">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs font-bold uppercase text-slate-300">Pregunta y Acción</span>
+                    <span id="mob-code-badge" class="text-[11px] font-mono bg-slate-800 px-2 py-0.5 rounded text-amber-300 hidden">---</span>
+                </div>
+                <p id="mob-question-text" class="text-sm text-slate-100 font-medium leading-snug">Selecciona dirección y lanza pregunta para avanzar.</p>
+
+                <div id="mob-attacker-controls" class="space-y-2 bg-slate-900 p-2.5 rounded-lg border border-slate-800">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="text-[11px] font-bold text-slate-300 block mb-1">Dirección:</label>
+                            <select id="mob-dir-select" onchange="syncMobileToAttacker('dir')" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-amber-300 font-bold">
+                                <option value="A">Avanzar (Frente ➔)</option>
+                                <option value="ADD">Diag. Derecha</option>
+                                <option value="ADE">Diag. Izquierda</option>
+                                <option value="LD">Lateral Derecha</option>
+                                <option value="LE">Lateral Izquierda</option>
+                                <option value="R">Retroceder (⬅️)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-[11px] font-bold text-slate-300 block mb-1">Magnitud (1-10):</label>
+                            <div class="flex gap-1">
+                                <input type="number" id="mob-steps-input" min="1" max="10" value="4" onchange="syncMobileToAttacker('steps')" class="w-14 bg-slate-950 border border-slate-700 rounded p-1 text-center text-xs font-black text-amber-300">
+                                <button type="button" onclick="rollRandomSteps(gameState.attacker); setTimeout(() => syncMobilePanel(), 560)" class="flex-1 bg-amber-600 hover:bg-amber-500 text-slate-950 font-extrabold py-1 px-1.5 rounded text-xs">🎲</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="mob-draw-btn" type="button" onclick="drawCard(gameState.attacker, 'NORMAL')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-lg text-sm transition shadow">
+                    Lanzar Pregunta Normal
+                </button>
+            </div>
+
+            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-xs font-bold uppercase text-slate-300">Opciones de Respuesta</span>
+                    <span id="mob-timer" class="text-xs font-black text-amber-400 hidden">20s</span>
+                </div>
+                <div id="mob-options" class="grid grid-cols-1 gap-2">
+                    <p class="text-xs text-slate-400 italic">Las opciones aparecerán cuando el rival lance una pregunta.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="hidden md:grid w-full grid-cols-1 lg:grid-cols-12 gap-3 items-stretch">
             <!-- Izquierdo -->
             <div id="panel-t1" class="lg:col-span-3 bg-slate-900 p-3.5 rounded-xl border-2 border-emerald-500/40 flex flex-col justify-between gap-2.5 order-2 lg:order-1">
                 <div class="flex justify-between items-center border-b border-slate-800 pb-2">
@@ -647,8 +717,9 @@
             }
 
             const incorrects = incorrectsRaw.split(',').map(s => s.trim()).filter(Boolean);
+            const tierVal = document.getElementById('p-tier')?.value || 'MEDIO';
             const options = [correct, ...incorrects];
-            const newQ = { category: cat, ref: ref, q: qText, correct: correct, options: options, refBib: bib };
+            const newQ = { category: cat, ref: ref, q: qText, correct: correct, options: options, refBib: bib, tier: tierVal };
             
             let list = getPersonalQuestions();
             list.push(newQ);
@@ -743,6 +814,7 @@
             document.getElementById('setup-screen').classList.add('hidden');
             document.getElementById('game-screen').classList.remove('hidden');
             renderPitch();
+            window.addEventListener('resize', () => renderPitch());
         }
 
         function updateStatsUI() {
@@ -793,6 +865,97 @@
                 ctrl1.classList.add('hidden');
                 poss.innerText = `⬅️ ${gameState.team2} Atacando`;
                 poss.className = "font-bold text-blue-400 text-sm md:text-base bg-slate-950 px-4 py-1.5 rounded-full border border-blue-500/40 inline-block";
+            }
+            syncMobilePanel();
+        }
+
+        function syncMobileToAttacker(field) {
+            const attId = gameState.attacker;
+            if (field === 'dir') {
+                const v = document.getElementById('mob-dir-select')?.value;
+                const targetSel = document.getElementById(`t${attId}-dir-select`);
+                if (v && targetSel) targetSel.value = v;
+            } else if (field === 'steps') {
+                const v = document.getElementById('mob-steps-input')?.value;
+                const targetInp = document.getElementById(`t${attId}-steps-input`);
+                if (v && targetInp) {
+                    targetInp.value = v;
+                    updateModeIndicator(attId);
+                }
+            }
+        }
+
+        function syncMobilePanel() {
+            const mobPanel = document.getElementById('mobile-unified-panel');
+            if (!mobPanel) return;
+
+            const attId = gameState.attacker;
+            const defId = attId === 1 ? 2 : 1;
+            const attName = attId === 1 ? gameState.team1 : gameState.team2;
+            const attColor = attId === 1 ? gameState.color1 : gameState.color2;
+
+            mobPanel.style.borderColor = attColor;
+            const dot = document.getElementById('mob-color-dot');
+            if (dot) dot.style.backgroundColor = attColor;
+
+            const nameEl = document.getElementById('mob-active-team-name');
+            if (nameEl) {
+                nameEl.innerText = attName.toUpperCase();
+                nameEl.style.color = attColor;
+            }
+
+            const roleBadge = document.getElementById('mob-role-badge');
+            if (roleBadge) {
+                roleBadge.innerText = gameState.questionActive ? `DEFENSA (${defId === 1 ? gameState.team1 : gameState.team2})` : 'ATACANTE (TURNO)';
+            }
+
+            const attQ = document.getElementById(`t${attId}-question-text`)?.innerText || '';
+            const defQ = document.getElementById(`t${defId}-question-text`)?.innerText || '';
+            const mobQ = document.getElementById('mob-question-text');
+            if (mobQ) mobQ.innerText = gameState.questionActive ? defQ : attQ;
+
+            const badgeSrc = document.getElementById(`t${attId}-code-badge`);
+            const mobBadge = document.getElementById('mob-code-badge');
+            if (badgeSrc && mobBadge) {
+                mobBadge.innerText = badgeSrc.innerText;
+                mobBadge.classList.toggle('hidden', badgeSrc.classList.contains('hidden'));
+            }
+
+            const mobDrawBtn = document.getElementById('mob-draw-btn');
+            if (mobDrawBtn) {
+                mobDrawBtn.disabled = gameState.questionActive;
+                mobDrawBtn.style.backgroundColor = attColor;
+                mobDrawBtn.style.color = '#020617';
+            }
+
+            const dirSrc = document.getElementById(`t${attId}-dir-select`);
+            const dirMob = document.getElementById('mob-dir-select');
+            if (dirSrc && dirMob) dirMob.value = dirSrc.value;
+
+            const stepsSrc = document.getElementById(`t${attId}-steps-input`);
+            const stepsMob = document.getElementById('mob-steps-input');
+            if (stepsSrc && stepsMob) stepsMob.value = stepsSrc.value;
+
+            const defOpts = document.getElementById(`t${defId}-options`);
+            const mobOpts = document.getElementById('mob-options');
+            if (defOpts && mobOpts) {
+                if (gameState.questionActive && defOpts.querySelectorAll('button').length > 0) {
+                    mobOpts.innerHTML = '';
+                    Array.from(defOpts.querySelectorAll('button')).forEach(origBtn => {
+                        const clone = origBtn.cloneNode(true);
+                        clone.onclick = origBtn.onclick;
+                        mobOpts.appendChild(clone);
+                    });
+                } else {
+                    mobOpts.innerHTML = '<p class="text-xs text-slate-400 italic">Las opciones aparecerán cuando el rival lance una pregunta.</p>';
+                }
+            }
+
+            const defTimer = document.getElementById(`t${defId}-timer`);
+            const mobTimer = document.getElementById('mob-timer');
+            if (defTimer && mobTimer) {
+                mobTimer.innerText = defTimer.innerText;
+                mobTimer.classList.toggle('hidden', defTimer.classList.contains('hidden'));
             }
         }
 
@@ -882,8 +1045,16 @@
             grid.innerHTML = '';
             const selectedPlayer = gameState.players.find(p => p.id === gameState.selectedPlayerId);
 
-            for (let r = 0; r < 17; r++) {
-                for (let c = 0; c < 27; c++) {
+            const isMobileVertical = window.innerWidth < 768;
+            const visualRows = isMobileVertical ? 27 : 17;
+            const visualCols = isMobileVertical ? 17 : 27;
+
+            for (let vr = 0; vr < visualRows; vr++) {
+                for (let vc = 0; vc < visualCols; vc++) {
+                    // En móvil vertical: vr (0..26) corresponde a lógica x (0..26), y vc (0..16) corresponde a lógica y (0..16)
+                    const c = isMobileVertical ? vr : vc;
+                    const r = isMobileVertical ? vc : vr;
+
                     const cell = document.createElement('div');
                     const isDark = (r + c) % 2 === 0;
                     cell.className = `cell ${isDark ? 'cell-dark' : 'cell-light'}`;
@@ -1031,6 +1202,7 @@
             document.getElementById('t1-code-badge').classList.remove('hidden');
             document.getElementById('t2-code-badge').innerText = `[${card.category}] ${card.ref} • ${tierTag}`;
             document.getElementById('t2-code-badge').classList.remove('hidden');
+            syncMobilePanel();
 
             document.getElementById(`t${teamId}-question-text`).innerText = `[${card.category}] ${card.q} (${card.refBib})`;
             document.getElementById(`t${defId}-question-text`).innerText = `Reto [${card.category}]: "${card.q}"`;
@@ -1163,6 +1335,7 @@
 
             renderPitch();
             syncPanelsRole();
+            syncMobilePanel();
         }
 
         function openSetupScreen() {
