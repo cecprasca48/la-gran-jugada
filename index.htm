@@ -99,9 +99,8 @@
         <!-- Grid Principal de 3 Columnas en Escritorio/Tablet -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">
 
-            <!-- COLUMNA 1: Tarjetas de Estrategia (Solo el nombre y posición del usuario/equipo propio en su tarjeta) -->
+            <!-- COLUMNA 1: Tarjetas de Estrategia -->
             <div class="space-y-3">
-                <!-- Tarjeta Propia / Atacante (Usuario A) -->
                 <div id="card-strategy-own" class="bg-slate-950 p-4 rounded-xl border border-emerald-500/50 space-y-3">
                     <div class="flex justify-between items-center">
                         <span id="own-card-title" class="text-xs font-extrabold uppercase text-emerald-400">Tu Tarjeta (Usuario / Equipo A)</span>
@@ -122,7 +121,6 @@
                     </div>
                 </div>
 
-                <!-- Tarjeta de Contendiente / Defensa (en modo 1 jugador solo se puede abrir/cerrar vía enlace; en PVP se oculta la estrategia rival hasta entrar al campo) -->
                 <div id="card-strategy-rival" class="bg-slate-950 p-4 rounded-xl border border-blue-500/40 space-y-3">
                     <div class="flex justify-between items-center">
                         <span id="rival-card-title" class="text-xs font-extrabold uppercase text-blue-400">Tarjeta Rival / Defensa</span>
@@ -145,7 +143,7 @@
                 </div>
             </div>
 
-            <!-- COLUMNA 2: Paquetes Acoplados (1 a 4 Simultáneos) y Banco Personal -->
+            <!-- COLUMNA 2: Paquetes Acoplados y Banco Personal -->
             <div class="space-y-3">
                 <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2.5">
                     <div class="flex flex-wrap justify-between items-center gap-2">
@@ -260,9 +258,10 @@
         </div>
     </div>
 
-    <!-- Pantalla de Juego -->
-    <div id="game-screen" class="w-full max-w-[1520px] hidden flex flex-col items-center my-auto">
-        <div class="w-full max-w-6xl grid grid-cols-3 items-center bg-slate-900 px-3 md:px-4 py-2.5 rounded-xl mb-3 border border-slate-800 shadow-lg">
+    <!-- Pantalla de Juego Centrada y Equilibrada -->
+    <div id="game-screen" class="w-full max-w-[1480px] mx-auto hidden flex flex-col items-center justify-center my-auto space-y-2.5">
+        <!-- Marcador Superior -->
+        <div class="w-full max-w-6xl grid grid-cols-3 items-center bg-slate-900 px-3 md:px-4 py-2.5 rounded-xl border border-slate-800 shadow-lg">
             <div class="flex items-center justify-between pr-2 md:pr-6 border-r border-slate-800">
                 <div>
                     <span id="disp-team1" class="font-black text-emerald-400 text-sm md:text-xl block">Judá</span>
@@ -305,7 +304,8 @@
             </div>
         </div>
 
-        <div id="remote-challenge-bar" class="w-full max-w-6xl bg-slate-900/95 border border-amber-500/30 rounded-xl px-4 py-2 mb-3 flex flex-wrap items-center justify-between gap-2 text-xs hidden">
+        <!-- Barra de Modo a Distancia -->
+        <div id="remote-challenge-bar" class="w-full max-w-6xl bg-slate-900/95 border border-amber-500/30 rounded-xl px-4 py-2 flex flex-wrap items-center justify-between gap-2 text-xs hidden">
             <div class="flex flex-wrap items-center gap-2">
                 <span class="bg-amber-500/20 text-amber-300 font-extrabold px-2.5 py-0.5 rounded-full">🌐 MODO A DISTANCIA</span>
                 <span id="challenge-code-label" class="font-mono text-slate-300">Sala: ---</span>
@@ -321,8 +321,17 @@
             </div>
         </div>
 
+        <!-- Banner Transparente de Respuesta Seleccionada y Veredicto (Modo Solo y PVP) -->
+        <div id="verdict-banner" class="w-full max-w-6xl bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs md:text-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 shadow">
+            <div class="flex items-center gap-2">
+                <span id="verdict-badge" class="px-2.5 py-0.5 rounded-full font-extrabold text-xs bg-slate-800 text-amber-300">TURNO LISTO</span>
+                <span id="verdict-detail" class="text-slate-200 font-medium">Selecciona dirección o magnitud y lanza una pregunta para iniciar la jugada.</span>
+            </div>
+            <span id="verdict-answer-ref" class="text-xs font-mono text-emerald-300"></span>
+        </div>
+
         <!-- Bloque Único Dinámico para Móvil (< 768px) -->
-        <div id="mobile-unified-panel" class="md:hidden w-full bg-slate-900 p-3.5 rounded-xl border-2 border-emerald-500 flex flex-col gap-3 mb-3 transition-colors duration-200">
+        <div id="mobile-unified-panel" class="md:hidden w-full bg-slate-900 p-3.5 rounded-xl border-2 border-emerald-500 flex flex-col gap-3 transition-colors duration-200">
             <div class="flex justify-between items-center border-b border-slate-800 pb-2">
                 <div class="flex items-center gap-2">
                     <span id="mob-color-dot" class="w-3.5 h-3.5 rounded-full bg-emerald-400 inline-block"></span>
@@ -333,7 +342,7 @@
 
             <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 space-y-2.5">
                 <div class="flex justify-between items-center">
-                    <span class="text-xs font-bold uppercase text-slate-300">Pregunta y Acción</span>
+                    <span class="text-xs font-bold uppercase text-slate-300">Tarjeta de Pregunta</span>
                     <span id="mob-code-badge" class="text-[11px] font-mono bg-slate-800 px-2 py-0.5 rounded text-amber-300 hidden">---</span>
                 </div>
                 <p id="mob-question-text" class="text-sm text-slate-100 font-medium leading-snug">Selecciona dirección y lanza pregunta para avanzar.</p>
@@ -366,21 +375,22 @@
                 </button>
             </div>
 
-            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
-                <div class="flex justify-between items-center mb-2">
+            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 space-y-2">
+                <div class="flex justify-between items-center">
                     <span class="text-xs font-bold uppercase text-slate-300">Opciones de Respuesta</span>
                     <span id="mob-timer" class="text-xs font-black text-amber-400 hidden">20s</span>
                 </div>
+                <div id="mob-verdict-box" class="hidden text-xs p-2 rounded-lg border border-slate-700 bg-slate-900"></div>
                 <div id="mob-options" class="grid grid-cols-1 gap-2">
-                    <p class="text-xs text-slate-400 italic">Las opciones aparecerán cuando el rival lance una pregunta.</p>
+                    <p class="text-xs text-slate-400 italic">Al lanzar una pregunta aparecerán las opciones de respuesta.</p>
                 </div>
             </div>
         </div>
 
-        <!-- Contenedor Principal de Juego (Tablero + Paneles Laterales en Escritorio/Tablet; Tablero Vertical en Móvil) -->
-        <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-3 items-stretch">
+        <!-- Contenedor Principal Centrado (Panel 1 | Campo Central | Panel 2) -->
+        <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-3 items-center justify-items-center">
             <!-- Panel Izquierdo (PC/Tablet) -->
-            <div id="panel-t1" class="hidden md:flex lg:col-span-3 bg-slate-900 p-3.5 rounded-xl border-2 border-emerald-500/40 flex-col justify-between gap-2.5 order-2 lg:order-1">
+            <div id="panel-t1" class="hidden md:flex w-full lg:col-span-3 bg-slate-900 p-3.5 rounded-xl border-2 border-emerald-500/40 flex-col justify-between gap-2.5 order-2 lg:order-1">
                 <div class="flex justify-between items-center border-b border-slate-800 pb-2">
                     <span id="panel-t1-name" class="font-black text-emerald-400 text-base md:text-lg">EQUIPO 1</span>
                     <span id="panel-t1-role" class="text-xs font-bold px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300">ATACANTE</span>
@@ -389,7 +399,7 @@
                 <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 flex-1 flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-center mb-1.5">
-                            <span class="text-xs font-bold uppercase text-slate-300">1. Pregunta y Selector</span>
+                            <span class="text-xs font-bold uppercase text-slate-300">1. Tarjeta de Pregunta</span>
                             <span id="t1-code-badge" class="text-xs font-mono bg-slate-800 px-2 py-0.5 rounded text-amber-300 hidden">A2-LE</span>
                         </div>
                         <p id="t1-question-text" class="text-sm md:text-base text-slate-100 font-medium leading-snug">Selecciona dirección y método de avance, luego lanza pregunta.</p>
@@ -432,50 +442,93 @@
                     </div>
                 </div>
 
-                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 flex-1">
-                    <div class="flex justify-between items-center mb-2">
+                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 flex-1 space-y-2">
+                    <div class="flex justify-between items-center">
                         <span class="text-xs font-bold uppercase text-slate-300">2. Opciones de Respuesta</span>
                         <span id="t1-timer" class="text-sm font-black text-amber-400 hidden">20s</span>
                     </div>
+                    <div id="t1-verdict-box" class="hidden text-xs p-2 rounded-lg border border-slate-700 bg-slate-900"></div>
                     <div id="t1-options" class="grid grid-cols-1 gap-2">
-                        <p class="text-sm text-slate-400 italic">Disponible cuando este equipo defienda.</p>
+                        <p class="text-xs text-slate-400 italic">Las opciones de respuesta se muestran aquí al activar un reto.</p>
                     </div>
                 </div>
 
                 <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
                     <span class="text-xs font-bold uppercase text-slate-300 block mb-1">3. Movimiento y Dirección</span>
-                    <div id="t1-move-info" class="text-sm text-slate-200 font-medium leading-snug">
+                    <div id="t1-move-info" class="text-xs md:text-sm text-slate-200 font-medium leading-snug">
                         Clic en ficha propia para moverla (DEF: 5, MED: 10, DEL: libre).
                     </div>
                 </div>
             </div>
 
-            <!-- Tablero Central (Horizontal en PC/Tablet, Vertical en Móvil) -->
-            <div id="pitch-column" class="w-full max-w-[390px] mx-auto md:max-w-none lg:col-span-6 flex flex-col items-center justify-center order-1 lg:order-2">
+            <!-- Campo de Fútbol Central con Líneas y Áreas Demarcadas -->
+            <div id="pitch-column" class="w-full max-w-[380px] mx-auto md:max-w-2xl lg:max-w-none lg:col-span-6 flex flex-col items-center justify-center order-1 lg:order-2">
                 <div class="relative w-full bg-emerald-700 border-4 border-white rounded-lg shadow-2xl overflow-hidden">
+                    <!-- Marcación Completa Horizontal (27 columnas x 17 filas) -->
                     <svg id="pitch-svg-horizontal" class="hidden md:block absolute inset-0 w-full h-full pointer-events-none z-10" viewBox="0 0 270 170" preserveAspectRatio="none">
-                        <line x1="135" y1="0" x2="135" y2="170" stroke="white" stroke-width="2" />
-                        <circle cx="135" cy="85" r="25" stroke="white" stroke-width="2" fill="none" />
-                        <circle cx="135" cy="85" r="2" fill="white" />
-                        <rect x="0" y="42.5" width="35" height="85" stroke="white" stroke-width="2" fill="none" />
-                        <rect x="235" y="42.5" width="35" height="85" stroke="white" stroke-width="2" fill="none" />
+                        <!-- Línea de medio campo, círculo central y punto central -->
+                        <line x1="135" y1="0" x2="135" y2="170" stroke="rgba(255,255,255,0.92)" stroke-width="2" />
+                        <circle cx="135" cy="85" r="26" stroke="rgba(255,255,255,0.92)" stroke-width="2" fill="none" />
+                        <circle cx="135" cy="85" r="2.6" fill="#ffffff" />
+
+                        <!-- Área Grande / Penal Izquierda (x: 0..40, y: 34..136) -->
+                        <rect x="0" y="34" width="40" height="102" stroke="rgba(255,255,255,0.92)" stroke-width="2" fill="none" />
+                        <!-- Área Chica / Meta Izquierda (x: 0..14, y: 60..110) -->
+                        <rect x="0" y="60" width="14" height="50" stroke="rgba(255,255,255,0.92)" stroke-width="1.8" fill="none" />
+                        <!-- Punto penal izquierdo y semicírculo -->
+                        <circle cx="28" cy="85" r="2.2" fill="#ffffff" />
+                        <path d="M 40 66 A 20 20 0 0 1 40 104" stroke="rgba(255,255,255,0.85)" stroke-width="1.8" fill="none" />
+                        <!-- Arco / Portería Izquierda -->
+                        <rect x="0" y="68" width="5" height="34" stroke="#fde047" stroke-width="2" fill="rgba(253,224,71,0.14)" />
+
+                        <!-- Área Grande / Penal Derecha (x: 230..270, y: 34..136) -->
+                        <rect x="230" y="34" width="40" height="102" stroke="rgba(255,255,255,0.92)" stroke-width="2" fill="none" />
+                        <!-- Área Chica / Meta Derecha (x: 256..270, y: 60..110) -->
+                        <rect x="256" y="60" width="14" height="50" stroke="rgba(255,255,255,0.92)" stroke-width="1.8" fill="none" />
+                        <!-- Punto penal derecho y semicírculo -->
+                        <circle cx="242" cy="85" r="2.2" fill="#ffffff" />
+                        <path d="M 230 66 A 20 20 0 0 0 230 104" stroke="rgba(255,255,255,0.85)" stroke-width="1.8" fill="none" />
+                        <!-- Arco / Portería Derecha -->
+                        <rect x="265" y="68" width="5" height="34" stroke="#fde047" stroke-width="2" fill="rgba(253,224,71,0.14)" />
                     </svg>
+
+                    <!-- Marcación Completa Vertical (17 columnas x 27 filas) -->
                     <svg id="pitch-svg-vertical" class="block md:hidden absolute inset-0 w-full h-full pointer-events-none z-10" viewBox="0 0 170 270" preserveAspectRatio="none">
-                        <line x1="0" y1="135" x2="170" y2="135" stroke="white" stroke-width="2" />
-                        <circle cx="85" cy="135" r="25" stroke="white" stroke-width="2" fill="none" />
-                        <circle cx="85" cy="135" r="2" fill="white" />
-                        <rect x="42.5" y="0" width="85" height="35" stroke="white" stroke-width="2" fill="none" />
-                        <rect x="42.5" y="235" width="85" height="35" stroke="white" stroke-width="2" fill="none" />
+                        <!-- Línea de medio campo, círculo central y punto central -->
+                        <line x1="0" y1="135" x2="170" y2="135" stroke="rgba(255,255,255,0.92)" stroke-width="2" />
+                        <circle cx="85" cy="135" r="26" stroke="rgba(255,255,255,0.92)" stroke-width="2" fill="none" />
+                        <circle cx="85" cy="135" r="2.6" fill="#ffffff" />
+
+                        <!-- Área Grande / Penal Superior (x: 34..136, y: 0..40) -->
+                        <rect x="34" y="0" width="102" height="40" stroke="rgba(255,255,255,0.92)" stroke-width="2" fill="none" />
+                        <!-- Área Chica / Meta Superior (x: 60..110, y: 0..14) -->
+                        <rect x="60" y="0" width="50" height="14" stroke="rgba(255,255,255,0.92)" stroke-width="1.8" fill="none" />
+                        <!-- Punto penal superior y semicírculo -->
+                        <circle cx="85" cy="28" r="2.2" fill="#ffffff" />
+                        <path d="M 66 40 A 20 20 0 0 0 104 40" stroke="rgba(255,255,255,0.85)" stroke-width="1.8" fill="none" />
+                        <!-- Arco / Portería Superior -->
+                        <rect x="68" y="0" width="34" height="5" stroke="#fde047" stroke-width="2" fill="rgba(253,224,71,0.14)" />
+
+                        <!-- Área Grande / Penal Inferior (x: 34..136, y: 230..270) -->
+                        <rect x="34" y="230" width="102" height="40" stroke="rgba(255,255,255,0.92)" stroke-width="2" fill="none" />
+                        <!-- Área Chica / Meta Inferior (x: 60..110, y: 256..270) -->
+                        <rect x="60" y="256" width="50" height="14" stroke="rgba(255,255,255,0.92)" stroke-width="1.8" fill="none" />
+                        <!-- Punto penal inferior y semicírculo -->
+                        <circle cx="85" cy="242" r="2.2" fill="#ffffff" />
+                        <path d="M 66 230 A 20 20 0 0 1 104 230" stroke="rgba(255,255,255,0.85)" stroke-width="1.8" fill="none" />
+                        <!-- Arco / Portería Inferior -->
+                        <rect x="68" y="265" width="34" height="5" stroke="#fde047" stroke-width="2" fill="rgba(253,224,71,0.14)" />
                     </svg>
+
                     <div id="pitch-grid" class="pitch-grid w-full"></div>
                 </div>
-                <div id="global-feed" class="w-full mt-2.5 bg-slate-900 border border-slate-800 rounded-lg px-4 py-2 text-center text-xs md:text-base text-amber-300 font-semibold">
+                <div id="global-feed" class="w-full mt-2 bg-slate-900 border border-slate-800 rounded-lg px-4 py-2 text-center text-xs md:text-sm text-amber-300 font-semibold">
                     Motor modular listo.
                 </div>
             </div>
 
             <!-- Panel Derecho (PC/Tablet) -->
-            <div id="panel-t2" class="hidden md:flex lg:col-span-3 bg-slate-900 p-3.5 rounded-xl border border-slate-800 flex-col justify-between gap-2.5 order-3">
+            <div id="panel-t2" class="hidden md:flex w-full lg:col-span-3 bg-slate-900 p-3.5 rounded-xl border border-slate-800 flex-col justify-between gap-2.5 order-3">
                 <div class="flex justify-between items-center border-b border-slate-800 pb-2">
                     <span id="panel-t2-name" class="font-black text-blue-400 text-base md:text-lg">EQUIPO 2</span>
                     <span id="panel-t2-role" class="text-xs font-bold px-2.5 py-1 rounded bg-slate-800 text-slate-300">DEFENSOR</span>
@@ -484,7 +537,7 @@
                 <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 flex-1 flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-center mb-1.5">
-                            <span class="text-xs font-bold uppercase text-slate-300">1. Pregunta y Selector</span>
+                            <span class="text-xs font-bold uppercase text-slate-300">1. Tarjeta de Pregunta</span>
                             <span id="t2-code-badge" class="text-xs font-mono bg-slate-800 px-2 py-0.5 rounded text-amber-300 hidden">A2-LE</span>
                         </div>
                         <p id="t2-question-text" class="text-sm md:text-base text-slate-100 font-medium leading-snug">En espera de turno ofensivo...</p>
@@ -527,19 +580,20 @@
                     </div>
                 </div>
 
-                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 flex-1">
-                    <div class="flex justify-between items-center mb-2">
+                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 flex-1 space-y-2">
+                    <div class="flex justify-between items-center">
                         <span class="text-xs font-bold uppercase text-slate-300">2. Opciones de Respuesta</span>
                         <span id="t2-timer" class="text-sm font-black text-amber-400 hidden">20s</span>
                     </div>
+                    <div id="t2-verdict-box" class="hidden text-xs p-2 rounded-lg border border-slate-700 bg-slate-900"></div>
                     <div id="t2-options" class="grid grid-cols-1 gap-2">
-                        <p class="text-sm text-slate-400 italic">Esperando pregunta del atacante...</p>
+                        <p class="text-xs text-slate-400 italic">Las opciones de respuesta se muestran aquí al activar un reto.</p>
                     </div>
                 </div>
 
                 <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
                     <span class="text-xs font-bold uppercase text-slate-300 block mb-1">3. Movimiento y Dirección</span>
-                    <div id="t2-move-info" class="text-sm text-slate-200 font-medium leading-snug">
+                    <div id="t2-move-info" class="text-xs md:text-sm text-slate-200 font-medium leading-snug">
                         Clic en ficha propia para moverla (DEF: 5, MED: 10, DEL: libre).
                     </div>
                 </div>
@@ -582,6 +636,7 @@
             players: [],
             timer: 20,
             interval: null,
+            systemTimeout: null,
             currentCard: null,
             questionActive: false
         };
@@ -597,7 +652,6 @@
 
         const INSTALLED_STORAGE_KEY = 'gran_jugada_installed_packages';
 
-        // --- SORTEO INICIAL AL AZAR (A vs B o Jugador vs Sistema) ---
         function openTossModal() {
             updateTossLabels();
             document.getElementById('toss-modal').classList.remove('hidden');
@@ -657,7 +711,6 @@
             }
         }
 
-        // --- MODO SOLITARIO / ALTERNANCIA DE TARJETAS ---
         function onOpponentTypeChange() {
             const mode = document.getElementById('opponent-type-select').value;
             gameState.opponentMode = mode;
@@ -974,28 +1027,28 @@
             const poss = document.getElementById('disp-possession');
 
             if (gameState.attacker === 1) {
-                p1.className = "hidden md:flex lg:col-span-3 bg-slate-900 p-3.5 rounded-xl border-2 border-emerald-500 flex-col justify-between gap-2.5 order-2 lg:order-1 shadow-lg";
-                p2.className = "hidden md:flex lg:col-span-3 bg-slate-900 p-3.5 rounded-xl border border-slate-800 flex-col justify-between gap-2.5 order-3";
+                p1.className = "hidden md:flex w-full lg:col-span-3 bg-slate-900 p-3.5 rounded-xl border-2 border-emerald-500 flex-col justify-between gap-2.5 order-2 lg:order-1 shadow-lg";
+                p2.className = "hidden md:flex w-full lg:col-span-3 bg-slate-900 p-3.5 rounded-xl border border-slate-800 flex-col justify-between gap-2.5 order-3";
                 r1.innerText = "ATACANTE";
                 r1.className = "text-xs font-bold px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300";
-                r2.innerText = "DEFENSOR";
+                r2.innerText = gameState.opponentMode === 'SOLO' ? "DEFENSOR (SISTEMA)" : "DEFENSOR";
                 r2.className = "text-xs font-bold px-2.5 py-1 rounded bg-slate-800 text-slate-300";
                 btn1.classList.remove('hidden');
-                btn1.disabled = false;
+                btn1.disabled = gameState.questionActive;
                 ctrl1.classList.remove('hidden');
                 btn2.classList.add('hidden');
                 ctrl2.classList.add('hidden');
                 poss.innerText = `${gameState.team1} Atacando`;
                 poss.className = "font-bold text-emerald-400 text-xs md:text-base bg-slate-950 px-3 py-1 rounded-full border border-emerald-500/40 inline-block";
             } else {
-                p2.className = "hidden md:flex lg:col-span-3 bg-slate-900 p-3.5 rounded-xl border-2 border-blue-500 flex-col justify-between gap-2.5 order-3 shadow-lg";
-                p1.className = "hidden md:flex lg:col-span-3 bg-slate-900 p-3.5 rounded-xl border border-slate-800 flex-col justify-between gap-2.5 order-2 lg:order-1";
-                r2.innerText = "ATACANTE";
+                p2.className = "hidden md:flex w-full lg:col-span-3 bg-slate-900 p-3.5 rounded-xl border-2 border-blue-500 flex-col justify-between gap-2.5 order-3 shadow-lg";
+                p1.className = "hidden md:flex w-full lg:col-span-3 bg-slate-900 p-3.5 rounded-xl border border-slate-800 flex-col justify-between gap-2.5 order-2 lg:order-1";
+                r2.innerText = gameState.opponentMode === 'SOLO' ? "ATACANTE (SISTEMA)" : "ATACANTE";
                 r2.className = "text-xs font-bold px-2.5 py-1 rounded bg-blue-500/20 text-blue-300";
                 r1.innerText = "DEFENSOR";
                 r1.className = "text-xs font-bold px-2.5 py-1 rounded bg-slate-800 text-slate-300";
                 btn2.classList.remove('hidden');
-                btn2.disabled = false;
+                btn2.disabled = gameState.questionActive;
                 ctrl2.classList.remove('hidden');
                 btn1.classList.add('hidden');
                 ctrl1.classList.add('hidden');
@@ -1083,8 +1136,15 @@
                         mobOpts.appendChild(clone);
                     });
                 } else {
-                    mobOpts.innerHTML = '<p class="text-xs text-slate-400 italic">Las opciones aparecerán cuando el rival lance una pregunta.</p>';
+                    mobOpts.innerHTML = '<p class="text-xs text-slate-400 italic">Al lanzar una pregunta aparecerán las opciones de respuesta.</p>';
                 }
+            }
+
+            const mobVerdict = document.getElementById('mob-verdict-box');
+            const defVerdict = document.getElementById(`t${defId}-verdict-box`);
+            if (mobVerdict && defVerdict) {
+                mobVerdict.className = defVerdict.className;
+                mobVerdict.innerHTML = defVerdict.innerHTML;
             }
 
             const defTimer = document.getElementById(`t${defId}-timer`);
@@ -1310,6 +1370,52 @@
             return { ...card, _pkgKey: chosenPkg };
         }
 
+        function clearVerdictBoxes() {
+            ['t1-verdict-box', 't2-verdict-box', 'mob-verdict-box'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.className = "hidden text-xs p-2 rounded-lg border border-slate-700 bg-slate-900";
+                    el.innerHTML = "";
+                }
+            });
+        }
+
+        function updateVerdictDisplay(responderName, chosenOption, correctOption, isCorrect, refBib) {
+            const banner = document.getElementById('verdict-banner');
+            const badge = document.getElementById('verdict-badge');
+            const detail = document.getElementById('verdict-detail');
+            const refEl = document.getElementById('verdict-answer-ref');
+
+            if (banner && badge && detail && refEl) {
+                banner.className = isCorrect
+                    ? "w-full max-w-6xl bg-emerald-950/60 border border-emerald-500/60 rounded-xl px-4 py-2.5 text-xs md:text-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 shadow"
+                    : "w-full max-w-6xl bg-rose-950/60 border border-rose-500/60 rounded-xl px-4 py-2.5 text-xs md:text-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 shadow";
+
+                badge.className = isCorrect
+                    ? "px-2.5 py-0.5 rounded-full font-extrabold text-xs bg-emerald-500/25 text-emerald-300"
+                    : "px-2.5 py-0.5 rounded-full font-extrabold text-xs bg-rose-500/25 text-rose-300";
+
+                badge.innerText = isCorrect ? "✓ ACIERTO" : "✗ NO ACERTÓ";
+                detail.innerHTML = `<strong>${responderName}</strong> eligió: <span class="underline text-white">"${chosenOption}"</span>` +
+                    (!isCorrect ? ` • Respuesta correcta: <strong class="text-emerald-300">"${correctOption}"</strong>` : '');
+                refEl.innerText = refBib ? `Ref: ${refBib}` : '';
+            }
+
+            const defId = gameState.attacker === 1 ? 2 : 1;
+            const targetBox = document.getElementById(`t${defId}-verdict-box`);
+            if (targetBox) {
+                targetBox.className = isCorrect
+                    ? "block text-xs p-2.5 rounded-lg border border-emerald-500/50 bg-emerald-950/50 text-emerald-200 space-y-1"
+                    : "block text-xs p-2.5 rounded-lg border border-rose-500/50 bg-rose-950/50 text-rose-200 space-y-1";
+                targetBox.innerHTML = `
+                    <div class="font-extrabold">${isCorrect ? '✓ Veredicto: Acierto' : '✗ Veredicto: No acertó'} (${responderName})</div>
+                    <div>Opción seleccionada: <strong>"${chosenOption}"</strong></div>
+                    ${!isCorrect ? `<div class="text-emerald-300">Correcta: <strong>"${correctOption}"</strong></div>` : ''}
+                `;
+            }
+            syncMobilePanel();
+        }
+
         function drawCard(teamId, playType) {
             if (teamId !== gameState.attacker || gameState.questionActive) return;
 
@@ -1317,6 +1423,12 @@
             if (!card) {
                 alert("No hay preguntas en los paquetes seleccionados.");
                 return;
+            }
+
+            clearVerdictBoxes();
+            if (gameState.systemTimeout) {
+                clearTimeout(gameState.systemTimeout);
+                gameState.systemTimeout = null;
             }
 
             gameState.questionActive = true;
@@ -1335,45 +1447,91 @@
             document.getElementById('t1-code-badge').classList.remove('hidden');
             document.getElementById('t2-code-badge').innerText = `[${card.category}] ${card.ref} • ${tierTag}`;
             document.getElementById('t2-code-badge').classList.remove('hidden');
-            syncMobilePanel();
 
-            document.getElementById(`t${teamId}-question-text`).innerText = `[${card.category}] ${card.q} (${card.refBib})`;
-            document.getElementById(`t${defId}-question-text`).innerText = `Reto [${card.category}]: "${card.q}"`;
+            const responderLabel = (gameState.opponentMode === 'SOLO' && defId === 2)
+                ? 'Sistema'
+                : (defId === 1 ? gameState.team1 : gameState.team2);
+
+            document.getElementById(`t${teamId}-question-text`).innerText = `[${card.category}] ${card.q} (${card.refBib || ''})`;
+            document.getElementById(`t${defId}-question-text`).innerText = `Reto para ${responderLabel} [${card.category}]: "${card.q}"`;
 
             document.getElementById(`t${defId}-options`).innerHTML = '';
-            const shuffled = [...card.options].sort(() => Math.random() - 0.5);
+            const shuffled = shuffleArray(card.options || [card.correct]);
+            const isSystemTurn = (gameState.opponentMode === 'SOLO' && defId === 2);
+
             shuffled.forEach(opt => {
                 const b = document.createElement('button');
-                b.className = "w-full text-left bg-slate-900 hover:bg-slate-800 text-slate-100 p-2.5 rounded border border-slate-700 text-sm transition font-medium";
+                b.className = "w-full text-left bg-slate-900 hover:bg-slate-800 text-slate-100 p-2.5 rounded border border-slate-700 text-xs md:text-sm transition font-medium";
                 b.innerText = opt;
-                b.onclick = () => resolvePlay(opt === card.correct);
+                b.disabled = isSystemTurn;
+                b.onclick = () => resolvePlay(opt === card.correct, opt, responderLabel);
                 document.getElementById(`t${defId}-options`).appendChild(b);
             });
 
             gameState.timer = 20;
             const timerEl = document.getElementById(`t${defId}-timer`);
             timerEl.classList.remove('hidden');
-            timerEl.innerText = `${gameState.timer}s`;
+            timerEl.innerText = isSystemTurn ? '🤖 Pensando...' : `${gameState.timer}s`;
 
             if (gameState.interval) clearInterval(gameState.interval);
             gameState.interval = setInterval(() => {
                 gameState.timer--;
-                timerEl.innerText = `${gameState.timer}s`;
+                if (!isSystemTurn) timerEl.innerText = `${gameState.timer}s`;
                 if (gameState.timer <= 0) {
                     clearInterval(gameState.interval);
-                    resolvePlay(false);
+                    resolvePlay(false, "Tiempo agotado", responderLabel);
                 }
             }, 1000);
+
+            if (isSystemTurn) {
+                const verdictBannerDetail = document.getElementById('verdict-detail');
+                if (verdictBannerDetail) {
+                    verdictBannerDetail.innerText = `El Sistema está analizando las opciones para defender...`;
+                }
+                gameState.systemTimeout = setTimeout(() => {
+                    if (!gameState.questionActive || !gameState.currentCard) return;
+                    const sysPicked = shuffled[Math.floor(Math.random() * shuffled.length)];
+                    resolvePlay(sysPicked === card.correct, sysPicked, "Sistema");
+                }, 1200);
+            }
+
+            syncMobilePanel();
         }
 
-        function resolvePlay(defenderAnsweredCorrectly) {
+        function resolvePlay(defenderAnsweredCorrectly, chosenOption = "", responderLabel = "") {
             clearInterval(gameState.interval);
+            if (gameState.systemTimeout) {
+                clearTimeout(gameState.systemTimeout);
+                gameState.systemTimeout = null;
+            }
             gameState.questionActive = false;
 
             const attId = gameState.attacker;
             const defId = attId === 1 ? 2 : 1;
+            const actualResponder = responderLabel || ((gameState.opponentMode === 'SOLO' && defId === 2) ? 'Sistema' : (defId === 1 ? gameState.team1 : gameState.team2));
+            const pickedText = chosenOption || (defenderAnsweredCorrectly ? gameState.currentCard.correct : "Opción incorrecta");
+
             document.getElementById(`t${defId}-timer`).classList.add('hidden');
-            document.getElementById(`t${defId}-options`).innerHTML = '';
+
+            // Resaltar opciones en la tarjeta de respuesta para total transparencia
+            const optsContainer = document.getElementById(`t${defId}-options`);
+            if (optsContainer) {
+                Array.from(optsContainer.querySelectorAll('button')).forEach(btn => {
+                    btn.disabled = true;
+                    const txt = btn.innerText.trim();
+                    if (txt === gameState.currentCard.correct) {
+                        btn.className = "w-full text-left bg-emerald-950/80 text-emerald-200 p-2.5 rounded border border-emerald-400 text-xs md:text-sm font-bold";
+                        btn.innerText = `✓ ${txt} (Correcta)`;
+                    } else if (txt === pickedText && !defenderAnsweredCorrectly) {
+                        btn.className = "w-full text-left bg-rose-950/80 text-rose-200 p-2.5 rounded border border-rose-400 text-xs md:text-sm font-bold";
+                        btn.innerText = `✗ ${txt} (Elegida por ${actualResponder})`;
+                    } else {
+                        btn.className = "w-full text-left bg-slate-900/60 text-slate-400 p-2.5 rounded border border-slate-800 text-xs md:text-sm";
+                    }
+                });
+            }
+
+            updateVerdictDisplay(actualResponder, pickedText, gameState.currentCard.correct, defenderAnsweredCorrectly, gameState.currentCard.refBib);
 
             const { dir, hiddenSteps, playType } = gameState.currentCard;
             const attName = attId === 1 ? gameState.team1 : gameState.team2;
@@ -1439,7 +1597,7 @@
                     gameState.carrierId = carrier.id;
                 }
 
-                document.getElementById('global-feed').innerText = `¡${attName} avanza ${totalSteps} casillas!`;
+                document.getElementById('global-feed').innerText = `¡${attName} avanza ${totalSteps} casillas! (${actualResponder} eligió: "${pickedText}")`;
 
                 if ((attId === 1 && gameState.ballX >= 26) || (attId === 2 && gameState.ballX <= 0)) {
                     if (attId === 1) gameState.score1++; else gameState.score2++;
@@ -1463,7 +1621,7 @@
                 gameState.ballX = snapped.x;
                 gameState.ballY = snapped.y;
                 gameState.attacker = defId;
-                document.getElementById('global-feed').innerText = `¡${defName} intercepta el balón!`;
+                document.getElementById('global-feed').innerText = `¡${actualResponder} acertó ("${pickedText}") e intercepta el balón!`;
             }
 
             renderPitch();
@@ -1473,6 +1631,7 @@
 
         function openSetupScreen() {
             if (gameState.interval) clearInterval(gameState.interval);
+            if (gameState.systemTimeout) clearTimeout(gameState.systemTimeout);
             gameState.questionActive = false;
             document.getElementById('game-screen').classList.add('hidden');
             document.getElementById('setup-screen').classList.remove('hidden');
