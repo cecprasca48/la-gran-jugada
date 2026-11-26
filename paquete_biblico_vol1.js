@@ -1,12 +1,13 @@
-// PAQUETE MODULAR: BÍBLICO VOL. 1 (226 Elementos Oficiales)
+// PAQUETE MODULAR: BÍBLICO VOL. 1 (226 Elementos Clasificados por Complejidad)
 // Colección independiente acoplable al motor de La Gran Jugada
+// Niveles asignados en "tier" según complejidad: "BASICO", "MEDIO", "FUERTE", "DIAMANTE"
 window.LA_GRAN_JUGADA_PACKAGES = window.LA_GRAN_JUGADA_PACKAGES || {};
 window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
     id: "BiblicoVol1",
     name: "Paquete Bíblico Vol. 1",
     category: "Bíblico",
-    version: "1.0",
-    description: "Colección oficial Bíblica Vol. 1 (226 preguntas)",
+    version: "1.2",
+    description: "Colección oficial Bíblica Vol. 1 (226 preguntas clasificadas por complejidad)",
     questions: [
         {
                 "category": "Biblicas",
@@ -19,7 +20,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "No princípio criou Deus",
                         "A terra era sem forma"
                 ],
-                "refBib": "Gn 1:1"
+                "refBib": "Gn 1:1",
+                "tier": "DIAMANTE"
         },
         {
                 "category": "Biblicas",
@@ -32,7 +34,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Jared",
                         "Lameque"
                 ],
-                "refBib": "Gn 5:21-29"
+                "refBib": "Gn 5:21-29",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -45,7 +48,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Gênesis 12:3",
                         "Salmo 22:1"
                 ],
-                "refBib": "Gn 3:15"
+                "refBib": "Gn 3:15",
+                "tier": "DIAMANTE"
         },
         {
                 "category": "Biblicas",
@@ -58,7 +62,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "a) Noé b) 950 anos",
                         "a) Enos b) 905 anos"
                 ],
-                "refBib": "Gn 5:27"
+                "refBib": "Gn 5:27",
+                "tier": "DIAMANTE"
         },
         {
                 "category": "Biblicas",
@@ -71,7 +76,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Ramá",
                         "Silo"
                 ],
-                "refBib": "1 Sm 7:5, 6"
+                "refBib": "1 Sm 7:5, 6",
+                "tier": "FUERTE"
         },
         {
                 "category": "Biblicas",
@@ -84,7 +90,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Uzias",
                         "Salomão"
                 ],
-                "refBib": "2 Rs 11:21"
+                "refBib": "2 Rs 11:21",
+                "tier": "FUERTE"
         },
         {
                 "category": "Biblicas",
@@ -97,7 +104,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Assur",
                         "Calné"
                 ],
-                "refBib": "Nahum / Jon"
+                "refBib": "Nahum / Jon",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -110,7 +118,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Lucas 3:16",
                         "Gênesis 12:3"
                 ],
-                "refBib": "Jo 3:16"
+                "refBib": "Jo 3:16",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -123,7 +132,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "500 anos",
                         "70 anos"
                 ],
-                "refBib": "História Bíblica"
+                "refBib": "História Bíblica",
+                "tier": "FUERTE"
         },
         {
                 "category": "Biblicas",
@@ -136,7 +146,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Viveu 777 anos",
                         "Viveu 500 anos"
                 ],
-                "refBib": "Gn 5:5"
+                "refBib": "Gn 5:5",
+                "tier": "FUERTE"
         },
         {
                 "category": "Biblicas",
@@ -149,7 +160,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Moisés",
                         "Davi"
                 ],
-                "refBib": "Rm 4:16"
+                "refBib": "Rm 4:16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -162,7 +174,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "a) Salmo 117; b) Salmo 150",
                         "a) Salmo 133; b) Salmo 119"
                 ],
-                "refBib": "Sl 117 / Sl 119"
+                "refBib": "Sl 117 / Sl 119",
+                "tier": "FUERTE"
         },
         {
                 "category": "Biblicas",
@@ -175,7 +188,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "O Senhor é o meu pastor...",
                         "Deus amou o mundo de tal maneira..."
                 ],
-                "refBib": "Rm 6:23"
+                "refBib": "Rm 6:23",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -188,7 +202,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Orai sem cessar",
                         "Alegrai-vos sempre"
                 ],
-                "refBib": "Jo 11:35"
+                "refBib": "Jo 11:35",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -201,7 +216,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Moisés",
                         "Jacó"
                 ],
-                "refBib": "Gn 41:15-16"
+                "refBib": "Gn 41:15-16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -214,7 +230,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Monte Hermom",
                         "Monte Tabor"
                 ],
-                "refBib": "Êx 19:20"
+                "refBib": "Êx 19:20",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -227,7 +244,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Elias",
                         "Jeremias"
                 ],
-                "refBib": "Dn 6:16"
+                "refBib": "Dn 6:16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -240,7 +258,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tomé",
                         "André"
                 ],
-                "refBib": "Lc 22:61"
+                "refBib": "Lc 22:61",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -253,7 +272,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Cafarnaum",
                         "Jerusalém"
                 ],
-                "refBib": "Mt 2:1"
+                "refBib": "Mt 2:1",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -266,7 +286,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tiago",
                         "Filipe"
                 ],
-                "refBib": "Mc 1:9"
+                "refBib": "Mc 1:9",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -279,7 +300,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Curar um cego",
                         "Acalmar a tempestade"
                 ],
-                "refBib": "Jo 2:1-11"
+                "refBib": "Jo 2:1-11",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -292,7 +314,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "66 livros",
                         "24 livros"
                 ],
-                "refBib": "Cânon do NT"
+                "refBib": "Cânon do NT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -305,7 +328,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "46 livros",
                         "66 livros"
                 ],
-                "refBib": "Cânon do AT"
+                "refBib": "Cânon do AT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -318,7 +342,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "João",
                         "Tiago"
                 ],
-                "refBib": "Novo Testamento"
+                "refBib": "Novo Testamento",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -331,7 +356,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Números",
                         "Deuteronômio"
                 ],
-                "refBib": "Js 1:1-2"
+                "refBib": "Js 1:1-2",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -344,7 +370,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Rute",
                         "Débora"
                 ],
-                "refBib": "1 Rs 10:1"
+                "refBib": "1 Rs 10:1",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -357,7 +384,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Isaías",
                         "Amós"
                 ],
-                "refBib": "Jn 1:17"
+                "refBib": "Jn 1:17",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -370,7 +398,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Orai sem cessar",
                         "Alegrai-vos sempre"
                 ],
-                "refBib": "Jo 11:35"
+                "refBib": "Jo 11:35",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -383,7 +412,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Moisés",
                         "Jacó"
                 ],
-                "refBib": "Gn 41:15-16"
+                "refBib": "Gn 41:15-16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -396,7 +426,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Monte Hermom",
                         "Monte Tabor"
                 ],
-                "refBib": "Êx 19:20"
+                "refBib": "Êx 19:20",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -409,7 +440,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Elias",
                         "Jeremias"
                 ],
-                "refBib": "Dn 6:16"
+                "refBib": "Dn 6:16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -422,7 +454,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tomé",
                         "André"
                 ],
-                "refBib": "Lc 22:61"
+                "refBib": "Lc 22:61",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -435,7 +468,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Cafarnaum",
                         "Jerusalém"
                 ],
-                "refBib": "Mt 2:1"
+                "refBib": "Mt 2:1",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -448,7 +482,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tiago",
                         "Filipe"
                 ],
-                "refBib": "Mc 1:9"
+                "refBib": "Mc 1:9",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -461,7 +496,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Curar um cego",
                         "Acalmar a tempestade"
                 ],
-                "refBib": "Jo 2:1-11"
+                "refBib": "Jo 2:1-11",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -474,7 +510,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "66 livros",
                         "24 livros"
                 ],
-                "refBib": "Cânon do NT"
+                "refBib": "Cânon do NT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -487,7 +524,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "46 livros",
                         "66 livros"
                 ],
-                "refBib": "Cânon do AT"
+                "refBib": "Cânon do AT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -500,7 +538,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "João",
                         "Tiago"
                 ],
-                "refBib": "Novo Testamento"
+                "refBib": "Novo Testamento",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -513,7 +552,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Números",
                         "Deuteronômio"
                 ],
-                "refBib": "Js 1:1-2"
+                "refBib": "Js 1:1-2",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -526,7 +566,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Rute",
                         "Débora"
                 ],
-                "refBib": "1 Rs 10:1"
+                "refBib": "1 Rs 10:1",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -539,7 +580,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Isaías",
                         "Amós"
                 ],
-                "refBib": "Jn 1:17"
+                "refBib": "Jn 1:17",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -552,7 +594,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Orai sem cessar",
                         "Alegrai-vos sempre"
                 ],
-                "refBib": "Jo 11:35"
+                "refBib": "Jo 11:35",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -565,7 +608,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Moisés",
                         "Jacó"
                 ],
-                "refBib": "Gn 41:15-16"
+                "refBib": "Gn 41:15-16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -578,7 +622,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Monte Hermom",
                         "Monte Tabor"
                 ],
-                "refBib": "Êx 19:20"
+                "refBib": "Êx 19:20",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -591,7 +636,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Elias",
                         "Jeremias"
                 ],
-                "refBib": "Dn 6:16"
+                "refBib": "Dn 6:16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -604,7 +650,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tomé",
                         "André"
                 ],
-                "refBib": "Lc 22:61"
+                "refBib": "Lc 22:61",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -617,7 +664,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Cafarnaum",
                         "Jerusalém"
                 ],
-                "refBib": "Mt 2:1"
+                "refBib": "Mt 2:1",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -630,7 +678,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tiago",
                         "Filipe"
                 ],
-                "refBib": "Mc 1:9"
+                "refBib": "Mc 1:9",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -643,7 +692,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Curar um cego",
                         "Acalmar a tempestade"
                 ],
-                "refBib": "Jo 2:1-11"
+                "refBib": "Jo 2:1-11",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -656,7 +706,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "66 livros",
                         "24 livros"
                 ],
-                "refBib": "Cânon do NT"
+                "refBib": "Cânon do NT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -669,7 +720,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "46 livros",
                         "66 livros"
                 ],
-                "refBib": "Cânon do AT"
+                "refBib": "Cânon do AT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -682,7 +734,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "João",
                         "Tiago"
                 ],
-                "refBib": "Novo Testamento"
+                "refBib": "Novo Testamento",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -695,7 +748,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Números",
                         "Deuteronômio"
                 ],
-                "refBib": "Js 1:1-2"
+                "refBib": "Js 1:1-2",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -708,7 +762,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Rute",
                         "Débora"
                 ],
-                "refBib": "1 Rs 10:1"
+                "refBib": "1 Rs 10:1",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -721,7 +776,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Isaías",
                         "Amós"
                 ],
-                "refBib": "Jn 1:17"
+                "refBib": "Jn 1:17",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -734,7 +790,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Orai sem cessar",
                         "Alegrai-vos sempre"
                 ],
-                "refBib": "Jo 11:35"
+                "refBib": "Jo 11:35",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -747,7 +804,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Moisés",
                         "Jacó"
                 ],
-                "refBib": "Gn 41:15-16"
+                "refBib": "Gn 41:15-16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -760,7 +818,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Monte Hermom",
                         "Monte Tabor"
                 ],
-                "refBib": "Êx 19:20"
+                "refBib": "Êx 19:20",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -773,7 +832,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Elias",
                         "Jeremias"
                 ],
-                "refBib": "Dn 6:16"
+                "refBib": "Dn 6:16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -786,7 +846,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tomé",
                         "André"
                 ],
-                "refBib": "Lc 22:61"
+                "refBib": "Lc 22:61",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -799,7 +860,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Cafarnaum",
                         "Jerusalém"
                 ],
-                "refBib": "Mt 2:1"
+                "refBib": "Mt 2:1",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -812,7 +874,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tiago",
                         "Filipe"
                 ],
-                "refBib": "Mc 1:9"
+                "refBib": "Mc 1:9",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -825,7 +888,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Curar um cego",
                         "Acalmar a tempestade"
                 ],
-                "refBib": "Jo 2:1-11"
+                "refBib": "Jo 2:1-11",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -838,7 +902,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "66 livros",
                         "24 livros"
                 ],
-                "refBib": "Cânon do NT"
+                "refBib": "Cânon do NT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -851,7 +916,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "46 livros",
                         "66 livros"
                 ],
-                "refBib": "Cânon do AT"
+                "refBib": "Cânon do AT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -864,7 +930,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "João",
                         "Tiago"
                 ],
-                "refBib": "Novo Testamento"
+                "refBib": "Novo Testamento",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -877,7 +944,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Números",
                         "Deuteronômio"
                 ],
-                "refBib": "Js 1:1-2"
+                "refBib": "Js 1:1-2",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -890,7 +958,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Rute",
                         "Débora"
                 ],
-                "refBib": "1 Rs 10:1"
+                "refBib": "1 Rs 10:1",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -903,7 +972,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Isaías",
                         "Amós"
                 ],
-                "refBib": "Jn 1:17"
+                "refBib": "Jn 1:17",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -916,7 +986,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Orai sem cessar",
                         "Alegrai-vos sempre"
                 ],
-                "refBib": "Jo 11:35"
+                "refBib": "Jo 11:35",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -929,7 +1000,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Moisés",
                         "Jacó"
                 ],
-                "refBib": "Gn 41:15-16"
+                "refBib": "Gn 41:15-16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -942,7 +1014,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Monte Hermom",
                         "Monte Tabor"
                 ],
-                "refBib": "Êx 19:20"
+                "refBib": "Êx 19:20",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -955,7 +1028,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Elias",
                         "Jeremias"
                 ],
-                "refBib": "Dn 6:16"
+                "refBib": "Dn 6:16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -968,7 +1042,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tomé",
                         "André"
                 ],
-                "refBib": "Lc 22:61"
+                "refBib": "Lc 22:61",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -981,7 +1056,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Cafarnaum",
                         "Jerusalém"
                 ],
-                "refBib": "Mt 2:1"
+                "refBib": "Mt 2:1",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -994,7 +1070,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tiago",
                         "Filipe"
                 ],
-                "refBib": "Mc 1:9"
+                "refBib": "Mc 1:9",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1007,7 +1084,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Curar um cego",
                         "Acalmar a tempestade"
                 ],
-                "refBib": "Jo 2:1-11"
+                "refBib": "Jo 2:1-11",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1020,7 +1098,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "66 livros",
                         "24 livros"
                 ],
-                "refBib": "Cânon do NT"
+                "refBib": "Cânon do NT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1033,7 +1112,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "46 livros",
                         "66 livros"
                 ],
-                "refBib": "Cânon do AT"
+                "refBib": "Cânon do AT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1046,7 +1126,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "João",
                         "Tiago"
                 ],
-                "refBib": "Novo Testamento"
+                "refBib": "Novo Testamento",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1059,7 +1140,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Números",
                         "Deuteronômio"
                 ],
-                "refBib": "Js 1:1-2"
+                "refBib": "Js 1:1-2",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1072,7 +1154,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Rute",
                         "Débora"
                 ],
-                "refBib": "1 Rs 10:1"
+                "refBib": "1 Rs 10:1",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1085,7 +1168,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Isaías",
                         "Amós"
                 ],
-                "refBib": "Jn 1:17"
+                "refBib": "Jn 1:17",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1098,7 +1182,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Orai sem cessar",
                         "Alegrai-vos sempre"
                 ],
-                "refBib": "Jo 11:35"
+                "refBib": "Jo 11:35",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1111,7 +1196,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Moisés",
                         "Jacó"
                 ],
-                "refBib": "Gn 41:15-16"
+                "refBib": "Gn 41:15-16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1124,7 +1210,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Monte Hermom",
                         "Monte Tabor"
                 ],
-                "refBib": "Êx 19:20"
+                "refBib": "Êx 19:20",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1137,7 +1224,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Elias",
                         "Jeremias"
                 ],
-                "refBib": "Dn 6:16"
+                "refBib": "Dn 6:16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1150,7 +1238,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tomé",
                         "André"
                 ],
-                "refBib": "Lc 22:61"
+                "refBib": "Lc 22:61",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1163,7 +1252,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Cafarnaum",
                         "Jerusalém"
                 ],
-                "refBib": "Mt 2:1"
+                "refBib": "Mt 2:1",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1176,7 +1266,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tiago",
                         "Filipe"
                 ],
-                "refBib": "Mc 1:9"
+                "refBib": "Mc 1:9",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1189,7 +1280,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Curar um cego",
                         "Acalmar a tempestade"
                 ],
-                "refBib": "Jo 2:1-11"
+                "refBib": "Jo 2:1-11",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1202,7 +1294,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "66 livros",
                         "24 livros"
                 ],
-                "refBib": "Cânon do NT"
+                "refBib": "Cânon do NT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1215,7 +1308,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "46 livros",
                         "66 livros"
                 ],
-                "refBib": "Cânon do AT"
+                "refBib": "Cânon do AT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1228,7 +1322,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "João",
                         "Tiago"
                 ],
-                "refBib": "Novo Testamento"
+                "refBib": "Novo Testamento",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1241,7 +1336,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Números",
                         "Deuteronômio"
                 ],
-                "refBib": "Js 1:1-2"
+                "refBib": "Js 1:1-2",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1254,7 +1350,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Rute",
                         "Débora"
                 ],
-                "refBib": "1 Rs 10:1"
+                "refBib": "1 Rs 10:1",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1267,7 +1364,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Isaías",
                         "Amós"
                 ],
-                "refBib": "Jn 1:17"
+                "refBib": "Jn 1:17",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1280,7 +1378,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Orai sem cessar",
                         "Alegrai-vos sempre"
                 ],
-                "refBib": "Jo 11:35"
+                "refBib": "Jo 11:35",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1293,7 +1392,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Moisés",
                         "Jacó"
                 ],
-                "refBib": "Gn 41:15-16"
+                "refBib": "Gn 41:15-16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1306,7 +1406,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Monte Hermom",
                         "Monte Tabor"
                 ],
-                "refBib": "Êx 19:20"
+                "refBib": "Êx 19:20",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1319,7 +1420,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Elias",
                         "Jeremias"
                 ],
-                "refBib": "Dn 6:16"
+                "refBib": "Dn 6:16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1332,7 +1434,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tomé",
                         "André"
                 ],
-                "refBib": "Lc 22:61"
+                "refBib": "Lc 22:61",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1345,7 +1448,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Cafarnaum",
                         "Jerusalém"
                 ],
-                "refBib": "Mt 2:1"
+                "refBib": "Mt 2:1",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1358,7 +1462,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tiago",
                         "Filipe"
                 ],
-                "refBib": "Mc 1:9"
+                "refBib": "Mc 1:9",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1371,7 +1476,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Curar um cego",
                         "Acalmar a tempestade"
                 ],
-                "refBib": "Jo 2:1-11"
+                "refBib": "Jo 2:1-11",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1384,7 +1490,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "66 livros",
                         "24 livros"
                 ],
-                "refBib": "Cânon do NT"
+                "refBib": "Cânon do NT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1397,7 +1504,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "46 livros",
                         "66 livros"
                 ],
-                "refBib": "Cânon do AT"
+                "refBib": "Cânon do AT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1410,7 +1518,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "João",
                         "Tiago"
                 ],
-                "refBib": "Novo Testamento"
+                "refBib": "Novo Testamento",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1423,7 +1532,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Números",
                         "Deuteronômio"
                 ],
-                "refBib": "Js 1:1-2"
+                "refBib": "Js 1:1-2",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1436,7 +1546,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Rute",
                         "Débora"
                 ],
-                "refBib": "1 Rs 10:1"
+                "refBib": "1 Rs 10:1",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1449,7 +1560,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Isaías",
                         "Amós"
                 ],
-                "refBib": "Jn 1:17"
+                "refBib": "Jn 1:17",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1462,7 +1574,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Orai sem cessar",
                         "Alegrai-vos sempre"
                 ],
-                "refBib": "Jo 11:35"
+                "refBib": "Jo 11:35",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1475,7 +1588,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Moisés",
                         "Jacó"
                 ],
-                "refBib": "Gn 41:15-16"
+                "refBib": "Gn 41:15-16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1488,7 +1602,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Monte Hermom",
                         "Monte Tabor"
                 ],
-                "refBib": "Êx 19:20"
+                "refBib": "Êx 19:20",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1501,7 +1616,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Elias",
                         "Jeremias"
                 ],
-                "refBib": "Dn 6:16"
+                "refBib": "Dn 6:16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1514,7 +1630,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tomé",
                         "André"
                 ],
-                "refBib": "Lc 22:61"
+                "refBib": "Lc 22:61",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1527,7 +1644,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Cafarnaum",
                         "Jerusalém"
                 ],
-                "refBib": "Mt 2:1"
+                "refBib": "Mt 2:1",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1540,7 +1658,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tiago",
                         "Filipe"
                 ],
-                "refBib": "Mc 1:9"
+                "refBib": "Mc 1:9",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1553,7 +1672,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Curar um cego",
                         "Acalmar a tempestade"
                 ],
-                "refBib": "Jo 2:1-11"
+                "refBib": "Jo 2:1-11",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1566,7 +1686,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "66 livros",
                         "24 livros"
                 ],
-                "refBib": "Cânon do NT"
+                "refBib": "Cânon do NT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1579,7 +1700,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "46 livros",
                         "66 livros"
                 ],
-                "refBib": "Cânon do AT"
+                "refBib": "Cânon do AT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1592,7 +1714,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "João",
                         "Tiago"
                 ],
-                "refBib": "Novo Testamento"
+                "refBib": "Novo Testamento",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1605,7 +1728,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Números",
                         "Deuteronômio"
                 ],
-                "refBib": "Js 1:1-2"
+                "refBib": "Js 1:1-2",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1618,7 +1742,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Rute",
                         "Débora"
                 ],
-                "refBib": "1 Rs 10:1"
+                "refBib": "1 Rs 10:1",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1631,7 +1756,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Isaías",
                         "Amós"
                 ],
-                "refBib": "Jn 1:17"
+                "refBib": "Jn 1:17",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1644,7 +1770,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Orai sem cessar",
                         "Alegrai-vos sempre"
                 ],
-                "refBib": "Jo 11:35"
+                "refBib": "Jo 11:35",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1657,7 +1784,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Moisés",
                         "Jacó"
                 ],
-                "refBib": "Gn 41:15-16"
+                "refBib": "Gn 41:15-16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1670,7 +1798,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Monte Hermom",
                         "Monte Tabor"
                 ],
-                "refBib": "Êx 19:20"
+                "refBib": "Êx 19:20",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1683,7 +1812,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Elias",
                         "Jeremias"
                 ],
-                "refBib": "Dn 6:16"
+                "refBib": "Dn 6:16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1696,7 +1826,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tomé",
                         "André"
                 ],
-                "refBib": "Lc 22:61"
+                "refBib": "Lc 22:61",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1709,7 +1840,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Cafarnaum",
                         "Jerusalém"
                 ],
-                "refBib": "Mt 2:1"
+                "refBib": "Mt 2:1",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1722,7 +1854,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tiago",
                         "Filipe"
                 ],
-                "refBib": "Mc 1:9"
+                "refBib": "Mc 1:9",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1735,7 +1868,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Curar um cego",
                         "Acalmar a tempestade"
                 ],
-                "refBib": "Jo 2:1-11"
+                "refBib": "Jo 2:1-11",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1748,7 +1882,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "66 livros",
                         "24 livros"
                 ],
-                "refBib": "Cânon do NT"
+                "refBib": "Cânon do NT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1761,7 +1896,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "46 livros",
                         "66 livros"
                 ],
-                "refBib": "Cânon do AT"
+                "refBib": "Cânon do AT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1774,7 +1910,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "João",
                         "Tiago"
                 ],
-                "refBib": "Novo Testamento"
+                "refBib": "Novo Testamento",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1787,7 +1924,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Números",
                         "Deuteronômio"
                 ],
-                "refBib": "Js 1:1-2"
+                "refBib": "Js 1:1-2",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1800,7 +1938,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Rute",
                         "Débora"
                 ],
-                "refBib": "1 Rs 10:1"
+                "refBib": "1 Rs 10:1",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1813,7 +1952,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Isaías",
                         "Amós"
                 ],
-                "refBib": "Jn 1:17"
+                "refBib": "Jn 1:17",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1826,7 +1966,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Orai sem cessar",
                         "Alegrai-vos sempre"
                 ],
-                "refBib": "Jo 11:35"
+                "refBib": "Jo 11:35",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1839,7 +1980,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Moisés",
                         "Jacó"
                 ],
-                "refBib": "Gn 41:15-16"
+                "refBib": "Gn 41:15-16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1852,7 +1994,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Monte Hermom",
                         "Monte Tabor"
                 ],
-                "refBib": "Êx 19:20"
+                "refBib": "Êx 19:20",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1865,7 +2008,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Elias",
                         "Jeremias"
                 ],
-                "refBib": "Dn 6:16"
+                "refBib": "Dn 6:16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1878,7 +2022,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tomé",
                         "André"
                 ],
-                "refBib": "Lc 22:61"
+                "refBib": "Lc 22:61",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1891,7 +2036,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Cafarnaum",
                         "Jerusalém"
                 ],
-                "refBib": "Mt 2:1"
+                "refBib": "Mt 2:1",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1904,7 +2050,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tiago",
                         "Filipe"
                 ],
-                "refBib": "Mc 1:9"
+                "refBib": "Mc 1:9",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -1917,7 +2064,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Curar um cego",
                         "Acalmar a tempestade"
                 ],
-                "refBib": "Jo 2:1-11"
+                "refBib": "Jo 2:1-11",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1930,7 +2078,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "66 livros",
                         "24 livros"
                 ],
-                "refBib": "Cânon do NT"
+                "refBib": "Cânon do NT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1943,7 +2092,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "46 livros",
                         "66 livros"
                 ],
-                "refBib": "Cânon do AT"
+                "refBib": "Cânon do AT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1956,7 +2106,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "João",
                         "Tiago"
                 ],
-                "refBib": "Novo Testamento"
+                "refBib": "Novo Testamento",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1969,7 +2120,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Números",
                         "Deuteronômio"
                 ],
-                "refBib": "Js 1:1-2"
+                "refBib": "Js 1:1-2",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1982,7 +2134,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Rute",
                         "Débora"
                 ],
-                "refBib": "1 Rs 10:1"
+                "refBib": "1 Rs 10:1",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -1995,7 +2148,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Isaías",
                         "Amós"
                 ],
-                "refBib": "Jn 1:17"
+                "refBib": "Jn 1:17",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2008,7 +2162,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Orai sem cessar",
                         "Alegrai-vos sempre"
                 ],
-                "refBib": "Jo 11:35"
+                "refBib": "Jo 11:35",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2021,7 +2176,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Moisés",
                         "Jacó"
                 ],
-                "refBib": "Gn 41:15-16"
+                "refBib": "Gn 41:15-16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2034,7 +2190,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Monte Hermom",
                         "Monte Tabor"
                 ],
-                "refBib": "Êx 19:20"
+                "refBib": "Êx 19:20",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2047,7 +2204,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Elias",
                         "Jeremias"
                 ],
-                "refBib": "Dn 6:16"
+                "refBib": "Dn 6:16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2060,7 +2218,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tomé",
                         "André"
                 ],
-                "refBib": "Lc 22:61"
+                "refBib": "Lc 22:61",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2073,7 +2232,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Cafarnaum",
                         "Jerusalém"
                 ],
-                "refBib": "Mt 2:1"
+                "refBib": "Mt 2:1",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2086,7 +2246,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tiago",
                         "Filipe"
                 ],
-                "refBib": "Mc 1:9"
+                "refBib": "Mc 1:9",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2099,7 +2260,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Curar um cego",
                         "Acalmar a tempestade"
                 ],
-                "refBib": "Jo 2:1-11"
+                "refBib": "Jo 2:1-11",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2112,7 +2274,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "66 livros",
                         "24 livros"
                 ],
-                "refBib": "Cânon do NT"
+                "refBib": "Cânon do NT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2125,7 +2288,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "46 livros",
                         "66 livros"
                 ],
-                "refBib": "Cânon do AT"
+                "refBib": "Cânon do AT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2138,7 +2302,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "João",
                         "Tiago"
                 ],
-                "refBib": "Novo Testamento"
+                "refBib": "Novo Testamento",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2151,7 +2316,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Números",
                         "Deuteronômio"
                 ],
-                "refBib": "Js 1:1-2"
+                "refBib": "Js 1:1-2",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2164,7 +2330,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Rute",
                         "Débora"
                 ],
-                "refBib": "1 Rs 10:1"
+                "refBib": "1 Rs 10:1",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2177,7 +2344,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Isaías",
                         "Amós"
                 ],
-                "refBib": "Jn 1:17"
+                "refBib": "Jn 1:17",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2190,7 +2358,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Orai sem cessar",
                         "Alegrai-vos sempre"
                 ],
-                "refBib": "Jo 11:35"
+                "refBib": "Jo 11:35",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2203,7 +2372,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Moisés",
                         "Jacó"
                 ],
-                "refBib": "Gn 41:15-16"
+                "refBib": "Gn 41:15-16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2216,7 +2386,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Monte Hermom",
                         "Monte Tabor"
                 ],
-                "refBib": "Êx 19:20"
+                "refBib": "Êx 19:20",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2229,7 +2400,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Elias",
                         "Jeremias"
                 ],
-                "refBib": "Dn 6:16"
+                "refBib": "Dn 6:16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2242,7 +2414,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tomé",
                         "André"
                 ],
-                "refBib": "Lc 22:61"
+                "refBib": "Lc 22:61",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2255,7 +2428,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Cafarnaum",
                         "Jerusalém"
                 ],
-                "refBib": "Mt 2:1"
+                "refBib": "Mt 2:1",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2268,7 +2442,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tiago",
                         "Filipe"
                 ],
-                "refBib": "Mc 1:9"
+                "refBib": "Mc 1:9",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2281,7 +2456,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Curar um cego",
                         "Acalmar a tempestade"
                 ],
-                "refBib": "Jo 2:1-11"
+                "refBib": "Jo 2:1-11",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2294,7 +2470,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "66 livros",
                         "24 livros"
                 ],
-                "refBib": "Cânon do NT"
+                "refBib": "Cânon do NT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2307,7 +2484,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "46 livros",
                         "66 livros"
                 ],
-                "refBib": "Cânon do AT"
+                "refBib": "Cânon do AT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2320,7 +2498,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "João",
                         "Tiago"
                 ],
-                "refBib": "Novo Testamento"
+                "refBib": "Novo Testamento",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2333,7 +2512,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Números",
                         "Deuteronômio"
                 ],
-                "refBib": "Js 1:1-2"
+                "refBib": "Js 1:1-2",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2346,7 +2526,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Rute",
                         "Débora"
                 ],
-                "refBib": "1 Rs 10:1"
+                "refBib": "1 Rs 10:1",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2359,7 +2540,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Isaías",
                         "Amós"
                 ],
-                "refBib": "Jn 1:17"
+                "refBib": "Jn 1:17",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2372,7 +2554,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Orai sem cessar",
                         "Alegrai-vos sempre"
                 ],
-                "refBib": "Jo 11:35"
+                "refBib": "Jo 11:35",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2385,7 +2568,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Moisés",
                         "Jacó"
                 ],
-                "refBib": "Gn 41:15-16"
+                "refBib": "Gn 41:15-16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2398,7 +2582,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Monte Hermom",
                         "Monte Tabor"
                 ],
-                "refBib": "Êx 19:20"
+                "refBib": "Êx 19:20",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2411,7 +2596,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Elias",
                         "Jeremias"
                 ],
-                "refBib": "Dn 6:16"
+                "refBib": "Dn 6:16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2424,7 +2610,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tomé",
                         "André"
                 ],
-                "refBib": "Lc 22:61"
+                "refBib": "Lc 22:61",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2437,7 +2624,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Cafarnaum",
                         "Jerusalém"
                 ],
-                "refBib": "Mt 2:1"
+                "refBib": "Mt 2:1",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2450,7 +2638,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tiago",
                         "Filipe"
                 ],
-                "refBib": "Mc 1:9"
+                "refBib": "Mc 1:9",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2463,7 +2652,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Curar um cego",
                         "Acalmar a tempestade"
                 ],
-                "refBib": "Jo 2:1-11"
+                "refBib": "Jo 2:1-11",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2476,7 +2666,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "66 livros",
                         "24 livros"
                 ],
-                "refBib": "Cânon do NT"
+                "refBib": "Cânon do NT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2489,7 +2680,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "46 livros",
                         "66 livros"
                 ],
-                "refBib": "Cânon do AT"
+                "refBib": "Cânon do AT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2502,7 +2694,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "João",
                         "Tiago"
                 ],
-                "refBib": "Novo Testamento"
+                "refBib": "Novo Testamento",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2515,7 +2708,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Números",
                         "Deuteronômio"
                 ],
-                "refBib": "Js 1:1-2"
+                "refBib": "Js 1:1-2",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2528,7 +2722,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Rute",
                         "Débora"
                 ],
-                "refBib": "1 Rs 10:1"
+                "refBib": "1 Rs 10:1",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2541,7 +2736,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Isaías",
                         "Amós"
                 ],
-                "refBib": "Jn 1:17"
+                "refBib": "Jn 1:17",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2554,7 +2750,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Orai sem cessar",
                         "Alegrai-vos sempre"
                 ],
-                "refBib": "Jo 11:35"
+                "refBib": "Jo 11:35",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2567,7 +2764,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Moisés",
                         "Jacó"
                 ],
-                "refBib": "Gn 41:15-16"
+                "refBib": "Gn 41:15-16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2580,7 +2778,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Monte Hermom",
                         "Monte Tabor"
                 ],
-                "refBib": "Êx 19:20"
+                "refBib": "Êx 19:20",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2593,7 +2792,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Elias",
                         "Jeremias"
                 ],
-                "refBib": "Dn 6:16"
+                "refBib": "Dn 6:16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2606,7 +2806,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tomé",
                         "André"
                 ],
-                "refBib": "Lc 22:61"
+                "refBib": "Lc 22:61",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2619,7 +2820,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Cafarnaum",
                         "Jerusalém"
                 ],
-                "refBib": "Mt 2:1"
+                "refBib": "Mt 2:1",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2632,7 +2834,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tiago",
                         "Filipe"
                 ],
-                "refBib": "Mc 1:9"
+                "refBib": "Mc 1:9",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2645,7 +2848,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Curar um cego",
                         "Acalmar a tempestade"
                 ],
-                "refBib": "Jo 2:1-11"
+                "refBib": "Jo 2:1-11",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2658,7 +2862,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "66 livros",
                         "24 livros"
                 ],
-                "refBib": "Cânon do NT"
+                "refBib": "Cânon do NT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2671,7 +2876,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "46 livros",
                         "66 livros"
                 ],
-                "refBib": "Cânon do AT"
+                "refBib": "Cânon do AT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2684,7 +2890,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "João",
                         "Tiago"
                 ],
-                "refBib": "Novo Testamento"
+                "refBib": "Novo Testamento",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2697,7 +2904,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Números",
                         "Deuteronômio"
                 ],
-                "refBib": "Js 1:1-2"
+                "refBib": "Js 1:1-2",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2710,7 +2918,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Rute",
                         "Débora"
                 ],
-                "refBib": "1 Rs 10:1"
+                "refBib": "1 Rs 10:1",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2723,7 +2932,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Isaías",
                         "Amós"
                 ],
-                "refBib": "Jn 1:17"
+                "refBib": "Jn 1:17",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2736,7 +2946,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Orai sem cessar",
                         "Alegrai-vos sempre"
                 ],
-                "refBib": "Jo 11:35"
+                "refBib": "Jo 11:35",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2749,7 +2960,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Moisés",
                         "Jacó"
                 ],
-                "refBib": "Gn 41:15-16"
+                "refBib": "Gn 41:15-16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2762,7 +2974,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Monte Hermom",
                         "Monte Tabor"
                 ],
-                "refBib": "Êx 19:20"
+                "refBib": "Êx 19:20",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2775,7 +2988,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Elias",
                         "Jeremias"
                 ],
-                "refBib": "Dn 6:16"
+                "refBib": "Dn 6:16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2788,7 +3002,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tomé",
                         "André"
                 ],
-                "refBib": "Lc 22:61"
+                "refBib": "Lc 22:61",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2801,7 +3016,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Cafarnaum",
                         "Jerusalém"
                 ],
-                "refBib": "Mt 2:1"
+                "refBib": "Mt 2:1",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2814,7 +3030,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Tiago",
                         "Filipe"
                 ],
-                "refBib": "Mc 1:9"
+                "refBib": "Mc 1:9",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2827,7 +3044,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Curar um cego",
                         "Acalmar a tempestade"
                 ],
-                "refBib": "Jo 2:1-11"
+                "refBib": "Jo 2:1-11",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2840,7 +3058,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "66 livros",
                         "24 livros"
                 ],
-                "refBib": "Cânon do NT"
+                "refBib": "Cânon do NT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2853,7 +3072,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "46 livros",
                         "66 livros"
                 ],
-                "refBib": "Cânon do AT"
+                "refBib": "Cânon do AT",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2866,7 +3086,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "João",
                         "Tiago"
                 ],
-                "refBib": "Novo Testamento"
+                "refBib": "Novo Testamento",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2879,7 +3100,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Números",
                         "Deuteronômio"
                 ],
-                "refBib": "Js 1:1-2"
+                "refBib": "Js 1:1-2",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2892,7 +3114,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Rute",
                         "Débora"
                 ],
-                "refBib": "1 Rs 10:1"
+                "refBib": "1 Rs 10:1",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2905,7 +3128,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Isaías",
                         "Amós"
                 ],
-                "refBib": "Jn 1:17"
+                "refBib": "Jn 1:17",
+                "tier": "MEDIO"
         },
         {
                 "category": "Biblicas",
@@ -2918,7 +3142,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Orai sem cessar",
                         "Alegrai-vos sempre"
                 ],
-                "refBib": "Jo 11:35"
+                "refBib": "Jo 11:35",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2931,7 +3156,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Moisés",
                         "Jacó"
                 ],
-                "refBib": "Gn 41:15-16"
+                "refBib": "Gn 41:15-16",
+                "tier": "BASICO"
         },
         {
                 "category": "Biblicas",
@@ -2944,7 +3170,8 @@ window.LA_GRAN_JUGADA_PACKAGES["BiblicoVol1"] = {
                         "Monte Hermom",
                         "Monte Tabor"
                 ],
-                "refBib": "Êx 19:20"
+                "refBib": "Êx 19:20",
+                "tier": "BASICO"
         }
 ]
 };
