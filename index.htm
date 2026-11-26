@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Gran Jugada — Motor Modular de Colecciones</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Registro Global de Paquetes Modulares -->
     <script>
         window.LA_GRAN_JUGADA_PACKAGES = window.LA_GRAN_JUGADA_PACKAGES || {};
     </script>
-    <!-- Acoplamiento de Paquetes Instalados en el Repositorio (hasta 4 simultáneos) -->
     <script src="paquete_biblico_vol1.js"></script>
     <style>
+        .hidden { display: none !important; }
         .pitch-grid {
             display: grid;
             grid-template-columns: repeat(27, minmax(0, 1fr));
@@ -43,90 +42,143 @@
 <body class="bg-slate-950 text-slate-100 min-h-screen font-sans flex flex-col items-center justify-between p-2 md:p-4 text-base">
     <header class="text-center my-1">
         <h1 class="text-2xl md:text-3xl font-black text-emerald-400 tracking-wide">LA GRAN JUGADA</h1>
-        <p class="text-sm text-slate-300 italic">Motor Modular de Colecciones — Ranuras Acoplables (1 a 4 Paquetes Simultáneos)</p>
+        <p class="text-xs md:text-sm text-slate-300 italic">Motor Modular — Configuración en 3 Columnas, Sorteo Inicial y Vista Adaptable</p>
     </header>
 
-    <!-- Pantalla de Configuración Modular -->
-    <div id="setup-screen" class="w-full max-w-3xl bg-slate-900 p-6 md:p-8 rounded-2xl shadow-xl border border-slate-800 my-auto">
-        <h2 class="text-xl font-bold text-white mb-4 text-center">Configuración Táctica y Acoplamiento de Paquetes</h2>
-        <div class="space-y-6">
-            
-            <!-- Equipos -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-slate-950 p-4 rounded-xl border border-emerald-500/45 space-y-3">
+    <!-- Ventana Emergente de Sorteo Inicial al Azar -->
+    <div id="toss-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="w-full max-w-md bg-slate-900 border-2 border-amber-400/70 rounded-2xl p-6 shadow-2xl text-center space-y-4">
+            <div class="text-xs uppercase tracking-widest text-amber-300 font-extrabold">🎲 Sorteo de Saque Inicial</div>
+            <h3 class="text-xl font-black text-white">¿Quién inicia como Atacante?</h3>
+            <p class="text-xs text-slate-300">Se sortea al azar entre los contendientes antes de saltar al terreno de juego.</p>
+
+            <div id="toss-spinner-box" class="bg-slate-950 border border-slate-800 rounded-xl py-5 px-4">
+                <div id="toss-result-label" class="text-2xl font-black text-emerald-400">Listo para sortear</div>
+                <div id="toss-sub-label" class="text-xs text-slate-400 mt-1">Presiona "Sortear al Azar" para decidir la posesión inicial</div>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-2.5 pt-1">
+                <button type="button" onclick="runInitialTossAnimation()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold px-4 py-2.5 rounded-xl text-sm transition shadow">
+                    🎲 Sortear al Azar
+                </button>
+                <button type="button" onclick="closeTossModalAndEnterGame()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2.5 rounded-xl text-sm transition shadow">
+                    ⚽ Entrar al Campo
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pantalla de Configuración en 3 Columnas en PC/Tablet y Alternable en Móvil -->
+    <div id="setup-screen" class="w-full max-w-[1440px] bg-slate-900 p-4 md:p-6 rounded-2xl shadow-xl border border-slate-800 my-auto space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+                <h2 class="text-lg md:text-xl font-bold text-white">Configuración Táctica y de Paquetes</h2>
+                <p class="text-xs text-slate-400">Cada tarjeta muestra únicamente tu propio nombre y estrategia de campo; la rival se revela al iniciar el partido.</p>
+            </div>
+            <div class="flex items-center gap-2">
+                <button type="button" onclick="openTossModal()" class="bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-400/50 px-3 py-1.5 rounded-lg text-xs font-extrabold transition">
+                    🎲 Sorteo Inicial: <span id="setup-toss-badge">Azar</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Enlace de alternancia para Móvil o Solitario (Atacante vs Defensa) -->
+        <div class="flex flex-wrap items-center justify-between gap-2 bg-slate-950 px-3.5 py-2 rounded-xl border border-slate-800">
+            <div class="flex items-center gap-2 text-xs">
+                <span class="font-bold text-slate-300">Contendiente:</span>
+                <select id="opponent-type-select" onchange="onOpponentTypeChange()" class="bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-emerald-300 font-bold">
+                    <option value="PVP" selected>⚔️ Jugador / Equipo A vs Jugador / Equipo B</option>
+                    <option value="SOLO">🧑 Jugador Solo vs Sistema (Alternar Atacante / Defensa)</option>
+                </select>
+            </div>
+            <button type="button" id="toggle-solo-card-link" onclick="toggleSoloStrategyCard()" class="text-xs font-bold text-amber-400 hover:underline hidden">
+                🔄 Ver/Ocultar Tarjeta Estratégica: <span id="solo-active-card-label">Atacante</span>
+            </button>
+        </div>
+
+        <!-- Grid Principal de 3 Columnas en Escritorio/Tablet -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">
+
+            <!-- COLUMNA 1: Tarjetas de Estrategia (Solo el nombre y posición del usuario/equipo propio en su tarjeta) -->
+            <div class="space-y-3">
+                <!-- Tarjeta Propia / Atacante (Usuario A) -->
+                <div id="card-strategy-own" class="bg-slate-950 p-4 rounded-xl border border-emerald-500/50 space-y-3">
                     <div class="flex justify-between items-center">
-                        <span class="text-sm font-bold text-emerald-400">Equipo 1 (Izq.)</span>
-                        <input type="color" id="team1-color" value="#34d399" class="w-7 h-7 rounded border-0 cursor-pointer bg-transparent">
+                        <span id="own-card-title" class="text-xs font-extrabold uppercase text-emerald-400">Tu Tarjeta (Usuario / Equipo A)</span>
+                        <input type="color" id="team1-color" value="#34d399" class="w-6 h-6 rounded border-0 cursor-pointer bg-transparent">
                     </div>
-                    <input type="text" id="team1-name" value="Judá" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-white">
-                    <select id="team1-formation" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-amber-300 font-bold">
-                        <option value="4-4-2">Formación 4-4-2</option>
-                        <option value="4-3-3" selected>Formación 4-3-3</option>
-                        <option value="3-5-2">Formación 3-5-2</option>
-                        <option value="5-3-2">Formación 5-3-2</option>
-                    </select>
+                    <div>
+                        <label class="text-[11px] text-slate-400 block mb-1">Tu Nombre o Equipo:</label>
+                        <input type="text" id="team1-name" value="Judá" oninput="updateTossLabels()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-sm text-white">
+                    </div>
+                    <div>
+                        <label class="text-[11px] text-slate-400 block mb-1">Estrategia de Posición en Campo:</label>
+                        <select id="team1-formation" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-amber-300 font-bold">
+                            <option value="4-4-2">Formación 4-4-2</option>
+                            <option value="4-3-3" selected>Formación 4-3-3</option>
+                            <option value="3-5-2">Formación 3-5-2</option>
+                            <option value="5-3-2">Formación 5-3-2</option>
+                        </select>
+                    </div>
                 </div>
 
-                <div class="bg-slate-950 p-4 rounded-xl border border-blue-500/45 space-y-3">
+                <!-- Tarjeta de Contendiente / Defensa (en modo 1 jugador solo se puede abrir/cerrar vía enlace; en PVP se oculta la estrategia rival hasta entrar al campo) -->
+                <div id="card-strategy-rival" class="bg-slate-950 p-4 rounded-xl border border-blue-500/40 space-y-3">
                     <div class="flex justify-between items-center">
-                        <span class="text-sm font-bold text-blue-400">Equipo 2 (Der.)</span>
-                        <input type="color" id="team2-color" value="#60a5fa" class="w-7 h-7 rounded border-0 cursor-pointer bg-transparent">
+                        <span id="rival-card-title" class="text-xs font-extrabold uppercase text-blue-400">Tarjeta Rival / Defensa</span>
+                        <input type="color" id="team2-color" value="#60a5fa" class="w-6 h-6 rounded border-0 cursor-pointer bg-transparent">
                     </div>
-                    <input type="text" id="team2-name" value="Israel" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-white">
-                    <select id="team2-formation" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-amber-300 font-bold">
-                        <option value="4-4-2">Formación 4-4-2</option>
-                        <option value="4-3-3" selected>Formación 4-3-3</option>
-                        <option value="3-5-2">Formación 3-5-2</option>
-                        <option value="5-3-2">Formación 5-3-2</option>
-                    </select>
+                    <div>
+                        <label id="rival-name-label" class="text-[11px] text-slate-400 block mb-1">Nombre Rival / Equipo B:</label>
+                        <input type="text" id="team2-name" value="Israel" oninput="updateTossLabels()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-sm text-white">
+                    </div>
+                    <div>
+                        <label class="text-[11px] text-slate-400 block mb-1">Estrategia de Posición en Campo:</label>
+                        <select id="team2-formation" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-amber-300 font-bold">
+                            <option value="4-4-2">Formación 4-4-2</option>
+                            <option value="4-3-3" selected>Formación 4-3-3</option>
+                            <option value="3-5-2">Formación 3-5-2</option>
+                            <option value="5-3-2">Formación 5-3-2</option>
+                        </select>
+                    </div>
+                    <p class="text-[11px] text-slate-400 italic">La táctica del oponente se revelará al entrar al campo e iniciar el juego.</p>
                 </div>
             </div>
 
-            <!-- Gestor de Ranuras Modulares e Instalador de 1 Clic (1 a 4 Paquetes Simultáneos) -->
-            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3">
-                <div class="flex flex-wrap justify-between items-center gap-2">
-                    <label class="text-xs font-bold uppercase text-slate-300">
-                        Paquetes Acoplados (<span id="active-slots-count" class="text-amber-400">1</span> / 4 máx.):
-                    </label>
-                    <div class="flex flex-wrap gap-2">
-                        <button type="button" onclick="oneClickInstallOfficialPackages()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 px-3 py-1 rounded-lg text-xs font-extrabold transition shadow">
-                            ⚡ Instalar / Sincronizar Paquetes (1 Clic)
-                        </button>
-                        <label class="cursor-pointer bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/40 px-3 py-1 rounded-lg text-xs font-bold transition">
-                            📦 Subir Archivo (.js / .json)
-                            <input type="file" id="package-file-input" accept=".js,.json" multiple onchange="handlePackageFileUpload(event)" class="hidden">
+            <!-- COLUMNA 2: Paquetes Acoplados (1 a 4 Simultáneos) y Banco Personal -->
+            <div class="space-y-3">
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2.5">
+                    <div class="flex flex-wrap justify-between items-center gap-2">
+                        <label class="text-xs font-bold uppercase text-slate-300">
+                            Paquetes (<span id="active-slots-count" class="text-amber-400">1</span> / 4):
                         </label>
-                    </div>
-                </div>
-                <p class="text-[11px] text-slate-400">
-                    <strong>Instalación en 1 clic:</strong> los paquetes del repositorio se acoplan automáticamente y quedan guardados en tu navegador. Marca entre <strong>1 y 4 paquetes</strong> para jugar y rotar temas sin complicaciones.
-                </p>
-                <div id="one-click-status" class="text-[11px] text-emerald-300 font-semibold hidden"></div>
-                <div id="packages-container" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    <!-- Se renderiza dinámicamente con los paquetes acoplados -->
-                </div>
-            </div>
-
-            <!-- Banco Personal Rápido (LocalStorage) -->
-            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3">
-                <div class="flex justify-between items-center">
-                    <span class="text-xs font-bold uppercase text-slate-300">Banco Personal Local (<span id="personal-count">0</span> guardadas)</span>
-                    <button onclick="togglePersonalEditor()" class="text-xs text-amber-400 hover:underline font-bold">➕ Añadir Pregunta Personal</button>
-                </div>
-                
-                <div id="personal-editor-panel" class="hidden space-y-2.5 bg-slate-900 p-3 rounded-lg border border-slate-700">
-                    <div class="grid grid-cols-2 gap-2">
-                        <div>
-                            <label class="text-[11px] text-slate-300 block mb-1">Categoría:</label>
-                            <select id="p-cat" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
-                                <option value="Biblicas">📖 Bíblica (Personal)</option>
-                                <option value="Deportes">⚽ Deporte (Personal)</option>
-                                <option value="General">🏛️ General (Personal)</option>
-                            </select>
+                        <div class="flex flex-wrap gap-1.5">
+                            <button type="button" onclick="oneClickInstallOfficialPackages()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 px-2.5 py-1 rounded-lg text-[11px] font-extrabold transition">
+                                ⚡ 1 Clic
+                            </button>
+                            <label class="cursor-pointer bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/40 px-2.5 py-1 rounded-lg text-[11px] font-bold transition">
+                                📦 .js/.json
+                                <input type="file" id="package-file-input" accept=".js,.json" multiple onchange="handlePackageFileUpload(event)" class="hidden">
+                            </label>
                         </div>
-                        <div>
-                            <label class="text-[11px] text-slate-300 block mb-1">Referencia / Nivel:</label>
-                            <div class="grid grid-cols-2 gap-1.5">
+                    </div>
+                    <div id="one-click-status" class="text-[11px] text-emerald-300 font-semibold hidden"></div>
+                    <div id="packages-container" class="grid grid-cols-1 gap-2 max-h-48 overflow-y-auto pr-1"></div>
+                </div>
+
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2.5">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-bold uppercase text-slate-300">Banco Personal (<span id="personal-count">0</span>)</span>
+                        <button type="button" onclick="togglePersonalEditor()" class="text-xs text-amber-400 hover:underline font-bold">➕ Añadir Pregunta</button>
+                    </div>
+                    <div id="personal-editor-panel" class="hidden space-y-2 bg-slate-900 p-3 rounded-lg border border-slate-700">
+                        <div class="grid grid-cols-2 gap-2">
+                            <select id="p-cat" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                                <option value="Biblicas">📖 Bíblica</option>
+                                <option value="Deportes">⚽ Deporte</option>
+                                <option value="General">🏛️ General</option>
+                            </select>
+                            <div class="grid grid-cols-2 gap-1">
                                 <input type="text" id="p-ref" value="H1" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
                                 <select id="p-tier" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-amber-300 font-bold">
                                     <option value="BASICO">🥉 Básico</option>
@@ -136,153 +188,135 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
-                    <div>
-                        <label class="text-[11px] text-slate-300 block mb-1">Enunciado:</label>
-                        <input type="text" id="p-text" placeholder="Pregunta personalizada..." class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
-                    </div>
-                    <div class="grid grid-cols-2 gap-2">
-                        <div>
-                            <label class="text-[11px] text-slate-300 block mb-1">Respuesta Correcta:</label>
-                            <input type="text" id="p-correct" placeholder="Respuesta exacta" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                        <input type="text" id="p-text" placeholder="Enunciado de la pregunta..." class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                        <div class="grid grid-cols-2 gap-2">
+                            <input type="text" id="p-correct" placeholder="Respuesta correcta" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                            <input type="text" id="p-bib" placeholder="Cita / Ref (Ej: Gn 1:1)" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
                         </div>
-                        <div>
-                            <label class="text-[11px] text-slate-300 block mb-1">Cita o Referencia:</label>
-                            <input type="text" id="p-bib" placeholder="Ej: Gn 1:1" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
-                        </div>
+                        <input type="text" id="p-incorrects" placeholder="Incorrectas separadas por coma" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
+                        <button type="button" onclick="savePersonalQuestion()" class="w-full bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold py-1.5 rounded text-xs transition">
+                            Guardar en Banco Personal
+                        </button>
                     </div>
-                    <div>
-                        <label class="text-[11px] text-slate-300 block mb-1">Opciones Incorrectas (separadas por coma):</label>
-                        <input type="text" id="p-incorrects" placeholder="Opción B, Opción C, Opción D" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-white">
-                    </div>
-                    <button onclick="savePersonalQuestion()" class="w-full bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold py-1.5 rounded text-xs transition">
-                        Guardar en mi Banco Personal
-                    </button>
                 </div>
             </div>
 
-            <!-- Nivel / Tipo de Pregunta y Modalidad de Juego -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
-                    <label class="block text-xs font-bold uppercase text-slate-300">Nivel / Tipo de Pregunta:</label>
-                    <select id="question-tier-filter" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-xs text-amber-300 font-bold">
-                        <option value="ALL" selected>🌟 Todos los Niveles (Mixto)</option>
-                        <option value="BASICO">🥉 Básico / Fácil — Cobre</option>
-                        <option value="MEDIO">🥈 Medio / Regular — Plata</option>
-                        <option value="FUERTE">🥇 Fuerte / Difícil — Oro</option>
-                        <option value="DIAMANTE">💎 Élite / Maestro — Diamante</option>
-                    </select>
-                    <p class="text-[11px] text-slate-400">
-                        Si un paquete no especifica nivel, se adapta automáticamente sin interrumpir la partida.
-                    </p>
+            <!-- COLUMNA 3: Nivel de Pregunta, Modalidad y Goles -->
+            <div class="space-y-3">
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-300 mb-1">Nivel / Tipo de Pregunta:</label>
+                        <select id="question-tier-filter" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-amber-300 font-bold">
+                            <option value="ALL" selected>🌟 Todos los Niveles (Mixto)</option>
+                            <option value="BASICO">🥉 Básico / Fácil — Cobre</option>
+                            <option value="MEDIO">🥈 Medio / Regular — Plata</option>
+                            <option value="FUERTE">🥇 Fuerte / Difícil — Oro</option>
+                            <option value="DIAMANTE">💎 Élite / Maestro — Diamante</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-300 mb-1">Modalidad de Encuentro:</label>
+                        <select id="play-mode-select" onchange="toggleRemoteModePanel()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-emerald-300 font-bold">
+                            <option value="LOCAL" selected>🏠 Presencial / Misma Pantalla</option>
+                            <option value="REMOTE">🌐 A Distancia / Grupos y Desafíos</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-300 mb-1">Goles para ganar:</label>
+                        <input type="number" id="target-goals" value="3" min="1" max="10" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-sm text-white">
+                    </div>
                 </div>
 
-                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
-                    <label class="block text-xs font-bold uppercase text-slate-300">Modalidad de Encuentro:</label>
-                    <select id="play-mode-select" onchange="toggleRemoteModePanel()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-xs text-emerald-300 font-bold">
-                        <option value="LOCAL" selected>🏠 Presencial / Misma Pantalla</option>
-                        <option value="REMOTE">🌐 A Distancia / Grupos y Desafíos</option>
-                    </select>
-                    <p class="text-[11px] text-slate-400">
-                        Ideal para jugar por videollamada o chat entre grupos en PC, tablet, TV o móvil.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Panel A Distancia / Equipos y Desafíos -->
-            <div id="remote-mode-panel" class="hidden bg-slate-950 p-4 rounded-xl border border-amber-500/40 space-y-3">
-                <div class="flex flex-wrap justify-between items-center gap-2">
-                    <span class="text-xs font-extrabold uppercase text-amber-300">🌐 Configuración de Grupos a Distancia y Desafíos</span>
-                    <span id="room-code-preview" class="text-xs font-mono bg-slate-900 text-emerald-300 px-2.5 py-1 rounded border border-slate-700">SALA: ---</span>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-                    <div>
-                        <label class="text-[11px] text-slate-300 block mb-1">Integrantes Grupo 1:</label>
-                        <input type="number" id="team1-members" value="2" min="1" max="20" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white">
+                <div id="remote-mode-panel" class="hidden bg-slate-950 p-4 rounded-xl border border-amber-500/40 space-y-2.5">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-extrabold uppercase text-amber-300">🌐 Sala a Distancia</span>
+                        <span id="room-code-preview" class="text-[11px] font-mono bg-slate-900 text-emerald-300 px-2 py-0.5 rounded border border-slate-700">SALA: ---</span>
                     </div>
-                    <div>
-                        <label class="text-[11px] text-slate-300 block mb-1">Integrantes Grupo 2:</label>
-                        <input type="number" id="team2-members" value="2" min="1" max="20" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white">
+                    <div class="grid grid-cols-3 gap-2">
+                        <div>
+                            <label class="text-[10px] text-slate-400 block mb-0.5">Integr. A:</label>
+                            <input type="number" id="team1-members" value="2" min="1" max="20" class="w-full bg-slate-900 border border-slate-700 rounded p-1.5 text-xs text-white">
+                        </div>
+                        <div>
+                            <label class="text-[10px] text-slate-400 block mb-0.5">Integr. B:</label>
+                            <input type="number" id="team2-members" value="2" min="1" max="20" class="w-full bg-slate-900 border border-slate-700 rounded p-1.5 text-xs text-white">
+                        </div>
+                        <div>
+                            <label class="text-[10px] text-slate-400 block mb-0.5">Código:</label>
+                            <input type="text" id="room-code-input" placeholder="LIGA-26" oninput="updateRoomCodePreview()" class="w-full bg-slate-900 border border-slate-700 rounded p-1.5 text-xs text-amber-300 font-mono uppercase">
+                        </div>
                     </div>
-                    <div>
-                        <label class="text-[11px] text-slate-300 block mb-1">Código de Sala (opcional):</label>
-                        <input type="text" id="room-code-input" placeholder="Ej: LIGA-2026" oninput="updateRoomCodePreview()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-amber-300 font-mono uppercase">
-                    </div>
-                </div>
-                <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
-                    <span class="text-[11px] text-slate-400">
-                        Comparte el enlace de sala para que otros dispositivos carguen la misma configuración de equipos y paquetes.
-                    </span>
-                    <button type="button" onclick="copyChallengeLink()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold px-3 py-1.5 rounded-lg text-xs transition shadow">
+                    <button type="button" onclick="copyChallengeLink()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold py-1.5 rounded-lg text-xs transition">
                         🔗 Copiar Enlace de Desafío
                     </button>
                 </div>
-            </div>
 
-            <div>
-                <label class="block text-xs font-semibold text-slate-300 mb-1">Goles necesarios para ganar:</label>
-                <input type="number" id="target-goals" value="3" min="1" max="10" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white">
+                <button type="button" onclick="prepareMatchWithToss()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl transition shadow-lg text-sm md:text-base">
+                    🎲 Sortear e Iniciar Partido
+                </button>
             </div>
-
-            <button onclick="startGame()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl transition shadow-lg text-base">
-                ¡Saltar al Terreno de Juego!
-            </button>
         </div>
     </div>
 
     <!-- Pantalla de Juego -->
     <div id="game-screen" class="w-full max-w-[1520px] hidden flex flex-col items-center my-auto">
-        <div class="w-full max-w-6xl grid grid-cols-3 items-center bg-slate-900 px-4 py-3 rounded-xl mb-3 border border-slate-800 shadow-lg">
+        <div class="w-full max-w-6xl grid grid-cols-3 items-center bg-slate-900 px-3 md:px-4 py-2.5 rounded-xl mb-3 border border-slate-800 shadow-lg">
             <div class="flex items-center justify-between pr-2 md:pr-6 border-r border-slate-800">
                 <div>
-                    <span id="disp-team1" class="font-black text-emerald-400 text-lg md:text-xl block">Judá</span>
-                    <span id="disp-t1-formation" class="text-xs text-slate-300 font-medium">4-3-3 • 11 Fichas</span>
+                    <span id="disp-team1" class="font-black text-emerald-400 text-sm md:text-xl block">Judá</span>
+                    <span id="disp-t1-formation" class="text-[11px] md:text-xs text-slate-300 font-medium">4-3-3 • 11 Fichas</span>
                 </div>
                 <div class="flex items-center space-x-2 md:space-x-3">
-                    <div class="bg-slate-950 px-3 py-1.5 rounded-lg border border-slate-800 text-center">
-                        <span class="text-[11px] uppercase text-slate-300 block font-semibold">Respuestas</span>
-                        <span class="text-sm font-bold"><span id="t1-correct" class="text-emerald-400">0</span>✓ / <span id="t1-errors" class="text-rose-400">0</span>✗</span>
+                    <div class="hidden sm:block bg-slate-950 px-3 py-1 rounded-lg border border-slate-800 text-center">
+                        <span class="text-[10px] uppercase text-slate-300 block font-semibold">Respuestas</span>
+                        <span class="text-xs md:text-sm font-bold"><span id="t1-correct" class="text-emerald-400">0</span>✓ / <span id="t1-errors" class="text-rose-400">0</span>✗</span>
                     </div>
-                    <span id="score-team1" class="text-3xl md:text-4xl font-black bg-emerald-950/60 text-emerald-300 px-3.5 py-1 rounded-lg border border-emerald-500/40">0</span>
+                    <span id="score-team1" class="text-2xl md:text-4xl font-black bg-emerald-950/60 text-emerald-300 px-3 py-1 rounded-lg border border-emerald-500/40">0</span>
                 </div>
             </div>
-            
+
             <div class="text-center px-2">
-                <span class="text-xs uppercase tracking-widest text-slate-300 block mb-1 font-semibold">Posesión Actual</span>
-                <span id="disp-possession" class="font-bold text-amber-400 text-sm md:text-base bg-slate-950 px-4 py-1.5 rounded-full border border-amber-500/40 inline-block">Judá Atacando</span>
+                <span class="text-[10px] md:text-xs uppercase tracking-widest text-slate-300 block mb-1 font-semibold">Posesión</span>
+                <span id="disp-possession" class="font-bold text-amber-400 text-xs md:text-base bg-slate-950 px-3 py-1 rounded-full border border-amber-500/40 inline-block">Judá Atacando</span>
             </div>
 
             <div class="flex items-center justify-between pl-2 md:pl-6 border-l border-slate-800 gap-2">
                 <div class="flex items-center space-x-2 md:space-x-3">
-                    <span id="score-team2" class="text-3xl md:text-4xl font-black bg-blue-950/60 text-blue-300 px-3.5 py-1 rounded-lg border border-blue-500/40">0</span>
-                    <div class="bg-slate-950 px-3 py-1.5 rounded-lg border border-slate-800 text-center">
-                        <span class="text-[11px] uppercase text-slate-300 block font-semibold">Respuestas</span>
-                        <span class="text-sm font-bold"><span id="t2-correct" class="text-emerald-400">0</span>✓ / <span id="t2-errors" class="text-rose-400">0</span>✗</span>
+                    <span id="score-team2" class="text-2xl md:text-4xl font-black bg-blue-950/60 text-blue-300 px-3 py-1 rounded-lg border border-blue-500/40">0</span>
+                    <div class="hidden sm:block bg-slate-950 px-3 py-1 rounded-lg border border-slate-800 text-center">
+                        <span class="text-[10px] uppercase text-slate-300 block font-semibold">Respuestas</span>
+                        <span class="text-xs md:text-sm font-bold"><span id="t2-correct" class="text-emerald-400">0</span>✓ / <span id="t2-errors" class="text-rose-400">0</span>✗</span>
                     </div>
                 </div>
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-1.5 md:gap-2">
                     <div class="text-right">
-                        <span id="disp-team2" class="font-black text-blue-400 text-lg md:text-xl block">Israel</span>
-                        <span id="disp-t2-formation" class="text-xs text-slate-300 font-medium">4-3-3 • 11 Fichas</span>
+                        <span id="disp-team2" class="font-black text-blue-400 text-sm md:text-xl block">Israel</span>
+                        <span id="disp-t2-formation" class="text-[11px] md:text-xs text-slate-300 font-medium">4-3-3 • 11 Fichas</span>
                     </div>
-                    <button type="button" onclick="openSetupScreen()" title="Volver a Configuración" aria-label="Volver a Configuración" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-amber-300 border border-slate-700 p-2.5 rounded-xl transition shadow flex items-center justify-center">
+                    <button type="button" onclick="openTossModal()" title="Sortear inicial" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-amber-300 border border-slate-700 p-2 rounded-xl transition text-xs">
+                        🎲
+                    </button>
+                    <button type="button" onclick="openSetupScreen()" title="Volver a Configuración" aria-label="Volver a Configuración" class="bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-amber-300 border border-slate-700 p-2 rounded-xl transition shadow flex items-center justify-center text-xs">
                         ⚙️
                     </button>
                 </div>
             </div>
         </div>
+
         <div id="remote-challenge-bar" class="w-full max-w-6xl bg-slate-900/95 border border-amber-500/30 rounded-xl px-4 py-2 mb-3 flex flex-wrap items-center justify-between gap-2 text-xs hidden">
             <div class="flex flex-wrap items-center gap-2">
-                <span class="bg-amber-500/20 text-amber-300 font-extrabold px-2.5 py-0.5 rounded-full">🌐 MODO A DISTANCIA / EQUIPOS</span>
+                <span class="bg-amber-500/20 text-amber-300 font-extrabold px-2.5 py-0.5 rounded-full">🌐 MODO A DISTANCIA</span>
                 <span id="challenge-code-label" class="font-mono text-slate-300">Sala: ---</span>
                 <span id="challenge-score-label" class="text-emerald-300 font-bold">Desafíos: 0 - 0</span>
             </div>
             <div class="flex flex-wrap items-center gap-2">
                 <button type="button" onclick="triggerGroupChallenge()" class="bg-purple-700 hover:bg-purple-600 text-white font-bold px-3 py-1 rounded-lg transition">
-                    ⚔️ Lanzar Desafío entre Grupos
+                    ⚔️ Lanzar Desafío
                 </button>
                 <button type="button" onclick="copyChallengeLink()" class="bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/40 font-bold px-3 py-1 rounded-lg transition">
-                    🔗 Copiar Enlace de Sala
+                    🔗 Copiar Enlace
                 </button>
             </div>
         </div>
@@ -309,12 +343,12 @@
                         <div>
                             <label class="text-[11px] font-bold text-slate-300 block mb-1">Dirección:</label>
                             <select id="mob-dir-select" onchange="syncMobileToAttacker('dir')" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-amber-300 font-bold">
-                                <option value="A">Avanzar (Frente ➔)</option>
+                                <option value="A">Avanzar (Frente)</option>
                                 <option value="ADD">Diag. Derecha</option>
                                 <option value="ADE">Diag. Izquierda</option>
                                 <option value="LD">Lateral Derecha</option>
                                 <option value="LE">Lateral Izquierda</option>
-                                <option value="R">Retroceder (⬅️)</option>
+                                <option value="R">Retroceder</option>
                             </select>
                         </div>
                         <div>
@@ -343,9 +377,10 @@
             </div>
         </div>
 
-        <div class="hidden md:grid w-full grid-cols-1 lg:grid-cols-12 gap-3 items-stretch">
-            <!-- Izquierdo -->
-            <div id="panel-t1" class="lg:col-span-3 bg-slate-900 p-3.5 rounded-xl border-2 border-emerald-500/40 flex flex-col justify-between gap-2.5 order-2 lg:order-1">
+        <!-- Contenedor Principal de Juego (Tablero + Paneles Laterales en Escritorio/Tablet; Tablero Vertical en Móvil) -->
+        <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-3 items-stretch">
+            <!-- Panel Izquierdo (PC/Tablet) -->
+            <div id="panel-t1" class="hidden md:flex lg:col-span-3 bg-slate-900 p-3.5 rounded-xl border-2 border-emerald-500/40 flex-col justify-between gap-2.5 order-2 lg:order-1">
                 <div class="flex justify-between items-center border-b border-slate-800 pb-2">
                     <span id="panel-t1-name" class="font-black text-emerald-400 text-base md:text-lg">EQUIPO 1</span>
                     <span id="panel-t1-role" class="text-xs font-bold px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300">ATACANTE</span>
@@ -358,24 +393,24 @@
                             <span id="t1-code-badge" class="text-xs font-mono bg-slate-800 px-2 py-0.5 rounded text-amber-300 hidden">A2-LE</span>
                         </div>
                         <p id="t1-question-text" class="text-sm md:text-base text-slate-100 font-medium leading-snug">Selecciona dirección y método de avance, luego lanza pregunta.</p>
-                        
+
                         <div id="attacker-controls-1" class="mt-3 space-y-2 bg-slate-900 p-2.5 rounded-lg border border-slate-800">
                             <div>
                                 <label class="text-xs font-bold text-slate-300 block mb-1">Dirección de Ataque:</label>
                                 <select id="t1-dir-select" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-amber-300 font-bold">
-                                    <option value="A">Avanzar (Frente ➔)</option>
+                                    <option value="A">Avanzar (Frente)</option>
                                     <option value="ADD">Avanzar Diag. Derecha</option>
                                     <option value="ADE">Avanzar Diag. Izquierda</option>
                                     <option value="LD">Lateral Derecha</option>
                                     <option value="LE">Lateral Izquierda</option>
-                                    <option value="R">Retroceder (⬅️)</option>
+                                    <option value="R">Retroceder</option>
                                 </select>
                             </div>
                             <div>
                                 <label class="text-xs font-bold text-slate-300 block mb-1">Magnitud (1-5: Conducción | 6-10: Pase):</label>
                                 <div class="flex gap-1.5 items-center">
                                     <input type="number" id="t1-steps-input" min="1" max="10" value="4" onchange="updateModeIndicator(1)" class="w-16 bg-slate-950 border border-slate-700 rounded p-1 text-center text-sm font-black text-emerald-400">
-                                    <button onclick="rollRandomSteps(1)" class="flex-1 bg-amber-600 hover:bg-amber-500 text-slate-950 font-extrabold py-1.5 px-2 rounded text-xs transition shadow" title="Ruleta (1-10)">
+                                    <button onclick="rollRandomSteps(1)" class="flex-1 bg-amber-600 hover:bg-amber-500 text-slate-950 font-extrabold py-1.5 px-2 rounded text-xs transition shadow">
                                         🎲 Ruleta (1-10)
                                     </button>
                                 </div>
@@ -415,25 +450,32 @@
                 </div>
             </div>
 
-            <!-- Tablero Central -->
-            <div class="lg:col-span-6 flex flex-col items-center justify-center order-1 lg:order-2">
+            <!-- Tablero Central (Horizontal en PC/Tablet, Vertical en Móvil) -->
+            <div id="pitch-column" class="w-full max-w-[390px] mx-auto md:max-w-none lg:col-span-6 flex flex-col items-center justify-center order-1 lg:order-2">
                 <div class="relative w-full bg-emerald-700 border-4 border-white rounded-lg shadow-2xl overflow-hidden">
-                    <svg class="absolute inset-0 w-full h-full pointer-events-none z-10" viewBox="0 0 270 170" preserveAspectRatio="none">
+                    <svg id="pitch-svg-horizontal" class="hidden md:block absolute inset-0 w-full h-full pointer-events-none z-10" viewBox="0 0 270 170" preserveAspectRatio="none">
                         <line x1="135" y1="0" x2="135" y2="170" stroke="white" stroke-width="2" />
                         <circle cx="135" cy="85" r="25" stroke="white" stroke-width="2" fill="none" />
                         <circle cx="135" cy="85" r="2" fill="white" />
                         <rect x="0" y="42.5" width="35" height="85" stroke="white" stroke-width="2" fill="none" />
                         <rect x="235" y="42.5" width="35" height="85" stroke="white" stroke-width="2" fill="none" />
                     </svg>
+                    <svg id="pitch-svg-vertical" class="block md:hidden absolute inset-0 w-full h-full pointer-events-none z-10" viewBox="0 0 170 270" preserveAspectRatio="none">
+                        <line x1="0" y1="135" x2="170" y2="135" stroke="white" stroke-width="2" />
+                        <circle cx="85" cy="135" r="25" stroke="white" stroke-width="2" fill="none" />
+                        <circle cx="85" cy="135" r="2" fill="white" />
+                        <rect x="42.5" y="0" width="85" height="35" stroke="white" stroke-width="2" fill="none" />
+                        <rect x="42.5" y="235" width="85" height="35" stroke="white" stroke-width="2" fill="none" />
+                    </svg>
                     <div id="pitch-grid" class="pitch-grid w-full"></div>
                 </div>
-                <div id="global-feed" class="w-full mt-2.5 bg-slate-900 border border-slate-800 rounded-lg px-4 py-2 text-center text-sm md:text-base text-amber-300 font-semibold">
-                    Motor modular listo. Selecciona entre 1 y 4 paquetes para iniciar.
+                <div id="global-feed" class="w-full mt-2.5 bg-slate-900 border border-slate-800 rounded-lg px-4 py-2 text-center text-xs md:text-base text-amber-300 font-semibold">
+                    Motor modular listo.
                 </div>
             </div>
 
-            <!-- Derecho -->
-            <div id="panel-t2" class="lg:col-span-3 bg-slate-900 p-3.5 rounded-xl border border-slate-800 flex flex-col justify-between gap-2.5 order-3">
+            <!-- Panel Derecho (PC/Tablet) -->
+            <div id="panel-t2" class="hidden md:flex lg:col-span-3 bg-slate-900 p-3.5 rounded-xl border border-slate-800 flex-col justify-between gap-2.5 order-3">
                 <div class="flex justify-between items-center border-b border-slate-800 pb-2">
                     <span id="panel-t2-name" class="font-black text-blue-400 text-base md:text-lg">EQUIPO 2</span>
                     <span id="panel-t2-role" class="text-xs font-bold px-2.5 py-1 rounded bg-slate-800 text-slate-300">DEFENSOR</span>
@@ -446,24 +488,24 @@
                             <span id="t2-code-badge" class="text-xs font-mono bg-slate-800 px-2 py-0.5 rounded text-amber-300 hidden">A2-LE</span>
                         </div>
                         <p id="t2-question-text" class="text-sm md:text-base text-slate-100 font-medium leading-snug">En espera de turno ofensivo...</p>
-                        
+
                         <div id="attacker-controls-2" class="mt-3 space-y-2 bg-slate-900 p-2.5 rounded-lg border border-slate-800 hidden">
                             <div>
                                 <label class="text-xs font-bold text-slate-300 block mb-1">Dirección de Ataque:</label>
                                 <select id="t2-dir-select" class="w-full bg-slate-950 border border-slate-700 rounded p-1.5 text-xs text-amber-300 font-bold">
-                                    <option value="A">Avanzar (Frente ➔)</option>
+                                    <option value="A">Avanzar (Frente)</option>
                                     <option value="ADD">Avanzar Diag. Derecha</option>
                                     <option value="ADE">Avanzar Diag. Izquierda</option>
                                     <option value="LD">Lateral Derecha</option>
                                     <option value="LE">Lateral Izquierda</option>
-                                    <option value="R">Retroceder (⬅️)</option>
+                                    <option value="R">Retroceder</option>
                                 </select>
                             </div>
                             <div>
                                 <label class="text-xs font-bold text-slate-300 block mb-1">Magnitud (1-5: Conducción | 6-10: Pase):</label>
                                 <div class="flex gap-1.5 items-center">
                                     <input type="number" id="t2-steps-input" min="1" max="10" value="4" onchange="updateModeIndicator(2)" class="w-16 bg-slate-950 border border-slate-700 rounded p-1 text-center text-sm font-black text-blue-400">
-                                    <button onclick="rollRandomSteps(2)" class="flex-1 bg-amber-600 hover:bg-amber-500 text-slate-950 font-extrabold py-1.5 px-2 rounded text-xs transition shadow" title="Ruleta (1-10)">
+                                    <button onclick="rollRandomSteps(2)" class="flex-1 bg-amber-600 hover:bg-amber-500 text-slate-950 font-extrabold py-1.5 px-2 rounded text-xs transition shadow">
                                         🎲 Ruleta (1-10)
                                     </button>
                                 </div>
@@ -515,6 +557,8 @@
             color2: "#60a5fa",
             form1: "4-3-3",
             form2: "4-3-3",
+            opponentMode: "PVP",
+            soloActiveTab: "OWN",
             activePackages: [],
             cycleQueues: {},
             lastCardIndexByPkg: {},
@@ -551,8 +595,108 @@
             "R": { code: "Retroceder", dx: -1, dy: 0 }
         };
 
-        // --- GESTOR MODULAR DE PAQUETES ---
         const INSTALLED_STORAGE_KEY = 'gran_jugada_installed_packages';
+
+        // --- SORTEO INICIAL AL AZAR (A vs B o Jugador vs Sistema) ---
+        function openTossModal() {
+            updateTossLabels();
+            document.getElementById('toss-modal').classList.remove('hidden');
+        }
+
+        function updateTossLabels() {
+            const n1 = (document.getElementById('team1-name')?.value || gameState.team1 || 'Jugador A').trim();
+            const isSolo = (document.getElementById('opponent-type-select')?.value || gameState.opponentMode) === 'SOLO';
+            const n2 = isSolo ? 'Sistema' : ((document.getElementById('team2-name')?.value || gameState.team2 || 'Jugador B').trim());
+            const badge = document.getElementById('setup-toss-badge');
+            if (badge) {
+                badge.innerText = gameState.attacker === 1 ? n1 : n2;
+            }
+        }
+
+        function runInitialTossAnimation() {
+            const n1 = (document.getElementById('team1-name')?.value || gameState.team1 || 'Jugador A').trim();
+            const isSolo = (document.getElementById('opponent-type-select')?.value || gameState.opponentMode) === 'SOLO';
+            const n2 = isSolo ? 'Sistema' : ((document.getElementById('team2-name')?.value || gameState.team2 || 'Jugador B').trim());
+
+            const labelEl = document.getElementById('toss-result-label');
+            const subEl = document.getElementById('toss-sub-label');
+            let ticks = 0;
+            const spin = setInterval(() => {
+                const pick = ticks % 2 === 0 ? 1 : 2;
+                labelEl.innerText = pick === 1 ? `⚽ ${n1}` : `⚽ ${n2}`;
+                labelEl.className = pick === 1 ? "text-2xl font-black text-emerald-400" : "text-2xl font-black text-blue-400";
+                subEl.innerText = "Sorteando saque inicial...";
+                ticks++;
+                if (ticks >= 10) {
+                    clearInterval(spin);
+                    const winner = Math.random() < 0.5 ? 1 : 2;
+                    gameState.attacker = winner;
+                    const winName = winner === 1 ? n1 : n2;
+                    labelEl.innerText = `🎯 Inicia: ${winName}`;
+                    labelEl.className = winner === 1 ? "text-2xl font-black text-emerald-400" : "text-2xl font-black text-blue-400";
+                    subEl.innerText = `${winName} comenzará como ATACANTE.`;
+                    updateTossLabels();
+                }
+            }, 70);
+        }
+
+        function prepareMatchWithToss() {
+            if (!gameState.attacker) gameState.attacker = Math.random() < 0.5 ? 1 : 2;
+            openTossModal();
+            runInitialTossAnimation();
+        }
+
+        function closeTossModalAndEnterGame() {
+            document.getElementById('toss-modal').classList.add('hidden');
+            const setupVisible = !document.getElementById('setup-screen').classList.contains('hidden');
+            if (setupVisible) {
+                startGame();
+            } else {
+                syncPanelsRole();
+                renderPitch();
+            }
+        }
+
+        // --- MODO SOLITARIO / ALTERNANCIA DE TARJETAS ---
+        function onOpponentTypeChange() {
+            const mode = document.getElementById('opponent-type-select').value;
+            gameState.opponentMode = mode;
+            const toggleLink = document.getElementById('toggle-solo-card-link');
+            const rivalCard = document.getElementById('card-strategy-rival');
+            const rivalNameInput = document.getElementById('team2-name');
+
+            if (mode === 'SOLO') {
+                toggleLink.classList.remove('hidden');
+                rivalNameInput.value = 'Sistema';
+                gameState.soloActiveTab = 'OWN';
+                applySoloCardVisibility();
+            } else {
+                toggleLink.classList.add('hidden');
+                rivalCard.classList.remove('hidden');
+                if (rivalNameInput.value === 'Sistema') rivalNameInput.value = 'Israel';
+            }
+            updateTossLabels();
+        }
+
+        function toggleSoloStrategyCard() {
+            gameState.soloActiveTab = gameState.soloActiveTab === 'OWN' ? 'RIVAL' : 'OWN';
+            applySoloCardVisibility();
+        }
+
+        function applySoloCardVisibility() {
+            const ownCard = document.getElementById('card-strategy-own');
+            const rivalCard = document.getElementById('card-strategy-rival');
+            const labelEl = document.getElementById('solo-active-card-label');
+            if (gameState.soloActiveTab === 'OWN') {
+                ownCard.classList.remove('hidden');
+                rivalCard.classList.add('hidden');
+                if (labelEl) labelEl.innerText = 'Atacante (Usuario)';
+            } else {
+                ownCard.classList.add('hidden');
+                rivalCard.classList.remove('hidden');
+                if (labelEl) labelEl.innerText = 'Defensa (Sistema)';
+            }
+        }
 
         function getPersonalQuestions() {
             try {
@@ -575,9 +719,7 @@
         function saveInstalledCachePackages(pkgMap) {
             try {
                 localStorage.setItem(INSTALLED_STORAGE_KEY, JSON.stringify(pkgMap));
-            } catch (e) {
-                // Si excede cuota local, no interrumpe la sesión actual
-            }
+            } catch (e) {}
         }
 
         function getAllAvailablePackages() {
@@ -606,11 +748,10 @@
                 cached[key] = liveRegistry[key];
             });
             saveInstalledCachePackages(cached);
-
             renderAvailablePackagesUI();
 
             const totalPkgs = Object.keys(getAllAvailablePackages()).length;
-            statusEl.innerText = `✅ ¡Listo! ${totalPkgs} paquete(s) instalado(s) con 1 clic y acoplados al juego.`;
+            statusEl.innerText = `✅ ${totalPkgs} paquete(s) sincronizado(s).`;
             statusEl.classList.remove('hidden');
         }
 
@@ -621,7 +762,7 @@
             container.innerHTML = '';
 
             if (keys.length === 0) {
-                container.innerHTML = '<p class="text-xs text-rose-400 col-span-2">No se detectaron paquetes acoplados. Carga un archivo .js o .json.</p>';
+                container.innerHTML = '<p class="text-xs text-rose-400">No hay paquetes acoplados. Sube un archivo .js o .json.</p>';
                 updateSelectedPackagesCount();
                 return;
             }
@@ -632,13 +773,13 @@
                 const isDefaultChecked = idx < MAX_SIMULTANEOUS_PACKAGES;
 
                 const label = document.createElement('label');
-                label.className = "flex items-center justify-between text-xs text-slate-200 cursor-pointer bg-slate-900 p-2.5 rounded border border-slate-700 hover:border-emerald-500/60 transition";
+                label.className = "flex items-center justify-between text-xs text-slate-200 cursor-pointer bg-slate-900 p-2 rounded border border-slate-700 hover:border-emerald-500/60 transition";
                 label.innerHTML = `
-                    <div class="flex items-center space-x-2">
+                    <div class="flex items-center space-x-2 truncate">
                         <input type="checkbox" name="package" value="${pkgKey}" ${isDefaultChecked ? 'checked' : ''} onchange="enforceMaxPackages(this)" class="accent-emerald-500">
-                        <span>📦 <strong>${pkg.name || pkgKey}</strong></span>
+                        <span class="truncate">📦 <strong>${pkg.name || pkgKey}</strong></span>
                     </div>
-                    <span class="text-[11px] bg-slate-800 text-amber-300 px-2 py-0.5 rounded font-mono">${count} preg.</span>
+                    <span class="text-[11px] bg-slate-800 text-amber-300 px-1.5 py-0.5 rounded font-mono ml-2">${count}</span>
                 `;
                 container.appendChild(label);
             });
@@ -650,7 +791,7 @@
             const checked = document.querySelectorAll('input[name="package"]:checked');
             if (checked.length > MAX_SIMULTANEOUS_PACKAGES) {
                 checkbox.checked = false;
-                alert(`Puedes acoplar un máximo de ${MAX_SIMULTANEOUS_PACKAGES} paquetes simultáneos. Desmarca uno para rotarlo.`);
+                alert(`Puedes acoplar un máximo de ${MAX_SIMULTANEOUS_PACKAGES} paquetes simultáneos.`);
             }
             updateSelectedPackagesCount();
         }
@@ -685,7 +826,7 @@
                         }
                         renderAvailablePackagesUI();
                     } catch (err) {
-                        alert(`Error al acoplar el paquete "${file.name}": ${err.message}`);
+                        alert(`Error al acoplar "${file.name}": ${err.message}`);
                     }
                 };
                 reader.readAsText(file, 'UTF-8');
@@ -693,10 +834,8 @@
             event.target.value = '';
         }
 
-        // --- BANCO PERSONAL LOCAL ---
         function updatePersonalCount() {
-            const list = getPersonalQuestions();
-            document.getElementById('personal-count').innerText = list.length;
+            document.getElementById('personal-count').innerText = getPersonalQuestions().length;
         }
 
         function togglePersonalEditor() {
@@ -718,10 +857,9 @@
 
             const incorrects = incorrectsRaw.split(',').map(s => s.trim()).filter(Boolean);
             const tierVal = document.getElementById('p-tier')?.value || 'MEDIO';
-            const options = [correct, ...incorrects];
-            const newQ = { category: cat, ref: ref, q: qText, correct: correct, options: options, refBib: bib, tier: tierVal };
-            
-            let list = getPersonalQuestions();
+            const newQ = { category: cat, ref: ref, q: qText, correct: correct, options: [correct, ...incorrects], refBib: bib, tier: tierVal };
+
+            const list = getPersonalQuestions();
             list.push(newQ);
             localStorage.setItem('gran_jugada_personal_questions', JSON.stringify(list));
 
@@ -734,16 +872,15 @@
             alert("¡Pregunta guardada en tu Banco Personal!");
         }
 
-        // --- TABLERO Y LÓGICA DE JUEGO ---
         function getRosterByFormation(teamId, formation) {
             const isTeam1 = teamId === 1;
-            let xPor = isTeam1 ? 1 : 25;
-            let roster = [{ id: isTeam1 ? 1 : 12, team: teamId, role: "POR", x: xPor, y: 8 }];
+            const xPor = isTeam1 ? 1 : 25;
+            const roster = [{ id: isTeam1 ? 1 : 12, team: teamId, role: "POR", x: xPor, y: 8 }];
             let idCounter = isTeam1 ? 2 : 13;
 
-            let defX = isTeam1 ? 5 : 21;
-            let medX = isTeam1 ? 9 : 17;
-            let delX = isTeam1 ? 13 : 13;
+            const defX = isTeam1 ? 5 : 21;
+            const medX = isTeam1 ? 9 : 17;
+            const delX = isTeam1 ? 13 : 13;
 
             if (formation === "4-4-2") {
                 [2, 6, 10, 14].forEach(y => roster.push({ id: idCounter++, team: teamId, role: "DEF", x: defX, y }));
@@ -783,7 +920,7 @@
             const f1 = document.getElementById('team1-formation').value;
             const f2 = document.getElementById('team2-formation').value;
             const target = parseInt(document.getElementById('target-goals').value);
-            
+
             const checkboxes = document.querySelectorAll('input[name="package"]:checked');
             gameState.activePackages = Array.from(checkboxes).map(cb => cb.value);
 
@@ -791,14 +928,14 @@
                 alert(`Selecciona entre 1 y ${MAX_SIMULTANEOUS_PACKAGES} paquetes acoplados para jugar.`);
                 return;
             }
-            
-            if(t1) gameState.team1 = t1;
-            if(t2) gameState.team2 = t2;
-            if(c1) gameState.color1 = c1;
-            if(c2) gameState.color2 = c2;
-            if(f1) gameState.form1 = f1;
-            if(f2) gameState.form2 = f2;
-            if(target) gameState.target = target;
+
+            if (t1) gameState.team1 = t1;
+            if (t2) gameState.team2 = t2;
+            if (c1) gameState.color1 = c1;
+            if (c2) gameState.color2 = c2;
+            if (f1) gameState.form1 = f1;
+            if (f2) gameState.form2 = f2;
+            if (target) gameState.target = target;
 
             document.getElementById('disp-team1').innerText = gameState.team1;
             document.getElementById('disp-team2').innerText = gameState.team2;
@@ -814,7 +951,6 @@
             document.getElementById('setup-screen').classList.add('hidden');
             document.getElementById('game-screen').classList.remove('hidden');
             renderPitch();
-            window.addEventListener('resize', () => renderPitch());
         }
 
         function updateStatsUI() {
@@ -838,9 +974,9 @@
             const poss = document.getElementById('disp-possession');
 
             if (gameState.attacker === 1) {
-                p1.className = "lg:col-span-3 bg-slate-900 p-3.5 rounded-xl border-2 border-emerald-500 flex flex-col justify-between gap-2.5 order-2 lg:order-1 shadow-lg shadow-emerald-950/30";
-                p2.className = "lg:col-span-3 bg-slate-900 p-3.5 rounded-xl border border-slate-800 flex flex-col justify-between gap-2.5 order-3";
-                r1.innerText = "ATACANTE (TURNO)";
+                p1.className = "hidden md:flex lg:col-span-3 bg-slate-900 p-3.5 rounded-xl border-2 border-emerald-500 flex-col justify-between gap-2.5 order-2 lg:order-1 shadow-lg";
+                p2.className = "hidden md:flex lg:col-span-3 bg-slate-900 p-3.5 rounded-xl border border-slate-800 flex-col justify-between gap-2.5 order-3";
+                r1.innerText = "ATACANTE";
                 r1.className = "text-xs font-bold px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300";
                 r2.innerText = "DEFENSOR";
                 r2.className = "text-xs font-bold px-2.5 py-1 rounded bg-slate-800 text-slate-300";
@@ -849,12 +985,12 @@
                 ctrl1.classList.remove('hidden');
                 btn2.classList.add('hidden');
                 ctrl2.classList.add('hidden');
-                poss.innerText = `${gameState.team1} Atacando ➔`;
-                poss.className = "font-bold text-emerald-400 text-sm md:text-base bg-slate-950 px-4 py-1.5 rounded-full border border-emerald-500/40 inline-block";
+                poss.innerText = `${gameState.team1} Atacando`;
+                poss.className = "font-bold text-emerald-400 text-xs md:text-base bg-slate-950 px-3 py-1 rounded-full border border-emerald-500/40 inline-block";
             } else {
-                p2.className = "lg:col-span-3 bg-slate-900 p-3.5 rounded-xl border-2 border-blue-500 flex flex-col justify-between gap-2.5 order-3 shadow-lg shadow-blue-950/30";
-                p1.className = "lg:col-span-3 bg-slate-900 p-3.5 rounded-xl border border-slate-800 flex flex-col justify-between gap-2.5 order-2 lg:order-1";
-                r2.innerText = "ATACANTE (TURNO)";
+                p2.className = "hidden md:flex lg:col-span-3 bg-slate-900 p-3.5 rounded-xl border-2 border-blue-500 flex-col justify-between gap-2.5 order-3 shadow-lg";
+                p1.className = "hidden md:flex lg:col-span-3 bg-slate-900 p-3.5 rounded-xl border border-slate-800 flex-col justify-between gap-2.5 order-2 lg:order-1";
+                r2.innerText = "ATACANTE";
                 r2.className = "text-xs font-bold px-2.5 py-1 rounded bg-blue-500/20 text-blue-300";
                 r1.innerText = "DEFENSOR";
                 r1.className = "text-xs font-bold px-2.5 py-1 rounded bg-slate-800 text-slate-300";
@@ -863,8 +999,8 @@
                 ctrl2.classList.remove('hidden');
                 btn1.classList.add('hidden');
                 ctrl1.classList.add('hidden');
-                poss.innerText = `⬅️ ${gameState.team2} Atacando`;
-                poss.className = "font-bold text-blue-400 text-sm md:text-base bg-slate-950 px-4 py-1.5 rounded-full border border-blue-500/40 inline-block";
+                poss.innerText = `${gameState.team2} Atacando`;
+                poss.className = "font-bold text-blue-400 text-xs md:text-base bg-slate-950 px-3 py-1 rounded-full border border-blue-500/40 inline-block";
             }
             syncMobilePanel();
         }
@@ -1014,7 +1150,7 @@
 
             if (clickedPlayer) {
                 gameState.selectedPlayerId = clickedPlayer.id;
-                document.getElementById('global-feed').innerText = `Ficha #${clickedPlayer.id} (${clickedPlayer.role}) seleccionada. Haz clic en casilla iluminada para moverla.`;
+                document.getElementById('global-feed').innerText = `Ficha #${clickedPlayer.id} (${clickedPlayer.role}) seleccionada.`;
                 renderPitch();
                 return;
             }
@@ -1042,6 +1178,7 @@
 
         function renderPitch() {
             const grid = document.getElementById('pitch-grid');
+            if (!grid) return;
             grid.innerHTML = '';
             const selectedPlayer = gameState.players.find(p => p.id === gameState.selectedPlayerId);
 
@@ -1051,7 +1188,6 @@
 
             for (let vr = 0; vr < visualRows; vr++) {
                 for (let vc = 0; vc < visualCols; vc++) {
-                    // En móvil vertical: vr (0..26) corresponde a lógica x (0..26), y vc (0..16) corresponde a lógica y (0..16)
                     const c = isMobileVertical ? vr : vc;
                     const r = isMobileVertical ? vc : vr;
 
@@ -1072,7 +1208,7 @@
                         const token = document.createElement('div');
                         const customColor = player.team === 1 ? gameState.color1 : gameState.color2;
                         const ring = player.id === gameState.selectedPlayerId ? 'ring-2 ring-amber-300 scale-110' : '';
-                        token.className = `w-4 h-4 md:w-5 md:h-5 ${ring} rounded-full border-2 border-white z-10 flex items-center justify-center text-[9px] font-black shadow cursor-pointer transition text-slate-950`;
+                        token.className = `w-3.5 h-3.5 md:w-5 md:h-5 ${ring} rounded-full border-2 border-white z-10 flex items-center justify-center text-[8px] md:text-[9px] font-black shadow cursor-pointer transition text-slate-950`;
                         token.style.backgroundColor = customColor;
                         token.innerText = player.role === 'POR' ? 'P' : player.id;
                         cell.appendChild(token);
@@ -1080,7 +1216,7 @@
 
                     if (c === gameState.ballX && r === gameState.ballY) {
                         const ball = document.createElement('div');
-                        ball.className = 'w-4 h-4 md:w-5 md:h-5 bg-white rounded-full shadow-lg border-2 border-slate-950 z-20 flex items-center justify-center text-[10px] font-black text-slate-950 absolute pointer-events-none';
+                        ball.className = 'w-3.5 h-3.5 md:w-5 md:h-5 bg-white rounded-full shadow-lg border-2 border-slate-950 z-20 flex items-center justify-center text-[9px] md:text-[10px] font-black text-slate-950 absolute pointer-events-none';
                         ball.innerText = '⚽';
                         cell.appendChild(ball);
                     }
@@ -1143,9 +1279,7 @@
             const list = registry[pkgKey]?.questions || [];
             const selectedTier = gameState.questionTier || "ALL";
             if (selectedTier === "ALL") return list;
-
             const filtered = list.filter((q, idx) => normalizeQuestionTier(q, idx) === selectedTier);
-            // Si el paquete no tiene preguntas marcadas específicamente en ese nivel, devolvemos el banco completo para no dejar al jugador sin preguntas
             return filtered.length > 0 ? filtered : list;
         }
 
@@ -1166,7 +1300,6 @@
                         [queue[0], queue[queue.length - 1]] = [queue[queue.length - 1], queue[0]];
                     }
                 }
-                document.getElementById('global-feed').innerText = `🔄 Nuevo ciclo barajado para [${chosenPkg}] (${sourceList.length} preguntas sin repetir).`;
             }
 
             const nextIdx = queue.shift();
@@ -1174,7 +1307,7 @@
             gameState.lastCardIndexByPkg[chosenPkg] = nextIdx;
 
             const card = sourceList[nextIdx];
-            return { ...card, _pkgKey: chosenPkg, _remainingInCycle: queue.length, _cycleTotal: sourceList.length };
+            return { ...card, _pkgKey: chosenPkg };
         }
 
         function drawCard(teamId, playType) {
@@ -1283,7 +1416,7 @@
             if (!defenderAnsweredCorrectly) {
                 if (gameState.defenseShieldActive[defId]) {
                     gameState.defenseShieldActive[defId] = false;
-                    document.getElementById('global-feed').innerText = `¡${defName} bloquea el ataque con la carta DEFESA!`;
+                    document.getElementById('global-feed').innerText = `¡${defName} bloquea el ataque con DEFENSA!`;
                     syncPanelsRole();
                     return;
                 }
@@ -1306,7 +1439,7 @@
                     gameState.carrierId = carrier.id;
                 }
 
-                document.getElementById('global-feed').innerText = `¡${attName} avanza ${totalSteps} casillas con éxito!`;
+                document.getElementById('global-feed').innerText = `¡${attName} avanza ${totalSteps} casillas!`;
 
                 if ((attId === 1 && gameState.ballX >= 26) || (attId === 2 && gameState.ballX <= 0)) {
                     if (attId === 1) gameState.score1++; else gameState.score2++;
@@ -1330,7 +1463,7 @@
                 gameState.ballX = snapped.x;
                 gameState.ballY = snapped.y;
                 gameState.attacker = defId;
-                document.getElementById('global-feed').innerText = `¡${defName} intercepta el balón y toma el control!`;
+                document.getElementById('global-feed').innerText = `¡${defName} intercepta el balón!`;
             }
 
             renderPitch();
@@ -1369,9 +1502,7 @@
 
         function updateRoomCodePreview() {
             const el = document.getElementById('room-code-preview');
-            if (el) {
-                el.innerText = 'SALA: ' + generateRoomCode();
-            }
+            if (el) el.innerText = 'SALA: ' + generateRoomCode();
         }
 
         function buildChallengeShareUrl() {
@@ -1399,10 +1530,8 @@
             const url = buildChallengeShareUrl();
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(url).then(() => {
-                    alert('✅ Enlace de sala / desafío copiado. Compártelo por WhatsApp o chat para jugar a distancia.');
-                }).catch(() => {
-                    prompt('Copia este enlace de sala:', url);
-                });
+                    alert('✅ Enlace de sala / desafío copiado.');
+                }).catch(() => prompt('Copia este enlace de sala:', url));
             } else {
                 prompt('Copia este enlace de sala:', url);
             }
@@ -1412,13 +1541,8 @@
             const attName = gameState.attacker === 1 ? gameState.team1 : gameState.team2;
             const defName = gameState.attacker === 1 ? gameState.team2 : gameState.team1;
             const tierLabel = TIER_LABELS[gameState.questionTier] || 'Mixto';
-            const feed = document.getElementById('global-feed');
-            feed.innerText = `⚔️ ¡DESAFÍO LANZADO! ${attName} reta a ${defName} en nivel [${tierLabel}]. ¡Responde para ganar el desafío!`;
-            if (gameState.attacker === 1) {
-                gameState.challengeWins1++;
-            } else {
-                gameState.challengeWins2++;
-            }
+            document.getElementById('global-feed').innerText = `⚔️ ¡DESAFÍO! ${attName} reta a ${defName} (${tierLabel}).`;
+            if (gameState.attacker === 1) gameState.challengeWins1++; else gameState.challengeWins2++;
             const scoreLabel = document.getElementById('challenge-score-label');
             if (scoreLabel) {
                 scoreLabel.innerText = `Desafíos: ${gameState.team1} ${gameState.challengeWins1} - ${gameState.challengeWins2} ${gameState.team2}`;
@@ -1449,16 +1573,13 @@
                     gameState.roomCode = data.room;
                 }
                 if (Array.isArray(data.pkgs) && data.pkgs.length > 0) {
-                    const checkboxes = document.querySelectorAll('input[name="package"]');
-                    checkboxes.forEach(cb => {
+                    document.querySelectorAll('input[name="package"]').forEach(cb => {
                         cb.checked = data.pkgs.includes(cb.value);
                     });
                     updateSelectedPackagesCount();
                 }
                 toggleRemoteModePanel();
-            } catch (e) {
-                // Ignorar hash inválido
-            }
+            } catch (e) {}
         }
 
         const _baseStartGame = startGame;
@@ -1481,6 +1602,12 @@
             }
         };
 
+        window.addEventListener('resize', () => {
+            if (!document.getElementById('game-screen').classList.contains('hidden')) {
+                renderPitch();
+            }
+        });
+
         window.onload = function() {
             const liveRegistry = window.LA_GRAN_JUGADA_PACKAGES || {};
             const cached = getInstalledCachePackages();
@@ -1491,6 +1618,7 @@
             renderAvailablePackagesUI();
             applyChallengeFromHash();
             updateRoomCodePreview();
+            updateTossLabels();
         };
     </script>
 </body>
